@@ -85,10 +85,15 @@ describe.only('Recipe', () => {
       }
     ]
 
-    recipe1 = new Recipe();
+    recipe1 = new Recipe(sampleRecipe);
   })
 
   it('should be an instance of Recipe', () => {
     expect(recipe1).to.be.an.instanceof(Recipe);
   })
+
+  it('should have a recipe id', () => {
+    expect(recipe1.id).to.equal(595736);
+  })
+
 })

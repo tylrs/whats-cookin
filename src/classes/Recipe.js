@@ -1,8 +1,8 @@
 const Ingredient = require('./Ingredient');
 
 class Recipe {
-  constructor() {
-
+  constructor(recipeDetails) {
+    this.id = recipeDetails.id;
   }
 }
 
