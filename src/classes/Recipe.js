@@ -26,11 +26,10 @@ class Recipe {
   }
 
   getTotalCost() {
-    let totalCost = this.ingredients.reduce((accumulator, ingredient) => {
+    return this.ingredients.reduce((accumulator, ingredient) => {
       accumulator += ingredient.estimatedCostInCents * ingredient.quantity.amount;
       return accumulator;
-    }, 0)
-    return totalCost;
+    }, 0);
   }
 
   getInstructions() {
