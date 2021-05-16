@@ -96,4 +96,23 @@ describe.only('Recipe', () => {
     expect(recipe1.id).to.equal(595736);
   })
 
+  it('should have a recipe image', () => {
+    expect(recipe1.image).to.equal('https://spoonacular.com/recipeImages/595736-556x370.jpg');
+  })
+
+  it('should have a name', () => {
+    expect(recipe1.name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+  })
+
+  it('should have tags', () => {
+    expect(recipe1.tags).to.deep.equal([
+      "antipasti",
+      "starter",
+      "snack",
+      "appetizer",
+      "antipasto",
+      "hor d'oeuvre"
+    ]);
+  })
+
 })
