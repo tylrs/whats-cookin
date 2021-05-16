@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const expect = require('chai').expect
 const Ingredient = require('../src/classes/Ingredient')
 
@@ -44,11 +45,13 @@ describe.only('Ingredient', () => {
   })
 
   it('should have a name property', () => {
-   
+    expect(ingredient1.name).to.equal(sampleIngredients[0].name)
+    expect(ingredient2.name).to.equal(sampleIngredients[1].name)
   })
 
   it('should have a estimated cost property', () => {
-   
+    expect(ingredient1.estimatedCostInCents).to.equal(sampleIngredients[0].estimatedCostInCents)
+    expect(ingredient2.estimatedCostInCents).to.equal(sampleIngredients[1].estimatedCostInCents)
   })
     
 })
