@@ -9,15 +9,14 @@ class Recipe {
   }
 
   fetchIngredients(recipeIngredients, ingredientList) {
-    let totalIngredients = recipeIngredients.map((recipeIngredient) => {
+    return recipeIngredients.map((recipeIngredient) => {
       let newIngredientInfo = ingredientList.find((ingredient) => {
         return ingredient.id === recipeIngredient.id;
       })
       recipeIngredient.name = newIngredientInfo.name;
       recipeIngredient.estimatedCostInCents = newIngredientInfo.estimatedCostInCents;
       return recipeIngredient;
-    })
-    return totalIngredients;
+    });
   }
 
   getIngredientNames() {
@@ -35,7 +34,9 @@ class Recipe {
   }
 
   getInstructions() {
-
+    return this.instructions.map((instruction) => {
+      return `${instruction.number}. ${instruction.instruction}`;
+    })
   }
 }
 

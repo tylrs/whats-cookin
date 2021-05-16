@@ -3,7 +3,7 @@ const Recipe = require('../src/classes/Recipe');
 const Ingredient = require('../src/classes/Ingredient');
 
 describe.only('Recipe', () => {
-  let updatedRecipeIngredients, sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
+  let updatedInstructions, updatedRecipeIngredients, sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
     sampleRecipe = {
       "id": 595736,
@@ -107,6 +107,15 @@ describe.only('Recipe', () => {
         estimatedCostInCents: 472
       }
     ]
+
+    updatedInstructions = [
+    '1. In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.',
+    '2. Add egg and vanilla and mix until combined.',
+    '3. Add dry ingredients and mix on low just until incorporated. Stir in chocolate chips.Scoop the dough into 1,5 tablespoon size balls and place on a plate or sheet. Cover with saran wrap and chill at least 2 hours or overnight.When ready to bake, preheat oven to 350 degrees.',
+    '4. Place the cookie dough balls into ungreased muffin pan. Sprinkle with sea salt.',
+    '5. Bake for 9 to 10 minutes, or until you see the edges start to brown.',
+    '6. Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack.Top with ice cream and a drizzle of chocolate sauce.'
+    ]
   })
 
   it('should be an instance of Recipe', () => {
@@ -146,11 +155,11 @@ describe.only('Recipe', () => {
     expect(recipe1.getIngredientNames()).to.deep.equal(['wheat flour', 'bicarbonate of soda', 'eggs'])
   })
 
-  it.only('should have a method to return total cost of ingredients in cents', () => {
+  it('should have a method to return total cost of ingredients in cents', () => {
     expect(recipe1.getTotalCost()).to.equal(976);
   })
 
   it('should have a method to return recipe instructions', () => {
-    expect(recipe1.getInstructions()).to.equal(sampleRecipe.instructions)
+    expect(recipe1.getInstructions()).to.deep.equal(updatedInstructions)
   })
 })
