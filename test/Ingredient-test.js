@@ -42,5 +42,8 @@ describe.only('Ingredient', () => {
     expect(ingredient1.id).to.equal(sampleIngredients[0].id)
     expect(ingredient2.id).to.equal(sampleIngredients[1].id)
   })
+  it('should have a name property', () => {
+   
+  })
     
 })
