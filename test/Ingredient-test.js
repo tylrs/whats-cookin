@@ -41,8 +41,13 @@ describe.only('Ingredient', () => {
     // ingredient5 = new Ingredient()
 
   })
+
   it('should be an instance of ingredient class', () => {
     expect(ingredient1).to.be.an.instanceof(Ingredient)
   })
-  
+
+  it('should have an ID property', () => {
+    expect(ingredient1.id).to.equal(sampleIngredients[0].id)
+  })
+    
 })
