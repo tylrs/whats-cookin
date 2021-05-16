@@ -141,4 +141,16 @@ describe.only('Recipe', () => {
   it('should have a property which has the returned value from fetchIngredients', () => {
     expect(recipe1.ingredients).to.deep.equal(updatedRecipeIngredients);
   })
+
+  it('should have a method to return ingredient names', () => {
+    expect(recipe1.getIngredientNames()).to.deep.equal(['wheat flour', 'bicarbonate of soda', 'eggs'])
+  })
+
+  it('should have a method to return total cost of ingredients in cents', () => {
+    expect(recipe1.getTotalCost()).to.equal(976);
+  })
+
+  it('should have a method to return recipe instructions', () => {
+    expect(recipe1.getInstructions()).to.equal(sampleRecipe.instructions)
+  })
 })
