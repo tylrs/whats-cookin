@@ -19,6 +19,20 @@ class Recipe {
     })
     return totalIngredients;
   }
+
+  getIngredientNames() {
+    return this.ingredients.map((ingredient) => {
+      return ingredient.name;
+    })
+  }
+
+  getTotalCost() {
+
+  }
+
+  getInstructions() {
+
+  }
 }
 
 module.exports = Recipe;
