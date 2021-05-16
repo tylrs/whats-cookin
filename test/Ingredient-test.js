@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const Ingredient = require('../src/classes/Ingredient')
 
-describe('Ingredient', () => {
+describe.only('Ingredient', () => {
   let sampleIngredients, ingredient1
   beforeEach('Setup', () => {
     [{
@@ -34,7 +34,7 @@ describe('Ingredient', () => {
     //   ingredient[index]
     // })
 
-    // ingredient1 = new Ingredient()
+    ingredient1 = new Ingredient()
     // ingredient2 = new Ingredient()
     // ingredient3 = new Ingredient()
     // ingredient4 = new Ingredient()
