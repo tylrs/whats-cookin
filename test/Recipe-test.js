@@ -3,7 +3,7 @@ const Recipe = require('../src/classes/Recipe');
 const Ingredient = require('../src/classes/Ingredient');
 
 describe.only('Recipe', () => {
-  let sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
+  let updatedRecipeIngredients, sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
     sampleRecipe = {
       "id": 595736,
@@ -86,6 +86,27 @@ describe.only('Recipe', () => {
     ]
 
     recipe1 = new Recipe(sampleRecipe, sampleIngredients);
+
+    updatedRecipeIngredients = [
+      {
+        id: 20081,
+        quantity: { amount: 1.5, unit: 'c' },
+        name: 'wheat flour',
+        estimatedCostInCents: 142
+      },
+      {
+        id: 18372,
+        quantity: { amount: 0.5, unit: 'tsp' },
+        name: 'bicarbonate of soda',
+        estimatedCostInCents: 582
+      },
+      {
+        id: 1123,
+        quantity: { amount: 1, unit: 'large' },
+        name: 'eggs',
+        estimatedCostInCents: 472
+      }
+    ]
   })
 
   it('should be an instance of Recipe', () => {
@@ -112,27 +133,12 @@ describe.only('Recipe', () => {
     expect(recipe1.tags).to.deep.equal(sampleRecipe.tags);
   })
 
-  it('should have a method which returns a new list of ingredients', () => {
-    expect(recipe1.ingredients).to.deep.equal([
-  {
-    id: 20081,
-    quantity: { amount: 1.5, unit: 'c' },
-    name: 'wheat flour',
-    estimatedCostInCents: 142
-  },
-  {
-    id: 18372,
-    quantity: { amount: 0.5, unit: 'tsp' },
-    name: 'bicarbonate of soda',
-    estimatedCostInCents: 582
-  },
-  {
-    id: 1123,
-    quantity: { amount: 1, unit: 'large' },
-    name: 'eggs',
-    estimatedCostInCents: 472
-  }
-]);
+  it('should have a method which returns a new list of ingredients with updated information', () => {
+    const updatedIngredients = recipe1.fetchIngredients(sampleRecipe.ingredients, sampleIngredients)
+    expect(updatedIngredients).to.deep.equal(updatedRecipeIngredients)
   })
 
+  it('should have a property which has the returned value from fetchIngredients', () => {
+    expect(recipe1.ingredients).to.deep.equal(updatedRecipeIngredients);
+  })
 })
