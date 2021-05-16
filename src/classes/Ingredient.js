@@ -1,6 +1,6 @@
 class Ingredient {
-  constructor() {
-
+  constructor(ingredientDetails) {
+    this.id = ingredientDetails.id
   }
 }
 module.exports = Ingredient
