@@ -146,7 +146,7 @@ describe.only('Recipe', () => {
     expect(recipe1.getIngredientNames()).to.deep.equal(['wheat flour', 'bicarbonate of soda', 'eggs'])
   })
 
-  it('should have a method to return total cost of ingredients in cents', () => {
+  it.only('should have a method to return total cost of ingredients in cents', () => {
     expect(recipe1.getTotalCost()).to.equal(976);
   })
 
