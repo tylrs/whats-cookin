@@ -2,8 +2,8 @@
 const expect = require('chai').expect
 const Ingredient = require('../src/classes/Ingredient')
 
-describe.only('Ingredient', () => {
-  let sampleIngredients, ingredient1, ingredient2 
+describe('Ingredient', () => {
+  let sampleIngredients, ingredient1, ingredient2
   beforeEach('Setup', () => {
     sampleIngredients = [{
       "id": 20081,
@@ -53,5 +53,5 @@ describe.only('Ingredient', () => {
     expect(ingredient1.estimatedCostInCents).to.equal(sampleIngredients[0].estimatedCostInCents)
     expect(ingredient2.estimatedCostInCents).to.equal(sampleIngredients[1].estimatedCostInCents)
   })
-    
+
 })
