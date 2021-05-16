@@ -112,4 +112,8 @@ describe.only('Recipe', () => {
     expect(recipe1.tags).to.deep.equal(sampleRecipe.tags);
   })
 
+  it('should have a method which returns an empty array', () => {
+    expect(recipe1.ingredients).to.deep.equal([]);
+  })
+
 })
