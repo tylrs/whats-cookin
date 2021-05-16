@@ -2,9 +2,9 @@ const expect = require('chai').expect
 const Ingredient = require('../src/classes/Ingredient')
 
 describe.only('Ingredient', () => {
-  let sampleIngredients, ingredient1
+  let sampleIngredients, ingredient1, ingredient2 
   beforeEach('Setup', () => {
-    [{
+    sampleIngredients = [{
       "id": 20081,
       "name": "wheat flour",
       "estimatedCostInCents": 142
@@ -30,16 +30,8 @@ describe.only('Ingredient', () => {
       "estimatedCostInCents": 660
     }]
 
-    // sampleIngredients.forEach((ingredient, index) => {
-    //   ingredient[index]
-    // })
-
-    ingredient1 = new Ingredient()
-    // ingredient2 = new Ingredient()
-    // ingredient3 = new Ingredient()
-    // ingredient4 = new Ingredient()
-    // ingredient5 = new Ingredient()
-
+    ingredient1 = new Ingredient(sampleIngredients[0])
+    ingredient2 = new Ingredient(sampleIngredients[1])
   })
 
   it('should be an instance of ingredient class', () => {
@@ -48,6 +40,7 @@ describe.only('Ingredient', () => {
 
   it('should have an ID property', () => {
     expect(ingredient1.id).to.equal(sampleIngredients[0].id)
+    expect(ingredient2.id).to.equal(sampleIngredients[1].id)
   })
     
 })
