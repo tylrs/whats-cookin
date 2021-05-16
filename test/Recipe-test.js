@@ -104,15 +104,12 @@ describe.only('Recipe', () => {
     expect(recipe1.name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
   })
 
+  it('should have instructions', () => {
+    expect(recipe1.instructions).to.deep.equal(sampleRecipe.instructions);
+  })
+
   it('should have tags', () => {
-    expect(recipe1.tags).to.deep.equal([
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
-    ]);
+    expect(recipe1.tags).to.deep.equal(sampleRecipe.tags);
   })
 
 })
