@@ -85,7 +85,7 @@ describe.only('Recipe', () => {
       }
     ]
 
-    recipe1 = new Recipe(sampleRecipe);
+    recipe1 = new Recipe(sampleRecipe, sampleIngredients);
   })
 
   it('should be an instance of Recipe', () => {
@@ -112,8 +112,27 @@ describe.only('Recipe', () => {
     expect(recipe1.tags).to.deep.equal(sampleRecipe.tags);
   })
 
-  it('should have a method which returns an empty array', () => {
-    expect(recipe1.ingredients).to.deep.equal([]);
+  it('should have a method which returns a new list of ingredients', () => {
+    expect(recipe1.ingredients).to.deep.equal([
+  {
+    id: 20081,
+    quantity: { amount: 1.5, unit: 'c' },
+    name: 'wheat flour',
+    estimatedCostInCents: 142
+  },
+  {
+    id: 18372,
+    quantity: { amount: 0.5, unit: 'tsp' },
+    name: 'bicarbonate of soda',
+    estimatedCostInCents: 582
+  },
+  {
+    id: 1123,
+    quantity: { amount: 1, unit: 'large' },
+    name: 'eggs',
+    estimatedCostInCents: 472
+  }
+]);
   })
 
 })
