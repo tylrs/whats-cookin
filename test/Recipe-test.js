@@ -3,7 +3,7 @@ const Recipe = require('../src/classes/Recipe');
 const Ingredient = require('../src/classes/Ingredient');
 
 describe.only('Recipe', () => {
-  let sampleRecipe, sampleIngredients, ingredient1, ingredient2, ingredient3
+  let sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
     sampleRecipe = {
       "id": 595736,
@@ -67,22 +67,28 @@ describe.only('Recipe', () => {
         "hor d'oeuvre"
       ]
     },
+    sampleIngredients = [
+      {
+        "id": 20081,
+        "name": "wheat flour",
+        "estimatedCostInCents": 142
+      },
+      {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+      },
+      {
+        "id": 1123,
+        "name": "eggs",
+        "estimatedCostInCents": 472
+      }
+    ]
+
+    recipe1 = new Recipe();
   })
 
-  sampleIngredients = [{
-    "id": 20081,
-    "name": "wheat flour",
-    "estimatedCostInCents": 142
-  },
-  {
-    "id": 18372,
-    "name": "bicarbonate of soda",
-    "estimatedCostInCents": 582
-  },
-  {
-    "id": 1123,
-    "name": "eggs",
-    "estimatedCostInCents": 472
-  },]
+  it('should be an instance of Recipe', () => {
+    expect(recipe1).to.be.an.instanceof(Recipe);
   })
 })
