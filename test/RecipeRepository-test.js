@@ -21,9 +21,19 @@ describe.only('Recipe Repository', () => {
   it('Should be able to hold recipes', () => {
     expect(recipeRepository.recipes).to.deep.equal(recipes)
   })
+  it('Should have method to filter recipes based on one or more tags', () => {
+    let filteredRecipes = recipeRepository.filterByTags(['snack']) 
+    console.log(recipes[0])
+    expect(filteredRecipes).to.be.deep.equal([recipes[0]])
+  })
+  it.skip('', () => {
+    
+  })
+
 })
 
 
+//       "name": "Loaded Chocolate Chip Pudding Cookie Cups",
 
 
 // recipe1 = new Recipe(sampleRecipe, sampleIngredients);
