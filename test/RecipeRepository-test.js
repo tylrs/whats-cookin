@@ -13,12 +13,12 @@ describe.only('Recipe Repository', () => {
       let newRecipe = new Recipe(recipe, sampleIngredients)
       return newRecipe
     })
-    const recipeRepository = new RecipeRepository(recipes)
+    recipeRepository = new RecipeRepository(recipes)
   })
   it('Should be a function', () => {
     expect(RecipeRepository).to.be.a('function');
   });
-  it('Should hold an array of recipes', () => {
+  it('Should be able to hold recipes', () => {
     expect(recipeRepository.recipes).to.deep.equal(recipes)
   })
 })
