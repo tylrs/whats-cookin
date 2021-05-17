@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 const expect = require('chai').expect;
 const Recipe = require('../src/classes/Recipe');
 const Ingredient = require('../src/classes/Ingredient');
 
-describe.only('Recipe', () => {
+describe('Recipe', () => {
   let updatedInstructions, updatedRecipeIngredients, sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
     sampleRecipe = {
