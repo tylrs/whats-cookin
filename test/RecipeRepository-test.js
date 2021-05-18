@@ -33,8 +33,9 @@ describe.only('Recipe Repository', () => {
 
     expect(filteredRecipes).to.be.deep.equal([recipes[4]])
   })
-  it('Should have a method to filter recipes based on one ingredient', () => {
+  it.only('Should have a method to filter recipes based on one ingredient', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter']})
+    console.log(recipeRepository.recipes[0].ingredientNames);
     expect(filteredRecipes).to.be.deep.equal([recipes[2], recipes[3]])
 
   })
@@ -42,17 +43,17 @@ describe.only('Recipe Repository', () => {
 
   })
   it('Should have a method to search through recipe names on a single word', () => {
-    
+
   })
-  it.only('Should have a method to search through recipe names on multiple word', () => {
+  it('Should have a method to search through recipe names on multiple word', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['Chocolate', 'Chip']})
     expect(filteredRecipes).to.be.deep.equal([recipes[0]])
 
   })
   it('Should return all recipes if no match is found for a recipe name', () => {
-    
+
   })
   it('Should return all recipes if no match is found for a ingredient name', () => {
-    
+
   })
 })

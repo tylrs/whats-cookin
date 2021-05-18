@@ -6,8 +6,8 @@ class Recipe {
     this.name = recipeDetails.name.split(' ');
     this.instructions = recipeDetails.instructions;
     this.tags = recipeDetails.tags;
-    this.ingredientNames = []
     this.ingredients = this.fetchIngredients(recipeDetails.ingredients, ingredientList);
+    this.ingredientNames = this.getIngredientNames();
   }
 
   fetchIngredients(recipeIngredients, ingredientList) {
@@ -15,7 +15,7 @@ class Recipe {
       let newIngredientInfo = ingredientList.find((ingredient) => {
         return ingredient.id === recipeIngredient.id;
       })
-      this.ingredientNames.push(newIngredientInfo.name)
+      // this.ingredientNames.push(newIngredientInfo.name)
       recipeIngredient.name = newIngredientInfo.name;
       recipeIngredient.estimatedCostInCents = newIngredientInfo.estimatedCostInCents;
       return recipeIngredient;
