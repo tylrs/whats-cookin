@@ -15,7 +15,6 @@ class Recipe {
       let newIngredientInfo = ingredientList.find((ingredient) => {
         return ingredient.id === recipeIngredient.id;
       })
-      // this.ingredientNames.push(newIngredientInfo.name)
       recipeIngredient.name = newIngredientInfo.name;
       recipeIngredient.estimatedCostInCents = newIngredientInfo.estimatedCostInCents;
       return recipeIngredient;
