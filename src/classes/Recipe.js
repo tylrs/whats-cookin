@@ -3,7 +3,7 @@ class Recipe {
   constructor(recipeDetails, ingredientList) {
     this.id = recipeDetails.id;
     this.image = recipeDetails.image;
-    this.name = recipeDetails.name.split(' ');
+    this.name = recipeDetails.name.toLowerCase().split(' ');
     this.instructions = recipeDetails.instructions;
     this.tags = recipeDetails.tags;
     this.ingredients = this.fetchIngredients(recipeDetails.ingredients, ingredientList);

@@ -35,18 +35,21 @@ describe.only('Recipe Repository', () => {
   })
   it.only('Should have a method to filter recipes based on one ingredient', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter']})
-    console.log(recipeRepository.recipes[0].ingredientNames);
+    // console.log(recipeRepository.recipes[0].name);
     expect(filteredRecipes).to.be.deep.equal([recipes[2], recipes[3]])
 
   })
   it('Should have a method to filter recipes based on multiple ingredients', () => {
-
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter', 'seasoned salt']})
+    // console.log(recipeRepository.recipes[0].name);
+    expect(filteredRecipes).to.be.deep.equal([recipes[2]])
   })
-  it('Should have a method to search through recipe names on a single word', () => {
-
+  it('Should have a method to search through recipe names with a single word', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['maple']})
+    expect(filteredRecipes).to.be.deep.equal([recipes[1]])
   })
-  it('Should have a method to search through recipe names on multiple word', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['Chocolate', 'Chip']})
+  it('Should have a method to search through recipe names with multiple words', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['chocolate', 'chip']})
     expect(filteredRecipes).to.be.deep.equal([recipes[0]])
 
   })
