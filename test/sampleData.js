@@ -556,10 +556,10 @@ const sampleData = {
         }
       ],
       "name": "Mock Udi’s Gluten Free Whole Grain Bread",
-      "tags": []
+      "tags": ["side dish", "starter"]
     }
   ],
-  sampleIngredients: 
+  sampleIngredients:
   [
     { id: 20081, name: 'wheat flour', estimatedCostInCents: 142 },
     { id: 18372, name: 'bicarbonate of soda', estimatedCostInCents: 582 },
@@ -659,4 +659,3 @@ const sampleData = {
 module.exports = {
 sampleData
 }
-

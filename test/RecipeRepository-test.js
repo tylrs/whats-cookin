@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
-const data = sampleData.sampleData
+const data = sampleData.sampleData;
 
 describe.only('Recipe Repository', () => {
   let recipes, recipeRepository
@@ -22,18 +22,22 @@ describe.only('Recipe Repository', () => {
     expect(recipeRepository.recipes).to.deep.equal(recipes)
   })
   it('Should have method to filter recipes based on one or more tags', () => {
-    let filteredRecipes = recipeRepository.filterByTags(['snack']) 
-    console.log(recipes[0])
-    expect(filteredRecipes).to.be.deep.equal([recipes[0]])
+    let filteredRecipes = recipeRepository.filterByTags(['side dish'])
+    // console.log(recipes[0])
+    console.log(filteredRecipes);
+
+    expect(filteredRecipes).to.be.deep.equal([recipes[3], recipes[4]])
   })
-  it.skip('', () => {
-    
+  it('Should have method to filter recipes based on one or more tags', () => {
+    let filteredRecipes = recipeRepository.filterByTags(['side dish', 'starter'])
+  
+    console.log(filteredRecipes);
+
+    expect(filteredRecipes).to.be.deep.equal([recipes[4]])
+  })
+  it('Experiment', () => {
+    let filteredRecipes = recipeRepository.filterByTags(['starter'])
+    console.log(filteredRecipes);
   })
 
 })
-
-
-//       "name": "Loaded Chocolate Chip Pudding Cookie Cups",
-
-
-// recipe1 = new Recipe(sampleRecipe, sampleIngredients);
