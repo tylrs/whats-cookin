@@ -3,9 +3,10 @@ class Recipe {
   constructor(recipeDetails, ingredientList) {
     this.id = recipeDetails.id;
     this.image = recipeDetails.image;
-    this.name = recipeDetails.name;
+    this.name = recipeDetails.name.split(' ');
     this.instructions = recipeDetails.instructions;
     this.tags = recipeDetails.tags;
+    this.ingredientNames = []
     this.ingredients = this.fetchIngredients(recipeDetails.ingredients, ingredientList);
   }
 
@@ -14,6 +15,7 @@ class Recipe {
       let newIngredientInfo = ingredientList.find((ingredient) => {
         return ingredient.id === recipeIngredient.id;
       })
+      this.ingredientNames.push(newIngredientInfo.name)
       recipeIngredient.name = newIngredientInfo.name;
       recipeIngredient.estimatedCostInCents = newIngredientInfo.estimatedCostInCents;
       return recipeIngredient;
