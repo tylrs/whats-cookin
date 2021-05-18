@@ -5,7 +5,7 @@ import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
-describe.only('Recipe Repository', () => {
+describe('Recipe Repository', () => {
   let recipes, recipeRepository
   beforeEach('Setup', () => {
     const sampleRecipes = data.sampleRecipe

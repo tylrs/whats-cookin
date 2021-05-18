@@ -131,8 +131,9 @@ describe('Recipe', () => {
     expect(recipe1.image).to.equal('https://spoonacular.com/recipeImages/595736-556x370.jpg');
   })
 
-  it('should have a name', () => {
-    expect(recipe1.name).to.equal('Loaded Chocolate Chip Pudding Cookie Cups');
+  it('should have a name which is an array of separate lowerCase words', () => {
+
+    expect(recipe1.name).to.deep.equal([ 'loaded', 'chocolate', 'chip', 'pudding', 'cookie', 'cups' ]);
   })
 
   it('should have instructions', () => {
