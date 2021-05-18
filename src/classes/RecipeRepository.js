@@ -2,16 +2,17 @@ class RecipeRepository {
   constructor(recipes) {
     this.recipes = recipes
   }
-  filterByTags(tags) {
-    let totalFilteredRecipes = tags.reduce((accumulator, tag) => {
+  filterRecipes(queryInfo) {
+    let totalFilteredRecipes = queryInfo.query.reduce((accumulator, query) => {
       accumulator = accumulator.filter((recipe) => {
-        return recipe.tags.includes(tag)
+        return recipe[queryInfo.type].includes(query)
       })
       return accumulator;
     }, this.recipes);
     return totalFilteredRecipes;
   }
-
 }
 
 export default RecipeRepository;
+
+
