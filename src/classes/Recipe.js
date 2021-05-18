@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 class Recipe {
   constructor(recipeDetails, ingredientList) {
     this.id = recipeDetails.id;
