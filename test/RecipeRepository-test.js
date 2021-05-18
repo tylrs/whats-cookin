@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
@@ -21,23 +22,32 @@ describe.only('Recipe Repository', () => {
   it('Should be able to hold recipes', () => {
     expect(recipeRepository.recipes).to.deep.equal(recipes)
   })
-  it('Should have method to filter recipes based on one or more tags', () => {
+  it('Should have method to filter recipes based on one tag', () => {
     let filteredRecipes = recipeRepository.filterByTags(['side dish'])
-    // console.log(recipes[0])
-    console.log(filteredRecipes);
 
     expect(filteredRecipes).to.be.deep.equal([recipes[3], recipes[4]])
   })
-  it('Should have method to filter recipes based on one or more tags', () => {
+  it('Should have method to filter recipes based on multiple tags', () => {
     let filteredRecipes = recipeRepository.filterByTags(['side dish', 'starter'])
   
-    console.log(filteredRecipes);
-
     expect(filteredRecipes).to.be.deep.equal([recipes[4]])
   })
-  it('Experiment', () => {
-    let filteredRecipes = recipeRepository.filterByTags(['starter'])
-    console.log(filteredRecipes);
-  })
+  it('Should have a method to filter recipes based on one ingredient', () => {
 
+  })
+  it('Should have a method to filter recipes based on multiple ingredients', () => {
+
+  })
+  it('Should have a method to search through recipe names on a single word', () => {
+    
+  })
+  it('Should have a method to search through recipe names on multiple word', () => {
+    
+  })
+  it('Should return all recipes if no match is found for a recipe name', () => {
+    
+  })
+  it('Should return all recipes if no match is found for a ingredient name', () => {
+    
+  })
 })
