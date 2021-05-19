@@ -1,26 +1,98 @@
 :root {
   --bg-light: rgba(50, 50, 51, 1);
-  --bg-dark: rgba(50, 50, 51, 1);
+  --bg-dark: rgba(28, 28, 29, 1);
   --accent-red: rgba(251, 54, 64, 1);
   --accent-grey: hsl(30, 1%, 37%);
   --accent-navy: rgba(29, 52, 64, 1);
   --accent-blue: rgba(31, 72, 126, 1);
   --accent-teal: rgba(36, 123, 160, 1);
+  --transp-white: rgba(84, 122, 172, 0.5);
 }
 
-body {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* utility */
-
-flex-row {
-  display: flex;
+body {
+  justify-content: space-between;
+  color: white;
+  font-family: "KoHo", sans-serif;
+  font-size: 0.3rem;
+  border: 1px pink solid;
 }
 
-flex-column {
+header,
+footer {
+  height: 10vh;
+  background: var(--bg-light);
+}
+
+main {
+  height: 80vh;
+  background: var(--bg-dark);
+}
+
+/* header */
+header {
+  padding: 0 0.9rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-logo-container {
+  justify-content: space-around;
+  width: 10rem;
+}
+
+header i {
+  font-size: 4rem;
+}
+
+h1 {
+  position: relative;
+  text-align: center;
+  justify-content: center;
+}
+
+h1 p:first-child {
+  color: var(--accent-red);
+  font-weight: 300;
+  font-size: 0.75rem;
+}
+
+h1 p:nth-child(2) {
+  font-style: italic;
+}
+
+h1 p:nth-child(3) {
+  font-family: "Seaweed Script", cursive;
+}
+
+h1 i {
+  color: var(--accent-teal);
+  font-size: 5rem;
+  align-self: center;
+  position: absolute;
+}
+
+.icon {
+  color: var(--accent-red);
+  font-size: 2.5rem;
+  padding: 0.4rem;
+  border: 2px solid var(--accent-blue);
+  background: var(--transp-white);
+  border-radius: 10%;
+}
+
+/* utility */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
   display: flex;
   flex-direction: column;
 }
