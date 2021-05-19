@@ -1,3 +1,26 @@
+:root {
+  --bg-light: rgba(50, 50, 51, 1);
+  --bg-dark: rgba(50, 50, 51, 1);
+  --accent-red: rgba(251, 54, 64, 1);
+  --accent-grey: hsl(30, 1%, 37%);
+  --accent-navy: rgba(29, 52, 64, 1);
+  --accent-blue: rgba(31, 72, 126, 1);
+  --accent-teal: rgba(36, 123, 160, 1);
+}
+
 body {
-  background-color: blueviolet;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* utility */
+
+flex-row {
+  display: flex;
+}
+
+flex-column {
+  display: flex;
+  flex-direction: column;
 }
