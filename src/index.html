@@ -46,30 +46,79 @@
     <div class="message-bar flex-row">
       <h2>Welcome, Taylor</h2>
     </div>
-    <main class="flex-column">
-
-      <section class="recipe-list-container">
-
-        <article class="recipe-card flex-row" id="recipeName">
-          <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies">
-           <div class="recipe-card-info">
-             <div class="recipe-text">
-               <h3>Pancakes</h3>
-               <div class="tag-container">
-                 <h4>Tag 1</h4>
-                 <h4>Tag 2</h4>
-                 <h4>Tag 1</h4>
-                 <h4>Tag 2</h4>
-                 <h4>Tag 1</h4>
-               </div>
-             </div>
-             <div class="recipe-card-buttons-container">
-               <button class="favorite-recipe">❤️</button>
-               <button class="this-week-recipe">🗓</button>
-             </div>
+    <main>
+      <section
+        class="recipe-list-container flex-column"
+      >
+        <article
+          class="recipe-card flex-row"
+          id="recipeName"
+        >
+          <img
+            src="https://spoonacular.com/recipeImages/595736-556x370.jpg"
+            alt="cookies"
+          />
+          <div class="recipe-card-info flex-row">
+            <div
+              class="recipe-tag-container flex-column"
+            >
+              <h3>Pancakes</h3>
+              <div class="tag-container flex-row">
+                <h4>Breakfast</h4>
+                <h4>Lunch</h4>
+                <h4>Dinner</h4>
+                <h4>Snack</h4>
+                <h4>Snack</h4>
+              </div>
             </div>
+            <div
+              class="recipe-card-buttons-container flex-column"
+            >
+              <button class="favorite-recipe">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="this-week-recipe">
+                <i
+                  class="fas fa-calendar-alt"
+                ></i>
+              </button>
+            </div>
+          </div>
         </article>
 
+        <!-- <article>
+          class="recipe-card flex-row"
+          id="recipeName"
+        >
+          <img
+            src="https://spoonacular.com/recipeImages/595736-556x370.jpg"
+            alt="cookies"
+          />
+          <div class="recipe-card-info">
+            <div class="recipe-text">
+              <h3>Pancakes</h3>
+              <div class="tag-container">
+                <h4>Tag 1</h4>
+                <h4>Tag 2</h4>
+                <h4>Tag 1</h4>
+                <h4>Tag 2</h4>
+                <h4>Tag 1</h4>
+              </div>
+            </div>
+            <div
+              class="recipe-card-buttons-container"
+            >
+              <button class="favorite-recipe">
+                <i class="icon fas fa-heart"></i>
+              </button>
+              <button class="this-week-recipe">
+                <i
+                  class="icon fas fa-calendar-alt"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </article> -->
       </section>
     </main>
     <footer class="flex-row">
