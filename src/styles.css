@@ -24,7 +24,7 @@ body {
   color: white;
   font-family: "KoHo", sans-serif;
   font-size: 0.3rem;
-  border: 1px pink solid;
+  /* border: 1px pink solid; */
 }
 
 header,
@@ -93,16 +93,20 @@ h1 i {
 main {
   height: 80vh;
   background: var(--bg-dark);
+  position: relative;
   align-items: center;
+  justify-content: center;
 }
 
 .message-bar {
   width: 100%;
   height: 5vh;
+  align-self: flex-start;
   justify-content: center;
   align-items: center;
   background-color: var(--transp-red);
   padding-bottom: 0.3rem;
+  /* position: absolute; */
 }
 
 h2 {
@@ -110,6 +114,74 @@ h2 {
   font-size: 1.8rem;
   font-weight: 200;
 }
+
+/* Recipe Card */
+.recipe-card {
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: absolute;
+  border: 1px pink solid;
+  height: 5rem;
+  width: 33rem;
+}
+
+.recipe-card img {
+  position: absolute;
+  border-radius: 0 0 10% 10% ;
+}
+
+.recipe-card-info {
+  background-color: rgba(50, 50, 51, .9);
+  z-index: 1;
+  height: 200%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
+
+.recipe-text {
+  width: 70%;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.recipe-text h3 {
+  font-size: 3rem;
+}
+
+.tag-container {
+  display: flex;
+  height: 3rem;
+  width: 20rem;
+  justify-content: space-between;
+}
+
+.tag-container h4 {
+  height: 3rem;
+  width: 3rem;
+  font-size: 1rem;
+  background-color: orchid;
+}
+
+.recipe-card-buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 15%;
+}
+
+.recipe-card-buttons-container button {
+  height: 40%;
+  width: 100%;
+  background-color: rgba(50, 50, 51, .9);
+  font-size: 2rem;
+  border: 0;
+} */
+
 
 /* Footer */
 footer {
