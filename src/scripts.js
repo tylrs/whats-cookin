@@ -36,7 +36,7 @@ function searchThroughRecipes() {
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
   console.log(filteredRecipesByName);
-  console.log(allFilteredRecipes);
+  // console.log(allFilteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
@@ -77,7 +77,6 @@ function renderRecipes(recipes) {
     let tags = recipe.tags.map((tag) => {
       return `<h4>${tag}</h4>`
     })
-    console.log(tags);
     let recipeNames = recipe.name.map((name) => {
       return name[0].toUpperCase() + name.substring(1);
     }).join(' ');
