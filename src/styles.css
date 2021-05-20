@@ -110,16 +110,22 @@ h2 {
 main {
   height: 80vh;
   background: var(--bg-dark);
+  /* width: 100%;
+  height: 100%; */
+  align-items: center;
+  justify-content: space-between;
+  overflow-y: scroll;
 }
 
 /* Recipe Card */
 
-.recipe-list-container {
+/* .recipe-list-container {
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: center;
-}
+  justify-content: space-between;
+  overflow-y: scroll;
+} */
 
 .recipe-card {
   justify-content: center;
@@ -128,7 +134,7 @@ main {
   width: 20rem;
   z-index: 1;
   border-radius: 0 0 15px 15px;
-  margin: 10rem 0;
+  /* margin: 10rem 0; */
   position: relative;
 }
 
