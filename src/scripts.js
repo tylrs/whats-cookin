@@ -15,6 +15,7 @@ recipes = sampleRecipes.map((recipe) => {
 })
 recipeRepository = new RecipeRepository(recipes)
 // console.log(recipeRepository);
+
 // querySelectors
 const main = document.querySelector('#recipeContainer');
 const searchBar = document.querySelector('#searchBar')
@@ -29,6 +30,7 @@ function collectUserInfo() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let filteredRecipes = recipeRepository.filterRecipes(convertedUserSearch);
+  renderRecipes(filteredRecipes)
   console.log(filteredRecipes);
 }
 
@@ -41,33 +43,36 @@ function convertUserInfo(userSearch) {
 }
 
 // other functions
-recipeRepository.recipes.forEach((recipe) => {
-  main.innerHTML += `
-  <article class="recipe-card flex-row" id="recipeName" >
-    <img src=${recipe.image} alt="cookies"/>
-    <div class="recipe-card-info flex-row">
-      <div class="recipe-tag-container flex-column">
-        <h3>${recipe.name}</h3>
-        <div class="tag-container flex-row">
-          <h4>Breakfast</h4>
-          <h4>Lunch</h4>
-          <h4>Dinner</h4>
-          <h4>Snack</h4>
-          <h4>Snack</h4>
+// renderRecipes(recipeRepository.recipes);
+
+function renderRecipes(recipes) {
+  recipes.forEach((recipe) => {
+    main.innerHTML += `
+    <article class="recipe-card flex-row" id="recipeName" >
+      <img src=${recipe.image} alt="cookies"/>
+      <div class="recipe-card-info flex-row">
+        <div class="recipe-tag-container flex-column">
+          <h3>${recipe.name}</h3>
+          <div class="tag-container flex-row">
+            <h4>Breakfast</h4>
+            <h4>Lunch</h4>
+            <h4>Dinner</h4>
+            <h4>Snack</h4>
+            <h4>Snack</h4>
+          </div>
+        </div>
+        <div class="recipe-card-buttons-container flex-column">
+          <button class="favorite-recipe">
+            <i class="fas fa-heart"></i>
+          </button>
+          <button class="this-week-recipe">
+            <i class="fas fa-calendar-alt"></i>
+          </button>
         </div>
       </div>
-      <div class="recipe-card-buttons-container flex-column">
-        <button class="favorite-recipe">
-          <i class="fas fa-heart"></i>
-        </button>
-        <button class="this-week-recipe">
-          <i class="fas fa-calendar-alt"></i>
-        </button>
-      </div>
-    </div>
-  </article>
-  `
-})
-
+    </article>
+    `
+  })
+}
 
 console.log('Hello world');
