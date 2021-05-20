@@ -43,10 +43,17 @@ function convertUserInfo(userSearch) {
 }
 
 // other functions
-// renderRecipes(recipeRepository.recipes);
+renderRecipes(recipeRepository.recipes);
+//rendering tags....
+//loop through recipe tags
 
 function renderRecipes(recipes) {
+  main.innerHTML = ``;
   recipes.forEach((recipe) => {
+    let tags = recipe.tags.map((tag) => {
+      return `<h4>${tag}</h4>`
+    })
+    console.log(tags);
     main.innerHTML += `
     <article class="recipe-card flex-row" id="recipeName" >
       <img src=${recipe.image} alt="cookies"/>
@@ -54,11 +61,7 @@ function renderRecipes(recipes) {
         <div class="recipe-tag-container flex-column">
           <h3>${recipe.name}</h3>
           <div class="tag-container flex-row">
-            <h4>Breakfast</h4>
-            <h4>Lunch</h4>
-            <h4>Dinner</h4>
-            <h4>Snack</h4>
-            <h4>Snack</h4>
+            ${tags}
           </div>
         </div>
         <div class="recipe-card-buttons-container flex-column">
