@@ -65,9 +65,16 @@ describe('Recipe Repository', () => {
 
     expect(filteredRecipes).to.be.deep.equal([])
   })
+
   it('Should return all recipes if no match is found for a ingredient name with a single word', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['saffron']})
 
     expect(filteredRecipes).to.be.deep.equal([])
+  })
+  
+  it('Should have a method to generate all recipe names', () => {
+    let allRecipeNames = recipeRepository.generateAllRecipeNames();
+
+    expect(allRecipeNames.length).to.equal(30);
   })
 })
