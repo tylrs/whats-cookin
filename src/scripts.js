@@ -23,10 +23,10 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
-searchButton.addEventListener('click', collectUserInfo)
+searchButton.addEventListener('click', searchThroughRecipes)
 
 // event handlers
-function collectUserInfo() {
+function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
@@ -35,6 +35,8 @@ function collectUserInfo() {
   let uniqueFilteredRecipes = [...new Set(allFilteredRecipes)];
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
+  console.log(filteredRecipesByName);
+  console.log(allFilteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
@@ -76,12 +78,15 @@ function renderRecipes(recipes) {
       return `<h4>${tag}</h4>`
     })
     console.log(tags);
+    let recipeNames = recipe.name.map((name) => {
+      return name[0].toUpperCase() + name.substring(1);
+    }).join(' ');
     main.innerHTML += `
     <article class="recipe-card flex-row" id="recipeName" >
       <img src=${recipe.image} alt="cookies"/>
       <div class="recipe-card-info flex-row">
         <div class="recipe-tag-container flex-column">
-          <h3>${recipe.name}</h3>
+          <h3>${recipeNames}</h3>
           <div class="tag-container flex-row">
             ${tags}
           </div>
