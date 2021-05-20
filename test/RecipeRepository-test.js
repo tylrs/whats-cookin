@@ -5,7 +5,7 @@ import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
-describe('Recipe Repository', () => {
+describe.only('Recipe Repository', () => {
   let recipes, recipeRepository
   beforeEach('Setup', () => {
     const sampleRecipes = data.sampleRecipe
@@ -71,10 +71,10 @@ describe('Recipe Repository', () => {
 
     expect(filteredRecipes).to.be.deep.equal([])
   })
-  
+
   it('Should have a method to generate all recipe names', () => {
     let allRecipeNames = recipeRepository.generateAllRecipeNames();
 
-    expect(allRecipeNames.length).to.equal(30);
+    expect(allRecipeNames.length).to.equal(27);
   })
 })

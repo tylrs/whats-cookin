@@ -12,11 +12,12 @@ class RecipeRepository {
     return totalFilteredRecipes;
   }
   generateAllRecipeNames() {
-    result = this.recipes.reduce((acc, recipe) => {
+    let result = this.recipes.reduce((acc, recipe) => {
       recipe.name.forEach((word) => {
         acc.push(word);
       })
-    }, acc)
+      return acc;
+    }, [])
     return result;
   }
   generateAllIngredientNames() {
