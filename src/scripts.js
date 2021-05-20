@@ -32,8 +32,9 @@ function collectUserInfo() {
   let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
   let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.ingredientNames);
   let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
-  renderRecipes(allFilteredRecipes)
-  console.log('These are filtered', allFilteredRecipes);
+  let uniqueFilteredRecipes = [...new Set(allFilteredRecipes)];
+  renderRecipes(uniqueFilteredRecipes);
+  console.log('These are filtered', uniqueFilteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
