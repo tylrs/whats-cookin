@@ -77,4 +77,10 @@ describe.only('Recipe Repository', () => {
 
     expect(allRecipeNames.length).to.equal(27);
   })
+
+  it('Should have a method to generate all ingredient names', () => {
+    let allIngredientNames = recipeRepository.generateAllIngredientNames();
+
+    expect(allIngredientNames.length).to.equal(200);
+  })
 })
