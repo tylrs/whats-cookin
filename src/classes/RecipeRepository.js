@@ -11,8 +11,15 @@ class RecipeRepository {
     }, this.recipes);
     return totalFilteredRecipes;
   }
+  generateAllRecipeNames() {
+    this.recipes.reduce((acc, recipe) => {
+      
+    }, acc)
+    return result;
+  }
+  generateAllIngredientNames() {
+
+  }
 }
 
 export default RecipeRepository;
-
-

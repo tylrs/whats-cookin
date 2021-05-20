@@ -45,9 +45,10 @@ function convertUserInfo(userSearch) {
 
 function determineSearchType(userSearch) {
   let alteredUserSearch = userSearch.split(' ');
-  alteredUserSearch.reduce((word) => {
-    
-  })
+  alteredUserSearch.reduce((acc, word) => {
+    recipeRepository.recipes.
+
+  }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
 }
 
 // other functions
