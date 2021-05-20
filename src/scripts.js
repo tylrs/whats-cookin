@@ -35,11 +35,19 @@ function collectUserInfo() {
 }
 
 function convertUserInfo(userSearch) {
+  determineSearchType(userSearch);
   let convertedUserSearch = {
     type: 'name',
     query: [`${userSearch}`]
   }
   return convertedUserSearch;
+}
+
+function determineSearchType(userSearch) {
+  let alteredUserSearch = userSearch.split(' ');
+  alteredUserSearch.reduce((word) => {
+    
+  })
 }
 
 // other functions
