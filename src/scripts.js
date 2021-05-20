@@ -36,21 +36,24 @@ function collectUserInfo() {
 
 function convertUserInfo(userSearch) {
   determineSearchType(userSearch);
-  let convertedUserSearch = {
-    type: 'name',
-    query: [`${userSearch}`]
-  }
+  // let convertedUserSearch = {
+  //   type: 'name',
+  //   query: [`${userSearch}`]
+  // }
   return convertedUserSearch;
 }
 
 function determineSearchType(userSearch) {
   let alteredUserSearch = userSearch.split(' ');
-  alteredUserSearch.reduce((acc, word) => {
+  let searchObject = alteredUserSearch.reduce((acc, word) => {
     let allRecipeNames = recipeRepository.generateAllRecipeNames();
     if (allRecipeNames.includes(word)) {
       acc.name.query.push(word);
     }
+    return acc;
   }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
+  console.log(searchObject);
+  return searchObject;
 }
 
 // other functions

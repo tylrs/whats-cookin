@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
-// import scripts from '..'
+import script from '../src/scripts.js'
 const data = sampleData.sampleData;
 
 describe.only('Recipe Repository', () => {
@@ -16,4 +16,8 @@ describe.only('Recipe Repository', () => {
     })
     recipeRepository = new RecipeRepository(recipes)
   })
-}
+
+  it('should have a method to search through all recipe names', () => {
+    
+  })
+})
