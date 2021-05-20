@@ -30,9 +30,10 @@ function collectUserInfo() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
-  let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.name);
-  renderRecipes(filteredRecipes)
-  console.log('These are filtered', filteredRecipes);
+  let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.ingredientNames);
+  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
+  renderRecipes(allFilteredRecipes)
+  console.log('These are filtered', allFilteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
