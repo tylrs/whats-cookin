@@ -29,13 +29,15 @@ searchButton.addEventListener('click', collectUserInfo)
 function collectUserInfo() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
-  let filteredRecipes = recipeRepository.filterRecipes(convertedUserSearch);
+  let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.name);
   renderRecipes(filteredRecipes)
-  console.log(filteredRecipes);
+  console.log('These are filtered', filteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
-  determineSearchType(userSearch);
+  let convertedUserSearch = determineSearchType(userSearch);
+  console.log(convertedUserSearch);
   // let convertedUserSearch = {
   //   type: 'name',
   //   query: [`${userSearch}`]
