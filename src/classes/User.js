@@ -1,7 +1,8 @@
 class User {
-  constructor(recipeRepo) {
+  constructor(recipeRepo, name) {
     this.favoriteRecipes = recipeRepo;
     this.recipesToCook = recipeRepo;
+    this.name = name;
   }
 };
 
