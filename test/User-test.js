@@ -7,7 +7,7 @@ import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
 describe.only('User', () => {
-  let recipes, recipeRepository, user1;
+  let recipes, recipeRepository, user1, sample;
   beforeEach('Setup', () => {
     const sampleRecipes = data.sampleRecipe
     const sampleIngredients = data.sampleIngredients
@@ -38,13 +38,26 @@ describe.only('User', () => {
   })
 
   it('Should have a method to favorite recipes', () => {
-    expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
-    expect(user1.recipesToCook.recipes).to.deep.equal([])
+    user1.addFavoriteRecipe(recipes[0])
+    user1.addFavoriteRecipe(recipes[1])
+    user1.addFavoriteRecipe(recipes[2])
+    user1.addFavoriteRecipe(recipes[3])
+    user1.addFavoriteRecipe(recipes[4])
+
+    expect(user1.favoriteRecipes.recipes.length).to.equal(5);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
   it('Should have a method to only favorite unique recipes', () => {
-    expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
-    expect(user1.recipesToCook.recipes).to.deep.equal([])
+    user1.addFavoriteRecipe(recipes[0])
+    user1.addFavoriteRecipe(recipes[1])
+    user1.addFavoriteRecipe(recipes[2])
+    user1.addFavoriteRecipe(recipes[3])
+    user1.addFavoriteRecipe(recipes[4])
+    user1.addFavoriteRecipe(recipes[0])
+
+    expect(user1.favoriteRecipes.recipes.length).to.equal(5);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
   it('Should have a method to unFavorite recipes', () => {
