@@ -24,12 +24,20 @@ const searchButton = document.querySelector('#searchButton')
 
 // event listeners
 window.onload = renderRecipes(recipeRepository.recipes);
-
+generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 console.log(data.sampleUsers);
 
 
 // event handlers
+function generateRandomUser() {
+  let randomNumber = getRandomNumber(data.sampleUsers.length);
+  let randomUserInfo = data.sampleUsers.find((user) => {
+    return user.id === randomNumber;
+  })
+  console.log(randomUserInfo);
+}
+
 function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)

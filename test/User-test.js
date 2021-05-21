@@ -9,6 +9,7 @@ const data = sampleData.sampleData;
 describe('User', () => {
   let recipes, recipeRepository, user1, sample;
   beforeEach('Setup', () => {
+    const sampleUsers = data.sampleUsers;
     const sampleRecipes = data.sampleRecipe
     const sampleIngredients = data.sampleIngredients
     recipes = sampleRecipes.map((recipe) => {
@@ -16,7 +17,7 @@ describe('User', () => {
       return newRecipe
     })
     recipeRepository = new RecipeRepository([])
-    user1 = new User('Bob');
+    user1 = new User(sampleUsers[0]);
     user1.addFavoriteRecipe(recipes[0])
     user1.addFavoriteRecipe(recipes[1])
     user1.addFavoriteRecipe(recipes[2])
