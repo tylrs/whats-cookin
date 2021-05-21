@@ -38,7 +38,6 @@ describe.only('User', () => {
 
   it('Should have a recipes to cook array which is an instance of a recipe repository', () => {
     expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
-    // expect(user1.recipesToCook.recipes).to.deep.equal([])
   })
 
   it('Should have a method to favorite recipes', () => {
@@ -61,10 +60,18 @@ describe.only('User', () => {
   })
 
   it('Should have a method to unFavorite recipes', () => {
+
     user1.removeFavoriteRecipe(595736);
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(4);
     expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);
+  })
+
+  it('Should not remove item from favoriteRecipes if id does not match', () => {
+    user1.removeFavoriteRecipe(2126351423);
+
+    expect(user1.favoriteRecipes.recipes.length).to.equal(5);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes);
   })
 
   it('Should have a method to filter favoriteRecipes based on one tag', () => {

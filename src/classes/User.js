@@ -13,14 +13,23 @@ class User {
     }
   }
 
-  addRecipeToCookThisWeek(recipe) {
-    if (!this.recipesToCook.recipes.includes(recipe)) {
-      this.recipesToCook.recipes.push(recipe);
+  removeFavoriteRecipe(recipeID) {
+    let index = this.favoriteRecipes.recipes.findIndex((recipe) => {
+      return recipe.id === recipeID;
+    })
+    if (index !== -1) {
+      this.favoriteRecipes.recipes.splice(index, 1);
     }
   }
 
   filterFavoriteRecipes(queryInfo) {
     return this.favoriteRecipes.filterRecipes(queryInfo);
+  }
+
+  addRecipeToCookThisWeek(recipe) {
+    if (!this.recipesToCook.recipes.includes(recipe)) {
+      this.recipesToCook.recipes.push(recipe);
+    }
   }
 
 };
