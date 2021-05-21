@@ -24,7 +24,9 @@ const searchButton = document.querySelector('#searchButton')
 
 // event listeners
 window.onload = renderRecipes(recipeRepository.recipes);
+
 searchButton.addEventListener('click', searchThroughRecipes)
+console.log(data.sampleUsers);
 
 
 // event handlers
@@ -99,5 +101,10 @@ function renderRecipes(recipes) {
     `
   })
 }
+
+function getRandomNumber(max) {
+  var number = Math.floor(Math.random() * (max-1) + 1);
+  return number;
+};
 
 console.log('Hello world');
