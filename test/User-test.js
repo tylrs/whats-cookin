@@ -17,6 +17,11 @@ describe.only('User', () => {
     })
     recipeRepository = new RecipeRepository([])
     user1 = new User(recipeRepository, 'Bob');
+    user1.addFavoriteRecipe(recipes[0])
+    user1.addFavoriteRecipe(recipes[1])
+    user1.addFavoriteRecipe(recipes[2])
+    user1.addFavoriteRecipe(recipes[3])
+    user1.addFavoriteRecipe(recipes[4])
   })
 
   it('Should be an instance of a user class', () => {
@@ -38,41 +43,30 @@ describe.only('User', () => {
   })
 
   it('Should have a method to favorite recipes', () => {
-    user1.addFavoriteRecipe(recipes[0])
-    user1.addFavoriteRecipe(recipes[1])
-    user1.addFavoriteRecipe(recipes[2])
-    user1.addFavoriteRecipe(recipes[3])
-    user1.addFavoriteRecipe(recipes[4])
-
     expect(user1.favoriteRecipes.recipes.length).to.equal(5);
     expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
   it('Should have a method to only favorite unique recipes', () => {
     user1.addFavoriteRecipe(recipes[0])
-    user1.addFavoriteRecipe(recipes[1])
-    user1.addFavoriteRecipe(recipes[2])
-    user1.addFavoriteRecipe(recipes[3])
-    user1.addFavoriteRecipe(recipes[4])
-    user1.addFavoriteRecipe(recipes[0])
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(5);
     expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
-  it('Should have a method to unFavorite recipes', () => {
+  it.skip('Should have a method to unFavorite recipes', () => {
     expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
     expect(user1.recipesToCook.recipes).to.deep.equal([])
   })
 
-  it('Should have method to filter favoriteRecipes based on one tag', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'tags', query: ['side dish']})
+  it('Should have a method to filter favoriteRecipes based on one tag', () => {
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'tags', query: ['side dish']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[3], recipes[4]])
   })
 
-  it('Should have method to filter favoriteRecipes based on multiple tags', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'tags', query: ['side dish', 'starter']})
+  it.only('Should have a method to filter favoriteRecipes based on multiple tags', () => {
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'tags', query: ['side dish', 'starter']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[4]])
   })

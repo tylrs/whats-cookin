@@ -10,6 +10,11 @@ class User {
       this.favoriteRecipes.recipes.push(recipe);
     }
   }
+
+  filterFavoriteRecipes(queryInfo) {
+    return this.favoriteRecipes.filterRecipes(queryInfo);
+  }
+
 };
 
 
