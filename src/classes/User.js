@@ -1,13 +1,21 @@
+import RecipeRepository from './RecipeRepository';
+
 class User {
-  constructor(recipeRepo, name) {
-    this.favoriteRecipes = recipeRepo;
-    this.recipesToCook = recipeRepo;
+  constructor(name) {
+    this.favoriteRecipes = new RecipeRepository([]);
+    this.recipesToCook = new RecipeRepository([]);
     this.name = name;
   }
 
   addFavoriteRecipe(recipe) {
     if (!this.favoriteRecipes.recipes.includes(recipe)) {
       this.favoriteRecipes.recipes.push(recipe);
+    }
+  }
+
+  addRecipeToCookThisWeek(recipe) {
+    if (!this.recipesToCook.recipes.includes(recipe)) {
+      this.recipesToCook.recipes.push(recipe);
     }
   }
 
@@ -18,4 +26,4 @@ class User {
 };
 
 
-module.exports = User;
+export default User;
