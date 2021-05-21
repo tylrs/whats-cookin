@@ -79,33 +79,52 @@ function renderRecipes(recipes) {
   main.innerHTML = ``;
   recipes.forEach((recipe) => {
     let tags = recipe.tags.map((tag) => {
-      return `<h4>${tag}</h4>`
+      return `<h4 class="tags flex-column">${tag}</h4>`
     })
     let recipeNames = recipe.name.map((name) => {
       return name[0].toUpperCase() + name.substring(1);
     }).join(' ');
-    main.innerHTML += `
-    <article class="recipe-card flex-row" id="recipeName" >
-      <img src=${recipe.image} alt="cookies"/>
-      <div class="recipe-card-info flex-row">
-        <div class="recipe-tag-container flex-column">
-          <h3>${recipeNames}</h3>
-          <div class="tag-container flex-row">
-            ${tags}
-          </div>
+    main.innerHTML +=
+    `
+      <article class="recipe-card flex-row" id="recipeName" >
+        <img src=${recipe.image} alt="cookies"/>
+        <div class="recipe-card-info flex-column">
+         <div class="recipe-tag-container flex-column">
+            <p class="recipe-name">${recipeNames}</p>
+            <div class="tag-container flex-row">
+              ${tags}
+            </div>
         </div>
         <div class="recipe-card-buttons-container flex-column">
           <button class="favorite-recipe">
-            <i class="fas fa-heart"></i>
+            <i class="heart-card fas fa-heart"></i>
           </button>
           <button class="this-week-recipe">
-            <i class="fas fa-calendar-alt"></i>
+            <i class="calendar-card fas fa-calendar-alt"></i>
           </button>
         </div>
-      </div>
-    </article>
+        </article>
     `
   })
 }
 
 console.log('Hello world');
+// <article class="recipe-card flex-row" id="recipeName" >
+//   <img src=${recipe.image} alt="cookies"/>
+//   <div class="recipe-card-info flex-row">
+//     <div class="recipe-tag-container flex-column">
+//       <h3>${recipeNames}</h3>
+//       <div class="tag-container flex-row">
+//         ${tags}
+//       </div>
+//     </div>
+//     <div class="recipe-card-buttons-container flex-column">
+//       <button class="favorite-recipe">
+//         <i class="fas fa-heart"></i>
+//       </button>
+//       <button class="this-week-recipe">
+//         <i class="fas fa-calendar-alt"></i>
+//       </button>
+//     </div>
+//   </div>
+// </article>
