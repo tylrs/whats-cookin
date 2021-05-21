@@ -53,6 +53,13 @@ describe.only('User', () => {
     expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
+  it('Should have a method to add recipes to cook this week', () => {
+    user1.addRecipeToCookThisWeek(recipes[0])
+
+    expect(user1.recipesToCook.recipes.length).to.equal(1);
+    expect(user1.recipesToCook.recipes).to.deep.equal(recipe[0])
+  })
+
   it.skip('Should have a method to unFavorite recipes', () => {
     expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
     expect(user1.recipesToCook.recipes).to.deep.equal([])
