@@ -34,12 +34,11 @@ describe.only('User', () => {
 
   it('Should have a favorite recipes array which is an instance of a recipe repository', () => {
     expect(user1.favoriteRecipes).to.be.an.instanceOf(RecipeRepository);
-    expect(user1.favoriteRecipes.recipes).to.deep.equal([])
   })
 
   it('Should have a recipes to cook array which is an instance of a recipe repository', () => {
     expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
-    expect(user1.recipesToCook.recipes).to.deep.equal([])
+    // expect(user1.recipesToCook.recipes).to.deep.equal([])
   })
 
   it('Should have a method to favorite recipes', () => {
@@ -65,32 +64,32 @@ describe.only('User', () => {
     expect(filteredRecipes).to.be.deep.equal([recipes[3], recipes[4]])
   })
 
-  it.only('Should have a method to filter favoriteRecipes based on multiple tags', () => {
+  it('Should have a method to filter favoriteRecipes based on multiple tags', () => {
     let filteredRecipes = user1.filterFavoriteRecipes({type: 'tags', query: ['side dish', 'starter']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[4]])
   })
 
   it('Should have a method to filter favoriteRecipes based on one ingredient', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter']})
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'ingredientNames', query: ['butter']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[2], recipes[3]])
   })
 
   it('Should have a method to filter favoriteRecipes based on multiple ingredients', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter', 'seasoned salt']})
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'ingredientNames', query: ['butter', 'seasoned', 'salt']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[2]])
   })
 
   it('Should have a method to search through favoriteRecipe names with a single word', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['maple']})
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'name', query: ['maple']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[1]])
   })
 
   it('Should have a method to search through favoriteRecipe names with multiple words', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['chocolate', 'chip']})
+    let filteredRecipes = user1.filterFavoriteRecipes({type: 'name', query: ['chocolate', 'chip']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[0]])
   })
