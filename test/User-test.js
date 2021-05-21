@@ -16,7 +16,7 @@ describe.only('User', () => {
       return newRecipe
     })
     recipeRepository = new RecipeRepository([])
-    user1 = new User(recipeRepository, 'Bob');
+    user1 = new User('Bob');
     user1.addFavoriteRecipe(recipes[0])
     user1.addFavoriteRecipe(recipes[1])
     user1.addFavoriteRecipe(recipes[2])
@@ -57,7 +57,7 @@ describe.only('User', () => {
     user1.addRecipeToCookThisWeek(recipes[0])
 
     expect(user1.recipesToCook.recipes.length).to.equal(1);
-    expect(user1.recipesToCook.recipes).to.deep.equal(recipe[0])
+    expect(user1.recipesToCook.recipes).to.deep.equal([recipes[0]])
   })
 
   it.skip('Should have a method to unFavorite recipes', () => {
