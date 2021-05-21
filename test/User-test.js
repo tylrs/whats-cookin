@@ -60,9 +60,11 @@ describe.only('User', () => {
     expect(user1.recipesToCook.recipes).to.deep.equal([recipes[0]])
   })
 
-  it.skip('Should have a method to unFavorite recipes', () => {
-    expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
-    expect(user1.recipesToCook.recipes).to.deep.equal([])
+  it('Should have a method to unFavorite recipes', () => {
+    user1.removeFavoriteRecipe(595736);
+
+    expect(user1.favoriteRecipes.recipes.length).to.equal(4);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);
   })
 
   it('Should have a method to filter favoriteRecipes based on one tag', () => {
