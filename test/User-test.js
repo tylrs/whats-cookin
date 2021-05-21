@@ -28,4 +28,9 @@ describe.only('User', () => {
     expect(user1.favoriteRecipes.recipes).to.deep.equal([])
   })
 
+  it('Should have a recipes to cook array which is an instance of a recipe repository', () => {
+    expect(user1.recipesToCook).to.be.an.instanceOf(RecipeRepository);
+    expect(user1.recipesToCook.recipes).to.deep.equal([])
+  })
+
 })
