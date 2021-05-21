@@ -7,14 +7,14 @@ import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
 describe('User', () => {
-  let recipes, recipeRepository, user1, sample;
+  let recipes, recipeRepository, user1
   beforeEach('Setup', () => {
     const sampleUsers = data.sampleUsers;
     const sampleRecipes = data.sampleRecipe
     const sampleIngredients = data.sampleIngredients
     recipes = sampleRecipes.map((recipe) => {
       let newRecipe = new Recipe(recipe, sampleIngredients)
-      return newRecipe
+      return newRecipe;
     })
     recipeRepository = new RecipeRepository([])
     user1 = new User(sampleUsers[0]);
@@ -30,7 +30,11 @@ describe('User', () => {
   });
 
   it('Should have a name', () => {
-    expect(user1.name).to.equal('Bob');
+    expect(user1.name).to.equal('Saige O\'Kon');
+  })
+
+  it('Should have an ID', () => {
+    expect(user1.id).to.equal(1);
   })
 
   it('Should have a favorite recipes array which is an instance of a recipe repository', () => {
