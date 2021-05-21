@@ -27,13 +27,11 @@ class RecipeRepository {
   generateAllIngredientNames() {
     let result = this.recipes.reduce((acc, recipe) => {
       recipe.ingredientNames.forEach((ingredient) => {
-        let separatedNames = ingredient.split(' ')
-        separatedNames.forEach((name) => {
-          acc.push(name);
-        })
+        acc.push(ingredient)
       })
       return acc;
     }, [])
+    console.log("all ingredient names", result);
     return result;
   }
 }
