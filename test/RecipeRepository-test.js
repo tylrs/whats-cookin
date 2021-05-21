@@ -43,7 +43,7 @@ describe('Recipe Repository', () => {
   })
 
   it('Should have a method to filter recipes based on multiple ingredients', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter', 'seasoned salt']})
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter', 'seasoned', 'salt']})
 
     expect(filteredRecipes).to.be.deep.equal([recipes[2]])
   })

@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const Recipe = require('../src/classes/Recipe');
 const Ingredient = require('../src/classes/Ingredient');
 
-describe.only('Recipe', () => {
+describe('Recipe', () => {
   let updatedInstructions, updatedRecipeIngredients, sampleRecipe, sampleIngredients, recipe1, ingredient1, ingredient2, ingredient3;
   beforeEach('Setup', () => {
     sampleRecipe = {
@@ -146,7 +146,7 @@ describe.only('Recipe', () => {
 
   it('should have a method which returns a new list of ingredients with updated information', () => {
     const updatedIngredients = recipe1.fetchIngredients(sampleRecipe.ingredients, sampleIngredients)
-    expect(updatedIngredients).to.deep.equal(updatedRecipeIngredients)
+    expect(updatedIngredients).to.deep.equal(updatedRecipeIngredients);
   })
 
   it('should have a property which has the returned value from fetchIngredients', () => {
@@ -154,7 +154,7 @@ describe.only('Recipe', () => {
   })
 
   it('should have a method to return ingredient names', () => {
-    expect(recipe1.getIngredientNames()).to.deep.equal(['wheat flour', 'bicarbonate of soda', 'eggs'])
+    expect(recipe1.getIngredientNames()).to.deep.equal(['wheat', 'flour', 'bicarbonate', 'of', 'soda', 'eggs'])
   })
 
   it('should have a method to return total cost of ingredients in cents', () => {

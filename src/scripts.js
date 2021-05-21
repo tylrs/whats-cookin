@@ -2,6 +2,7 @@ import './styles.css';
 import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
 import RecipeRepository from './classes/RecipeRepository.js'
+import User from './classes/User.js'
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
@@ -14,7 +15,6 @@ recipes = sampleRecipes.map((recipe) => {
   return newRecipe
 })
 recipeRepository = new RecipeRepository(recipes)
-// console.log(recipeRepository);
 
 // querySelectors
 const main = document.querySelector('#recipeContainer');
@@ -23,17 +23,26 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
+window.onload = renderRecipes(recipeRepository.recipes);
+generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 
+
 // event handlers
+function generateRandomUser() {
+  let randomNumber = getRandomNumber(data.sampleUsers.length + 1);
+  let randomUserInfo = data.sampleUsers.find((user) => {
+    return user.id === randomNumber;
+  })
+  let randomUser = new User(randomUserInfo);
+}
+
 function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
-  // console.log(filteredRecipesByName);
-  // console.log(allFilteredRecipes);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
@@ -64,14 +73,8 @@ function determineSearchType(alteredUserSearch) {
     }
     return acc;
   }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
-  console.log(searchObject);
   return searchObject;
 }
-
-// other functions
-renderRecipes(recipeRepository.recipes);
-//rendering tags....
-//loop through recipe tags
 
 function renderRecipes(recipes) {
   main.innerHTML = ``;
@@ -106,23 +109,9 @@ function renderRecipes(recipes) {
   })
 }
 
+function getRandomNumber(max) {
+  var number = Math.floor(Math.random() * (max-1) + 1);
+  return number;
+};
+
 console.log('Hello world');
-// <article class="recipe-card flex-row" id="recipeName" >
-//   <img src=${recipe.image} alt="cookies"/>
-//   <div class="recipe-card-info flex-row">
-//     <div class="recipe-tag-container flex-column">
-//       <h3>${recipeNames}</h3>
-//       <div class="tag-container flex-row">
-//         ${tags}
-//       </div>
-//     </div>
-//     <div class="recipe-card-buttons-container flex-column">
-//       <button class="favorite-recipe">
-//         <i class="fas fa-heart"></i>
-//       </button>
-//       <button class="this-week-recipe">
-//         <i class="fas fa-calendar-alt"></i>
-//       </button>
-//     </div>
-//   </div>
-// </article>
