@@ -29,14 +29,18 @@ searchButton.addEventListener('click', searchThroughRecipes)
 function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
+  let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
+  renderRecipes(uniqueFilteredRecipes);
+  console.log('These are filtered', uniqueFilteredRecipes);
+  // console.log(filteredRecipesByName);
+  // console.log(allFilteredRecipes);
+}
+
+function generateFilteredRecipes(convertedUserSearch) {
   let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
   let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.ingredientNames);
   let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
-  let uniqueFilteredRecipes = [...new Set(allFilteredRecipes)];
-  renderRecipes(uniqueFilteredRecipes);
-  console.log('These are filtered', uniqueFilteredRecipes);
-  console.log(filteredRecipesByName);
-  // console.log(allFilteredRecipes);
+  return [...new Set(allFilteredRecipes)];
 }
 
 function convertUserInfo(userSearch) {
