@@ -31,7 +31,6 @@ class RecipeRepository {
       })
       return acc;
     }, [])
-    console.log("all ingredient names", result);
     return result;
   }
 }

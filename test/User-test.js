@@ -45,7 +45,7 @@ describe('User', () => {
     expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes)
   })
 
-  it('Should have a method to only favorite unique recipes', () => {
+  it('Should only favorite unique recipes', () => {
     user1.addFavoriteRecipe(recipes[0])
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(5);
@@ -61,7 +61,7 @@ describe('User', () => {
 
   it('Should have a method to unFavorite recipes', () => {
 
-    user1.removeFavoriteRecipe(595736);
+    user1.removeFavoriteRecipe(recipes[0].id);
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(4);
     expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);

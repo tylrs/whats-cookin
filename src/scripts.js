@@ -64,7 +64,6 @@ function determineSearchType(alteredUserSearch) {
     }
     return acc;
   }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
-  console.log(searchObject);
   return searchObject;
 }
 
