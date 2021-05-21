@@ -44,7 +44,8 @@ function generateFilteredRecipes(convertedUserSearch) {
 }
 
 function convertUserInfo(userSearch) {
-  let convertedUserSearch = determineSearchType(userSearch);
+  let alteredUserSearch = userSearch.split(' ');
+  let convertedUserSearch = determineSearchType(alteredUserSearch);
   console.log(convertedUserSearch);
   // let convertedUserSearch = {
   //   type: 'name',
@@ -53,8 +54,7 @@ function convertUserInfo(userSearch) {
   return convertedUserSearch;
 }
 
-function determineSearchType(userSearch) {
-  let alteredUserSearch = userSearch.split(' ');
+function determineSearchType(alteredUserSearch) {
   let searchObject = alteredUserSearch.reduce((acc, word) => {
     let allRecipeNames = recipeRepository.generateAllRecipeNames();
     let allIngredientNames = recipeRepository.generateAllIngredientNames();
