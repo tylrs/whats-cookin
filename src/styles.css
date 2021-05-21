@@ -12,6 +12,7 @@
 
   --transp-teal: rgba(84, 122, 172, 0.5);
   --transp-white: rgb(255, 255, 255, 0.5);
+  --transp-bg-light: rgba(50, 50, 51, 0.8);
 }
 
 * {
@@ -34,11 +35,46 @@ footer {
   background: var(--bg-light);
 }
 
+/* utility */
 button {
   border: none;
   background: var(--transp-white);
   border-radius: 20%;
   color: var(--accent-navy);
+}
+
+.btn {
+  border: none;
+  padding: 0.3rem 3.3rem;
+  background: var(--accent-darkred);
+  color: var(--white);
+  border-radius: 15px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
+}
+
+.icon {
+  font-size: 2.5rem;
+  padding: 0.4rem;
+  border: 2px solid var(--accent-blue);
+  background: var(--transp-teal);
+  border-radius: 10%;
+}
+
+.icon-small {
+  font-size: 1.3rem;
 }
 
 /* header */
@@ -85,16 +121,43 @@ h1 i {
   position: absolute;
 }
 
-.icon {
-  font-size: 2.5rem;
-  padding: 0.4rem;
-  border: 2px solid var(--accent-blue);
-  background: var(--transp-teal);
-  border-radius: 10%;
-}
-
 .fa-heart:hover {
   color: var(--accent-red);
+}
+
+/* Filter Menu */
+.filter-menu {
+  align-self: flex-start;
+  height: 100%;
+  width: 60%;
+  background: var(--transp-bg-light);
+  border-right: 2px solid var(--accent-grey);
+  padding: 0.5rem 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+fieldset {
+  height: 100%;
+  width: 13rem;
+  flex-wrap: wrap;
+  border: none;
+  justify-content: center;
+}
+
+li {
+  align-content: center;
+  text-align: center;
+  margin: 0.5rem 0.95rem;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  letter-spacing: 0.3rem;
+  font-size: 1rem;
 }
 
 /* Message Bar */
@@ -218,25 +281,7 @@ footer {
   font-size: 1.3rem;
 }
 
-/* utility */
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.icon {
-  font-size: 2.5rem;
-  padding: 0.4rem;
-  border: 2px solid var(--accent-blue);
-  background: var(--transp-teal);
-  border-radius: 10%;
-}
-
-.icon-small {
-  font-size: 1.3rem;
+input:checked + .tags {
+  background: var(--accent-blue);
+  color: var(--accent-red);
 }
