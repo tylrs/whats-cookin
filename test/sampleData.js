@@ -653,6 +653,9 @@ const sampleData = {
     '4. Place the cookie dough balls into ungreased muffin pan. Sprinkle with sea salt.',
     '5. Bake for 9 to 10 minutes, or until you see the edges start to brown.',
     '6. Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack.Top with ice cream and a drizzle of chocolate sauce.'
+  ],
+  sampleUsers: [
+    
   ]
 }
 

@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import { expect } from 'chai';
+import User from '../src/classes/User';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
-describe('Recipe Repository', () => {
-  let recipes, recipeRepository
+describe.only('User', () => {
+  let recipes, recipeRepository, user1;
   beforeEach('Setup', () => {
     const sampleRecipes = data.sampleRecipe
     const sampleIngredients = data.sampleIngredients
@@ -14,14 +15,17 @@ describe('Recipe Repository', () => {
       let newRecipe = new Recipe(recipe, sampleIngredients)
       return newRecipe
     })
-    recipeRepository = new RecipeRepository(recipes)
+    recipeRepository = new RecipeRepository([])
+    user1 = new User(recipeRepository);
   })
-  it('Should be a function', () => {
-    expect(RecipeRepository).to.be.a('function');
+
+  it('Should be an instance of a user class', () => {
+    expect(user1).to.be.an.instanceOf(User);
   });
 
-  it('Should be able to hold recipes', () => {
-    expect(recipeRepository.recipes).to.deep.equal(recipes)
+  it('Should have a favorite recipes array which is an instance of a recipe repository', () => {
+    expect(user1.favoriteRecipes).to.be.an.instanceOf(RecipeRepository);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal([])
   })
 
 })
