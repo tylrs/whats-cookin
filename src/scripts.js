@@ -23,23 +23,49 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
-searchButton.addEventListener('click', collectUserInfo)
+searchButton.addEventListener('click', searchThroughRecipes)
 
 // event handlers
-function collectUserInfo() {
+function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
-  let filteredRecipes = recipeRepository.filterRecipes(convertedUserSearch);
-  renderRecipes(filteredRecipes)
-  console.log(filteredRecipes);
+  let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
+  renderRecipes(uniqueFilteredRecipes);
+  console.log('These are filtered', uniqueFilteredRecipes);
+  // console.log(filteredRecipesByName);
+  // console.log(allFilteredRecipes);
+}
+
+function generateFilteredRecipes(convertedUserSearch) {
+  let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.ingredientNames);
+  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
+  return [...new Set(allFilteredRecipes)];
 }
 
 function convertUserInfo(userSearch) {
-  let convertedUserSearch = {
-    type: 'name',
-    query: [`${userSearch}`]
-  }
+  let alteredUserSearch = userSearch.split(' '). map((word) => {
+    return word.toLowerCase();
+  });
+  let convertedUserSearch = determineSearchType(alteredUserSearch);
+  console.log(convertedUserSearch);
   return convertedUserSearch;
+}
+
+function determineSearchType(alteredUserSearch) {
+  let searchObject = alteredUserSearch.reduce((acc, word) => {
+    let allRecipeNames = recipeRepository.generateAllRecipeNames();
+    let allIngredientNames = recipeRepository.generateAllIngredientNames();
+    if (allRecipeNames.includes(word)) {
+      acc.name.query.push(word);
+    }
+    if (allIngredientNames.includes(word)) {
+      acc.ingredientNames.query.push(word);
+    }
+    return acc;
+  }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
+  console.log(searchObject);
+  return searchObject;
 }
 
 // other functions
@@ -51,31 +77,52 @@ function renderRecipes(recipes) {
   main.innerHTML = ``;
   recipes.forEach((recipe) => {
     let tags = recipe.tags.map((tag) => {
-      return `<h4>${tag}</h4>`
+      return `<h4 class="tags flex-column">${tag}</h4>`
     })
-    console.log(tags);
-    main.innerHTML += `
-    <article class="recipe-card flex-row" id="recipeName" >
-      <img src=${recipe.image} alt="cookies"/>
-      <div class="recipe-card-info flex-row">
-        <div class="recipe-tag-container flex-column">
-          <h3>${recipe.name}</h3>
-          <div class="tag-container flex-row">
-            ${tags}
-          </div>
+    let recipeNames = recipe.name.map((name) => {
+      return name[0].toUpperCase() + name.substring(1);
+    }).join(' ');
+    main.innerHTML +=
+    `
+      <article class="recipe-card flex-row" id="recipeName" >
+        <img src=${recipe.image} alt="cookies"/>
+        <div class="recipe-card-info flex-column">
+         <div class="recipe-tag-container flex-column">
+            <p class="recipe-name">${recipeNames}</p>
+            <div class="tag-container flex-row">
+              ${tags}
+            </div>
         </div>
         <div class="recipe-card-buttons-container flex-column">
           <button class="favorite-recipe">
-            <i class="fas fa-heart"></i>
+            <i class="heart-card fas fa-heart"></i>
           </button>
           <button class="this-week-recipe">
-            <i class="fas fa-calendar-alt"></i>
+            <i class="calendar-card fas fa-calendar-alt"></i>
           </button>
         </div>
-      </div>
-    </article>
+        </article>
     `
   })
 }
 
 console.log('Hello world');
+// <article class="recipe-card flex-row" id="recipeName" >
+//   <img src=${recipe.image} alt="cookies"/>
+//   <div class="recipe-card-info flex-row">
+//     <div class="recipe-tag-container flex-column">
+//       <h3>${recipeNames}</h3>
+//       <div class="tag-container flex-row">
+//         ${tags}
+//       </div>
+//     </div>
+//     <div class="recipe-card-buttons-container flex-column">
+//       <button class="favorite-recipe">
+//         <i class="fas fa-heart"></i>
+//       </button>
+//       <button class="this-week-recipe">
+//         <i class="fas fa-calendar-alt"></i>
+//       </button>
+//     </div>
+//   </div>
+// </article>

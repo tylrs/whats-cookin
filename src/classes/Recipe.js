@@ -22,9 +22,13 @@ class Recipe {
   }
 
   getIngredientNames() {
-    return this.ingredients.map((ingredient) => {
-      return ingredient.name;
-    })
+    return this.ingredients.reduce((acc, ingredient) => {
+      let separatedNames = ingredient.name.split(' ')
+      separatedNames.forEach((name) => {
+        acc.push(name);
+      })
+      return acc;
+    }, [])
   }
 
   getTotalCost() {

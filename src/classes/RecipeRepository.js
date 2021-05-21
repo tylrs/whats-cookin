@@ -3,16 +3,37 @@ class RecipeRepository {
     this.recipes = recipes
   }
   filterRecipes(queryInfo) {
-    let totalFilteredRecipes = queryInfo.query.reduce((accumulator, query) => {
-      accumulator = accumulator.filter((recipe) => {
-        return recipe[queryInfo.type].includes(query)
+    if (queryInfo.query.length > 0) {
+      let totalFilteredRecipes = queryInfo.query.reduce((accumulator, query) => {
+        accumulator = accumulator.filter((recipe) => {
+          return recipe[queryInfo.type].includes(query)
+        })
+        return accumulator;
+      }, this.recipes);
+      return totalFilteredRecipes;
+    } else {
+      return [];
+    }
+  }
+  generateAllRecipeNames() {
+    let result = this.recipes.reduce((acc, recipe) => {
+      recipe.name.forEach((word) => {
+        acc.push(word);
       })
-      return accumulator;
-    }, this.recipes);
-    return totalFilteredRecipes;
+      return acc;
+    }, [])
+    return result;
+  }
+  generateAllIngredientNames() {
+    let result = this.recipes.reduce((acc, recipe) => {
+      recipe.ingredientNames.forEach((ingredient) => {
+        acc.push(ingredient)
+      })
+      return acc;
+    }, [])
+    console.log("all ingredient names", result);
+    return result;
   }
 }
 
 export default RecipeRepository;
-
-
