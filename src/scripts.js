@@ -2,6 +2,7 @@ import './styles.css';
 import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
 import RecipeRepository from './classes/RecipeRepository.js'
+import User from './classes/User.js'
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
@@ -14,7 +15,6 @@ recipes = sampleRecipes.map((recipe) => {
   return newRecipe
 })
 recipeRepository = new RecipeRepository(recipes)
-// console.log(recipeRepository);
 
 // querySelectors
 const main = document.querySelector('#recipeContainer');
@@ -23,7 +23,9 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
+window.onload = renderRecipes(recipeRepository.recipes);
 searchButton.addEventListener('click', searchThroughRecipes)
+
 
 // event handlers
 function searchThroughRecipes() {
@@ -32,8 +34,6 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
-  // console.log(filteredRecipesByName);
-  // console.log(allFilteredRecipes);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
@@ -66,11 +66,6 @@ function determineSearchType(alteredUserSearch) {
   }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
   return searchObject;
 }
-
-// other functions
-renderRecipes(recipeRepository.recipes);
-//rendering tags....
-//loop through recipe tags
 
 function renderRecipes(recipes) {
   main.innerHTML = ``;
