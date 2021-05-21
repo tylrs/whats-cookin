@@ -44,13 +44,11 @@ function generateFilteredRecipes(convertedUserSearch) {
 }
 
 function convertUserInfo(userSearch) {
-  let alteredUserSearch = userSearch.split(' ');
+  let alteredUserSearch = userSearch.split(' '). map((word) => {
+    return word.toLowerCase();
+  });
   let convertedUserSearch = determineSearchType(alteredUserSearch);
   console.log(convertedUserSearch);
-  // let convertedUserSearch = {
-  //   type: 'name',
-  //   query: [`${userSearch}`]
-  // }
   return convertedUserSearch;
 }
 
