@@ -7,14 +7,17 @@ import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
 //extra
-let recipes, recipeRepository;
+let recipes;
 const sampleRecipes = data.sampleRecipe
 const sampleIngredients = data.sampleIngredients
 recipes = sampleRecipes.map((recipe) => {
   let newRecipe = new Recipe(recipe, sampleIngredients)
   return newRecipe
 })
-recipeRepository = new RecipeRepository(recipes)
+// recipeRepository = new RecipeRepository(recipes)
+//global variable
+let currentRecipeRepo = new RecipeRepository(recipes);
+let currentUser;
 
 // querySelectors
 const main = document.querySelector('#main-recipes');
@@ -26,8 +29,8 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
-window.onload = renderRecipes(recipeRepository.recipes);
-generateRandomUser();
+window.onload = renderRecipes(currentRecipeRepo.recipes);
+window.onload = generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', submitFilter)
@@ -39,7 +42,7 @@ function generateRandomUser() {
   let randomUserInfo = data.sampleUsers.find((user) => {
     return user.id === randomNumber;
   })
-  let randomUser = new User(randomUserInfo);
+  currentUser = new User(randomUserInfo);
 }
 
 function searchThroughRecipes() {
@@ -48,11 +51,12 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
+  console.log(currentUser);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
-  let filteredRecipesByName = recipeRepository.filterRecipes(convertedUserSearch.name);
-  let filteredRecipesByIngredient = recipeRepository.filterRecipes(convertedUserSearch.ingredientNames);
+  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
   let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
   return [...new Set(allFilteredRecipes)];
 }
@@ -68,8 +72,8 @@ function convertUserInfo(userSearch) {
 
 function determineSearchType(alteredUserSearch) {
   let searchObject = alteredUserSearch.reduce((acc, word) => {
-    let allRecipeNames = recipeRepository.generateAllRecipeNames();
-    let allIngredientNames = recipeRepository.generateAllIngredientNames();
+    let allRecipeNames = currentRecipeRepo.generateAllRecipeNames();
+    let allIngredientNames = currentRecipeRepo.generateAllIngredientNames();
     if (allRecipeNames.includes(word)) {
       acc.name.query.push(word);
     }
