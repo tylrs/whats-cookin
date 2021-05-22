@@ -29,6 +29,9 @@ const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
+const favoritesViewButton = document.querySelector('#favoritesViewButton');
+const toCookViewButton = document.querySelector('#toCookViewButton');
+
 // renderFullRecipeInfo(741603);
 
 
@@ -39,20 +42,29 @@ searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
 main.addEventListener('click', determineRecipeCardAction)
+favoritesViewButton.addEventListener('click', showFavoritesView)
+toCookViewButton.addEventListener('click', showToCookView)
 
 
 // event handlers
+
+function showFavoritesView() {
+  messageBar.innerHTML = `<h2>${currentUser.name}s Favorite Recipes'</h2>`
+  renderRecipes(currentUser.favoriteRecipes.recipes);
+}
+
+function showToCookView() {
+  renderRecipes(currentUser.favoriteRecipes.recipes);
+}
+
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
-    console.log('favoriteRecipes')
-    //use the id to grab the correct recipe and push it in
     addToFavoriteRecipes(id);
   } else if (buttonType === 'this-week-recipe') {
-    console.log('addRecipeToCookThisWeek')
+    addToRecipeToCook(id);
   } else {
-    console.log(id)
     showFullRecipeView(id);
   }
 }
@@ -65,13 +77,19 @@ function addToFavoriteRecipes(id) {
   console.log(currentUser.favoriteRecipes);
 }
 
-function addToRecipeToCook() {
-
+function addToRecipeToCook(id) {
+  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  currentUser.addRecipeToCookThisWeek(recipeToAdd);
+  console.log(currentUser.recipesToCook);
 }
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
   hide(main);
+  hide(searchBar);
+  hide(searchButton);
   show(fullRecipeSection);
 }
 
@@ -104,7 +122,6 @@ function convertUserInfo(userSearch) {
     return word.toLowerCase();
   });
   let convertedUserSearch = determineSearchType(alteredUserSearch);
-  console.log(convertedUserSearch);
   return convertedUserSearch;
 }
 
