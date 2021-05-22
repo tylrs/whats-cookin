@@ -31,7 +31,7 @@ const filterMenu = document.querySelector('#filterMenu')
 const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
-const fullRecipeSection = document.querySelector('#fullRecipeInfo');
+const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
 renderFullRecipeInfo(595736);
 
@@ -132,18 +132,26 @@ function renderFullRecipeInfo(id) {
   let tags = recipeToRender.tags.map((tag) => {
     return `<h4 class="tags flex-column">${tag}</h4>`
   })
+  let fixedIngredients = recipeToRender.ingredients.map((ingredient) => {
+    return `<p class="ingredients flex-column">${ingredient}</p>`
+  })
+  let instructions = recipeToRender.getInstructions();
+  let fixedInstructions = instructions.map((instruction) => {
+    return `<p class="instructions flex-column">${instruction}</p>`
+  })
   let fixedName = recipeToRender.name.map((name) => {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
+  let totalCost;
   console.log("This is the fullview recipe", recipeToRender);
   console.log(fixedName);
   messageBar.innerHTML = `<h4>${fixedName}</h4>`
-  fullRecipeSection.innerHTML +=
+  fullRecipeSection.innerHTML =
   `  <div class="tag-container flex-row">
       ${tags}
     </div>
     <article class="recipe-card flex-row" id="recipeName" >
-      <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies"/>
+      <img src=${recipeToRender.image} alt="cookies"/>
       <div class="recipe-card-buttons-container flex-column">
         <button class="favorite-recipe">
           <i class="heart-card fas fa-heart"></i>
@@ -156,8 +164,7 @@ function renderFullRecipeInfo(id) {
     <section class="full-recipe-info flex-column" id="fullRecipeInfo">
       <div class="ingredients-info" id=ingredientsInfo>
         <h4>Ingredients</h4>
-        <p>1.5c wheat flour</p>
-        <p>.5tsp bicarbonate of soda</p>
+        ${fixedIngredients}
       </div>
       <div class="total-cost" id="totalCost">
         <h4>Estimated Total Cost of Ingredients</h4>
@@ -165,8 +172,7 @@ function renderFullRecipeInfo(id) {
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
-        <p>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</p>
-        <p>"2. Add egg and vanilla and mix until combined."</p>
+        ${fixedInstructions}
       </div>
     </section>
   `
