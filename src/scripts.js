@@ -124,8 +124,23 @@ function renderRecipes(recipes) {
     `
   })
 }
-function convertRecipeToRender() {
-
+function convertRecipeToRender(recipeToRender) {
+  let tags = recipeToRender.tags.map((tag) => {
+    return `<h4 class="tags flex-column">${tag}</h4>`
+  })
+  let ingredients = recipeToRender.ingredients.map((ingredient) => {
+    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
+  }).join(' ');
+  let instructions = recipeToRender.getInstructions();
+  let fixedInstructions = instructions.map((instruction) => {
+    return `<p class="instructions flex-column">${instruction}</p>`
+  }).join(' ');
+  let name = recipeToRender.name.map((name) => {
+    return name[0].toUpperCase() + name.substring(1);
+  }).join(' ');
+  let totalCost = convertTotalCost(recipeToRender);
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
+  return recipeToRenderInfo;
 }
 
 function convertTotalCost(recipeToRender) {
@@ -138,26 +153,12 @@ function renderFullRecipeInfo(id) {
   let recipeToRender = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
-  let tags = recipeToRender.tags.map((tag) => {
-    return `<h4 class="tags flex-column">${tag}</h4>`
-  })
-  let fixedIngredients = recipeToRender.ingredients.map((ingredient) => {
-    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
-  }).join(' ');
-  let instructions = recipeToRender.getInstructions();
-  let fixedInstructions = instructions.map((instruction) => {
-    return `<p class="instructions flex-column">${instruction}</p>`
-  }).join(' ');
-  let fixedName = recipeToRender.name.map((name) => {
-    return name[0].toUpperCase() + name.substring(1);
-  }).join(' ');
-  let fixedCost = convertTotalCost(recipeToRender);
-  console.log("This is the fullview recipe", recipeToRender);
-  console.log(fixedCost);
-  messageBar.innerHTML = `<h4>${fixedName}</h4>`
+  let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
+
+  messageBar.innerHTML = `<h4>${recipeToRenderInfo.name}</h4>`
   fullRecipeSection.innerHTML =
   `  <div class="tag-container flex-row">
-      ${tags}
+      ${recipeToRenderInfo.tags}
     </div>
     <article class="recipe-card flex-row" id="recipeName" >
       <img src=${recipeToRender.image} alt="cookies"/>
@@ -173,15 +174,15 @@ function renderFullRecipeInfo(id) {
     <section class="full-recipe-info flex-column" id="fullRecipeInfo">
       <div class="ingredients-info" id=ingredientsInfo>
         <h4>Ingredients</h4>
-        ${fixedIngredients}
+        ${recipeToRenderInfo.ingredients}
       </div>
       <div class="total-cost" id="totalCost">
         <h4>Estimated Total Cost of Ingredients</h4>
-        <p>${fixedCost}</p>
+        <p>${recipeToRenderInfo.totalCost}</p>
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
-        ${fixedInstructions}
+        ${recipeToRenderInfo.fixedInstructions}
       </div>
     </section>
   `
