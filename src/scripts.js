@@ -133,18 +133,18 @@ function renderFullRecipeInfo(id) {
     return `<h4 class="tags flex-column">${tag}</h4>`
   })
   let fixedIngredients = recipeToRender.ingredients.map((ingredient) => {
-    return `<p class="ingredients flex-column">${ingredient}</p>`
-  })
+    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
+  }).join(' ');
   let instructions = recipeToRender.getInstructions();
   let fixedInstructions = instructions.map((instruction) => {
     return `<p class="instructions flex-column">${instruction}</p>`
-  })
+  }).join(' ');
   let fixedName = recipeToRender.name.map((name) => {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost;
   console.log("This is the fullview recipe", recipeToRender);
-  console.log(fixedName);
+  console.log(fixedIngredients);
   messageBar.innerHTML = `<h4>${fixedName}</h4>`
   fullRecipeSection.innerHTML =
   `  <div class="tag-container flex-row">
