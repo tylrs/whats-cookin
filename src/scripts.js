@@ -132,8 +132,13 @@ function submitFilter(e) {
   e.preventDefault();
   let filteredTags = []
   tagCheckBox.forEach((tag) => {
-    tag.checked ? filteredTags.push(tag.value) : null
+    return tag.checked ? filteredTags.push(tag.value) : null
+
   })
+  filteredTags.reduce((acc, tag) => {
+    return tag.checked ? acc.query.push(tag.value) : null
+  }, {tag: {type: 'tags', query: []} })
+  console(filteredTags)
   hide(filterMenu)
 }
   
