@@ -14,6 +14,11 @@ recipes = sampleRecipes.map((recipe) => {
   let newRecipe = new Recipe(recipe, sampleIngredients)
   return newRecipe
 })
+console.log(recipes[0].getInstructions());
+console.log(recipes[0].getIngredientNames());
+console.log(recipes[0].getTotalCost());
+console.log(recipes[0].ingredients);
+
 // recipeRepository = new RecipeRepository(recipes)
 //global variable
 let currentRecipeRepo = new RecipeRepository(recipes);
@@ -51,7 +56,6 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
-  console.log(currentUser);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
