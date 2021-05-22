@@ -29,18 +29,83 @@ const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
-renderFullRecipeInfo(741603);
+const favoritesViewButton = document.querySelector('#favoritesViewButton');
+const toCookViewButton = document.querySelector('#toCookViewButton');
+const homeButton = document.querySelector('#homeView')
+
+// renderFullRecipeInfo(741603);
 
 
 // event listeners
-window.onload = renderRecipes(currentRecipeRepo.recipes);
 window.onload = generateRandomUser();
+// window.onload = renderRecipes(currentRecipeRepo.recipes);
+window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
+main.addEventListener('click', determineRecipeCardAction)
+favoritesViewButton.addEventListener('click', showFavoritesView)
+toCookViewButton.addEventListener('click', showToCookView)
+homeButton.addEventListener('click', showHomeView)
 
 
 // event handlers
+
+function showFavoritesView() {
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
+  currentRecipeRepo = currentUser.favoriteRecipes.recipes;
+  renderRecipes(currentRecipeRepo);
+}
+
+function showToCookView() {
+  messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
+  currentRecipeRepo = currentUser.recipesToCook.recipes;
+  renderRecipes(currentRecipeRepo);
+}
+
+function showHomeView() {
+  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  currentRecipeRepo = new RecipeRepository(recipes);
+  renderRecipes(currentRecipeRepo.recipes);
+}
+
+function determineRecipeCardAction(event) {
+  let id = parseInt(event.target.closest('.recipe-card').id);
+  let buttonType = event.target.parentElement.className;
+  if (buttonType === 'favorite-recipe') {
+    addToFavoriteRecipes(id);
+  } else if (buttonType === 'this-week-recipe') {
+    addToRecipeToCook(id);
+  } else {
+    showFullRecipeView(id);
+  }
+}
+
+function addToFavoriteRecipes(id) {
+  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  currentUser.addFavoriteRecipe(recipeToAdd);
+  console.log(currentUser.favoriteRecipes);
+}
+
+function addToRecipeToCook(id) {
+  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  currentUser.addRecipeToCookThisWeek(recipeToAdd);
+  console.log(currentUser.recipesToCook);
+}
+
+function showFullRecipeView(id) {
+  renderFullRecipeInfo(id);
+  hide(main);
+  hide(searchBar);
+  hide(searchButton);
+  show(fullRecipeSection);
+}
+
+
 function generateRandomUser() {
   let randomNumber = getRandomNumber(data.sampleUsers.length + 1);
   let randomUserInfo = data.sampleUsers.find((user) => {
@@ -69,7 +134,6 @@ function convertUserInfo(userSearch) {
     return word.toLowerCase();
   });
   let convertedUserSearch = determineSearchType(alteredUserSearch);
-  console.log(convertedUserSearch);
   return convertedUserSearch;
 }
 
@@ -99,7 +163,7 @@ function renderRecipes(recipes) {
     }).join(' ');
     main.innerHTML +=
     `
-      <article class="recipe-card flex-row" id="recipeName" >
+      <article class="recipe-card flex-row" id="${recipe.id}" >
         <img src=${recipe.image} alt="cookies"/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
