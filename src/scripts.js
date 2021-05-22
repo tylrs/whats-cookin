@@ -47,18 +47,22 @@ function determineRecipeCardAction(event) {
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
     console.log('favoriteRecipes')
+    //use the id to grab the correct recipe and push it in
+    addToFavoriteRecipes(id);
   } else if (buttonType === 'this-week-recipe') {
     console.log('addRecipeToCookThisWeek')
   } else {
     console.log(id)
+    showFullRecipeView(id);
   }
-  // console.log(button);
-  // console.log(buttonType);
-  // showFullRecipeView(id);
 }
 
-function addToFavoriteRecipes() {
-
+function addToFavoriteRecipes(id) {
+  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  currentUser.addFavoriteRecipe(recipeToAdd);
+  console.log(currentUser.favoriteRecipes);
 }
 
 function addToRecipeToCook() {
