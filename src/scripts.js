@@ -14,12 +14,7 @@ recipes = sampleRecipes.map((recipe) => {
   let newRecipe = new Recipe(recipe, sampleIngredients)
   return newRecipe
 })
-console.log(recipes[0].getInstructions());
-console.log(recipes[0].getIngredientNames());
-console.log(recipes[0].getTotalCost());
-console.log(recipes[0].ingredients);
 
-// recipeRepository = new RecipeRepository(recipes)
 //global variable
 let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
@@ -33,7 +28,7 @@ const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
-renderFullRecipeInfo(595736);
+renderFullRecipeInfo(741603);
 
 
 // event listeners
@@ -157,7 +152,8 @@ function renderFullRecipeInfo(id) {
 
   messageBar.innerHTML = `<h4>${recipeToRenderInfo.name}</h4>`
   fullRecipeSection.innerHTML =
-  `  <div class="tag-container flex-row">
+  `
+    <div class="tag-container flex-row">
       ${recipeToRenderInfo.tags}
     </div>
     <article class="recipe-card flex-row" id="recipeName" >
