@@ -61,7 +61,7 @@ button {
   flex-direction: column;
 }
 
-.hide {
+.hidden {
   display: none;
 }
 
