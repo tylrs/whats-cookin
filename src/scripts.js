@@ -17,7 +17,10 @@ recipes = sampleRecipes.map((recipe) => {
 recipeRepository = new RecipeRepository(recipes)
 
 // querySelectors
-const main = document.querySelector('#recipeContainer');
+const main = document.querySelector('#main-recipes');
+const filter = document.querySelector('#filter')
+const filterMenu = document.querySelector('#filterMenu')
+const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 
@@ -26,6 +29,8 @@ const searchButton = document.querySelector('#searchButton')
 window.onload = renderRecipes(recipeRepository.recipes);
 generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
+filter.addEventListener('click', openFilterMenu)
+filterSubmitBtn.addEventListener('click', submitFilter)
 
 
 // event handlers
@@ -110,8 +115,25 @@ function renderRecipes(recipes) {
 }
 
 function getRandomNumber(max) {
-  var number = Math.floor(Math.random() * (max-1) + 1);
+  var number = Math.floor(Math.random() * (max - 1) + 1);
   return number;
-};
+}
+
+function  openFilterMenu() {
+  show(filterMenu)
+}
+
+function submitFilter() {
+  hide(filterMenu)
+}
+
+function show(e) {
+  e.classList.remove('hidden')
+}
+
+function hide(e) {
+  e.classList.add('hidden')
+}
+
 
 console.log('Hello world');
