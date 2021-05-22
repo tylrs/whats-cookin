@@ -25,12 +25,14 @@ let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
 
 // querySelectors
-const main = document.querySelector('#main-recipes');
+const main = document.querySelector('#mainRecipes');
 const filter = document.querySelector('#filter')
 const filterMenu = document.querySelector('#filterMenu')
 const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
+const fullRecipeSection = document.querySelector('#fullRecipeInfo');
+renderFullRecipeInfo(595736);
 
 
 // event listeners
@@ -121,6 +123,53 @@ function renderRecipes(recipes) {
     `
   })
 }
+
+function renderFullRecipeInfo(id) {
+  let recipeToRender = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  let tags = recipeToRender.tags.map((tag) => {
+    return `<h4 class="tags flex-column">${tag}</h4>`
+  })
+  let fixedName = recipeToRender.name.map((name) => {
+    return name[0].toUpperCase() + name.substring(1);
+  }).join(' ');
+  console.log("This is the fullview recipe", recipeToRender);
+  console.log(fixedName);
+  fullRecipeSection.innerHTML +=
+  `  <div class="tag-container flex-row">
+      ${tags}
+    </div>
+    <article class="recipe-card flex-row" id="recipeName" >
+      <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies"/>
+      <div class="recipe-card-buttons-container flex-column">
+        <button class="favorite-recipe">
+          <i class="heart-card fas fa-heart"></i>
+        </button>
+        <button class="this-week-recipe">
+          <i class="calendar-card fas fa-calendar-alt"></i>
+        </button>
+      </div>
+      </article>
+    <section class="full-recipe-info flex-column" id="fullRecipeInfo">
+      <div class="ingredients-info" id=ingredientsInfo>
+        <h4>Ingredients</h4>
+        <p>1.5c wheat flour</p>
+        <p>.5tsp bicarbonate of soda</p>
+      </div>
+      <div class="total-cost" id="totalCost">
+        <h4>Estimated Total Cost of Ingredients</h4>
+        <p>$9.76</p>
+      </div>
+      <div class="instructions-info flex-column" id="totalCost">
+        <h4>Instructions</h4>
+        <p>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</p>
+        <p>"2. Add egg and vanilla and mix until combined."</p>
+      </div>
+    </section>
+  `
+}
+
 
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
