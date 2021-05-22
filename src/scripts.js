@@ -20,9 +20,10 @@ let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
 
 // querySelectors
-const main = document.querySelector('#main-recipes');
+const main = document.querySelector('#mainRecipes');
 const filter = document.querySelector('#filter')
 const filterMenu = document.querySelector('#filterMenu')
+const tagCheckBox = document.querySelectorAll('input[type="checkbox"]')
 const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
@@ -127,9 +128,18 @@ function  openFilterMenu() {
   show(filterMenu)
 }
 
-function submitFilter() {
+function submitFilter(e) {
+  e.preventDefault();
+  let filteredTags = []
+  tagCheckBox.forEach((tag) => {
+    tag.checked ? filteredTags.push(tag.value) : null
+  })
   hide(filterMenu)
 }
+  
+
+  
+
 
 function show(e) {
   e.classList.remove('hidden')
