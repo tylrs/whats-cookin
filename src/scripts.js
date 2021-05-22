@@ -134,18 +134,10 @@ function searchByTag(e) {
   tagCheckBox.forEach((tag) => {
     tag.checked ? tagSearchInfo.query.push(tag.value) : null
   })
-  // filteredTags.reduce((acc, tag) => {
-  //   return tag.checked ? acc.query.push(tag.value) : null
-  // }, {tag: {type: 'tags', query: []} })
-  console.log(tagSearchInfo);
   hide(filterMenu)
   let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
   renderRecipes(uniqueFilteredRecipes);
 }
-
-
-
-
 
 function show(e) {
   e.classList.remove('hidden')
