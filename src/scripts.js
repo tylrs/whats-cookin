@@ -34,7 +34,7 @@ window.onload = renderRecipes(currentRecipeRepo.recipes);
 window.onload = generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
-filterSubmitBtn.addEventListener('click', submitFilter)
+filterSubmitBtn.addEventListener('click', searchByTag)
 
 
 // event handlers
@@ -72,7 +72,7 @@ function convertUserInfo(userSearch) {
 }
 
 function determineSearchType(alteredUserSearch) {
-  let searchObject = alteredUserSearch.reduce((acc, word) => {
+  let searchInfo = alteredUserSearch.reduce((acc, word) => {
     let allRecipeNames = currentRecipeRepo.generateAllRecipeNames();
     let allIngredientNames = currentRecipeRepo.generateAllIngredientNames();
     if (allRecipeNames.includes(word)) {
@@ -83,7 +83,7 @@ function determineSearchType(alteredUserSearch) {
     }
     return acc;
   }, {name: {type: 'name', query: []}, ingredientNames: {type: 'ingredientNames', query: []}})
-  return searchObject;
+  return searchInfo;
 }
 
 function renderRecipes(recipes) {
@@ -128,22 +128,23 @@ function  openFilterMenu() {
   show(filterMenu)
 }
 
-function submitFilter(e) {
+function searchByTag(e) {
   e.preventDefault();
-  let filteredTags = []
+  let tagSearchInfo = {type: 'tags', query: []}
   tagCheckBox.forEach((tag) => {
-    return tag.checked ? filteredTags.push(tag.value) : null
-
+    tag.checked ? tagSearchInfo.query.push(tag.value) : null
   })
-  filteredTags.reduce((acc, tag) => {
-    return tag.checked ? acc.query.push(tag.value) : null
-  }, {tag: {type: 'tags', query: []} })
-  console(filteredTags)
+  // filteredTags.reduce((acc, tag) => {
+  //   return tag.checked ? acc.query.push(tag.value) : null
+  // }, {tag: {type: 'tags', query: []} })
+  console.log(tagSearchInfo);
   hide(filterMenu)
+  let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
+  renderRecipes(uniqueFilteredRecipes);
 }
-  
 
-  
+
+
 
 
 function show(e) {
