@@ -130,7 +130,7 @@ function convertRecipeToRender(recipeToRender) {
   let instructions = recipeToRender.getInstructions();
   let fixedInstructions = instructions.map((instruction) => {
     return `<p class="instructions flex-column">${instruction}</p>`
-  }).join(' ');
+  }).join('  ');
   let name = recipeToRender.name.map((name) => {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
@@ -151,14 +151,18 @@ function renderFullRecipeInfo(id) {
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
 
-  messageBar.innerHTML = `<h4>${recipeToRenderInfo.name}</h4>`
+  messageBar.innerHTML = `<h3>${recipeToRenderInfo.name}</h3>`
   fullRecipeSection.innerHTML =
-  `
-    <div class="tag-container flex-row">
-      ${recipeToRenderInfo.tags}
-    </div>
-    <article class="recipe-card flex-row" id="recipeName" >
+  ` <div class="tag-container flex-row">
+    ${recipeToRenderInfo.tags}
+  </div>
+  
+    <article  class="recipe-card-all flex-column" >
+   
+    <div class="recipe-card flex-row" id="recipeName">
+  
       <img src=${recipeToRender.image} alt="cookies"/>
+      
       <div class="recipe-card-buttons-container flex-column">
         <button class="favorite-recipe">
           <i class="heart-card fas fa-heart"></i>
@@ -167,21 +171,26 @@ function renderFullRecipeInfo(id) {
           <i class="calendar-card fas fa-calendar-alt"></i>
         </button>
       </div>
-      </article>
+      <div class="total-cost flex-row" id="totalCost">
+      <h5>Estimated Cost </h5>
+      <p>${recipeToRenderInfo.totalCost}</p>
+    </div>
+      </div>
+
     <section class="full-recipe-info flex-column" id="fullRecipeInfo">
+    <div class="recipePriceContainer flex-row">
       <div class="ingredients-info" id=ingredientsInfo>
         <h4>Ingredients</h4>
-        ${recipeToRenderInfo.ingredients}
+        <p> ${recipeToRenderInfo.ingredients}</p>
       </div>
-      <div class="total-cost" id="totalCost">
-        <h4>Estimated Total Cost of Ingredients</h4>
-        <p>${recipeToRenderInfo.totalCost}</p>
+   
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
-        ${recipeToRenderInfo.fixedInstructions}
+        <p>${recipeToRenderInfo.fixedInstructions}</p>
       </div>
     </section>
+    </article>
   `
 }
 
