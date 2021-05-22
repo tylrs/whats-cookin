@@ -29,7 +29,7 @@ const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
-renderFullRecipeInfo(741603);
+// renderFullRecipeInfo(741603);
 
 
 // event listeners
@@ -99,7 +99,7 @@ function renderRecipes(recipes) {
     }).join(' ');
     main.innerHTML +=
     `
-      <article class="recipe-card flex-row" id="recipeName" >
+      <article class="recipe-card flex-row" id="${recipe.id}" >
         <img src=${recipe.image} alt="cookies"/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
