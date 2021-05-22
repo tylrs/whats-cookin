@@ -43,7 +43,10 @@ main.addEventListener('click', determineRecipeCardAction)
 
 // event handlers
 function determineRecipeCardAction(event) {
-
+  console.log(event.target.closest('.recipe-card'));
+  let id = parseInt(event.target.closest('.recipe-card').id);
+  console.log(id);
+  showFullRecipeView(id);
 }
 
 function addToFavoriteRecipes() {
