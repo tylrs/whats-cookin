@@ -41,13 +41,13 @@
     <div class="message-bar flex-row">
       <h2>Welcome, Taylor</h2>
     </div>
-    <main
-      class="flex-column"
-      id="recipeContainer"
-    >
-      <section class="main-recipes"></section>
+    <main class="flex-column">
+      <section id="main-recipes"></section>
 
-      <section class="filter-menu hidden">
+      <section
+        id="filterMenu"
+        class="filter-menu hidden"
+      >
         <form action="#">
           <fieldset class="flex-row">
             <li class="flex-row">
@@ -262,6 +262,7 @@
               >
             </li>
             <input
+              id="filterSubmitBtn"
               type="submit"
               value="FILTER"
               class="btn"
@@ -272,6 +273,7 @@
     </main>
     <footer class="flex-row">
       <i
+        id="filter"
         class="icon icon-small fas fa-filter"
       ></i>
       <input
