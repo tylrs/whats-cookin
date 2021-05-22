@@ -38,12 +38,52 @@
       <i class="icon fas fa-calendar-alt"></i>
       <i class="icon fas fa-heart"></i>
     </header>
-    <div class="message-bar flex-row">
+    <div
+      class="message-bar flex-row"
+      id="messageBar"
+    >
       <h2>Welcome, Taylor</h2>
     </div>
     <main class="flex-column">
-      <section id="mainRecipes"></section>
-
+      <section
+        class="hidden"
+        id="mainRecipes"
+      ></section>
+      <section
+        class="full-recipe-view flex-column"
+        id="fullRecipeView"
+      >
+        <!-- <div class="tag-container flex-row">
+          ${tags}
+        </div>
+        <article class="recipe-card flex-row" id="recipeName" >
+          <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies"/>
+          <div class="recipe-card-buttons-container flex-column">
+            <button class="favorite-recipe">
+              <i class="heart-card fas fa-heart"></i>
+            </button>
+            <button class="this-week-recipe">
+              <i class="calendar-card fas fa-calendar-alt"></i>
+            </button>
+          </div>
+          </article>
+        <section class="full-recipe-info hidden flex-column" id="fullRecipeInfo">
+          <div class="ingredients-info" id=ingredientsInfo>
+            <h4>Ingredients</h4>
+            <p>1.5c wheat flour</p>
+            <p>.5tsp bicarbonate of soda</p>
+          </div>
+          <div class="total-cost" id="totalCost">
+            <h4>Estimated Total Cost of Ingredients</h4>
+            <p>$9.76</p>
+          </div>
+          <div class="instructions-info flex-column" id="totalCost">
+            <h4>Instructions</h4>
+            <p>"In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy."</p>
+            <p>"2. Add egg and vanilla and mix until combined."</p>
+          </div>
+        </section> -->
+      </section>
       <section
         id="filterMenu"
         class="filter-menu hidden"
