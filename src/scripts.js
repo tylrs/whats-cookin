@@ -16,7 +16,8 @@ recipes = sampleRecipes.map((recipe) => {
 })
 // recipeRepository = new RecipeRepository(recipes)
 //global variable
-let currentRecipe = new RecipeRepository(recipes);
+let currentRecipeRepo = new RecipeRepository(recipes);
+let currentUser;
 
 // querySelectors
 const main = document.querySelector('#main-recipes');
@@ -28,7 +29,7 @@ const searchButton = document.querySelector('#searchButton')
 
 
 // event listeners
-window.onload = renderRecipes(currentRecipe.recipes);
+window.onload = renderRecipes(currentRecipeRepo.recipes);
 window.onload = generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
@@ -41,7 +42,7 @@ function generateRandomUser() {
   let randomUserInfo = data.sampleUsers.find((user) => {
     return user.id === randomNumber;
   })
-  let randomUser = new User(randomUserInfo);
+  currentUser = new User(randomUserInfo);
 }
 
 function searchThroughRecipes() {
@@ -50,11 +51,12 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
+  console.log(currentUser);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
-  let filteredRecipesByName = currentRecipe.filterRecipes(convertedUserSearch.name);
-  let filteredRecipesByIngredient = currentRecipe.filterRecipes(convertedUserSearch.ingredientNames);
+  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
   let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
   return [...new Set(allFilteredRecipes)];
 }
@@ -70,8 +72,8 @@ function convertUserInfo(userSearch) {
 
 function determineSearchType(alteredUserSearch) {
   let searchObject = alteredUserSearch.reduce((acc, word) => {
-    let allRecipeNames = currentRecipe.generateAllRecipeNames();
-    let allIngredientNames = currentRecipe.generateAllIngredientNames();
+    let allRecipeNames = currentRecipeRepo.generateAllRecipeNames();
+    let allIngredientNames = currentRecipeRepo.generateAllIngredientNames();
     if (allRecipeNames.includes(word)) {
       acc.name.query.push(word);
     }
