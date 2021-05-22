@@ -38,9 +38,29 @@ window.onload = generateRandomUser();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
+main.addEventListener('click', determineRecipeCardAction)
 
 
 // event handlers
+function determineRecipeCardAction(event) {
+
+}
+
+function addToFavoriteRecipes() {
+
+}
+
+function addToRecipeToCook() {
+
+}
+
+function showFullRecipeView(id) {
+  renderFullRecipeInfo(id);
+  hide(main);
+  show(fullRecipeSection);
+}
+
+
 function generateRandomUser() {
   let randomNumber = getRandomNumber(data.sampleUsers.length + 1);
   let randomUserInfo = data.sampleUsers.find((user) => {
