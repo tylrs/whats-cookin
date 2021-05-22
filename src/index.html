@@ -41,11 +41,13 @@
     <div class="message-bar flex-row">
       <h2>Welcome, Taylor</h2>
     </div>
-    <main
-      class="flex-column"
-      id="recipeContainer"
-    >
-      <section class="filter-menu hide">
+    <main class="flex-column">
+      <section id="main-recipes"></section>
+
+      <section
+        id="filterMenu"
+        class="filter-menu hidden"
+      >
         <form action="#">
           <fieldset class="flex-row">
             <li class="flex-row">
@@ -63,15 +65,14 @@
               <input
                 type="checkbox"
                 name="tags"
-                id="starter’"
-                value="starter’"
+                id="starter"
+                value="starter"
               />
-              <label
-                for="starter"
-                class="target tags"
+              <label for="starter" class="tags"
                 >Starter</label
               >
             </li>
+
             <li class="flex-row">
               <input
                 type="checkbox"
@@ -108,12 +109,10 @@
               <input
                 type="checkbox"
                 name="tags"
-                id="horDoeuvre’"
+                id="horDoeuvre"
                 value="hor d'oeuvre’"
               />
-              <label
-                for="hor d'oeuvre’"
-                class="tags"
+              <label for="horDoeuvre" class="tags"
                 >Hor d'oeuvre’</label
               >
             </li>
@@ -132,12 +131,10 @@
               <input
                 type="checkbox"
                 name="tags"
-                id="mainCourse’"
+                id="mainCourse"
                 value="main course’"
               />
-              <label
-                for="main course"
-                class="tags"
+              <label for="mainCourse" class="tags"
                 >Main course</label
               >
             </li>
@@ -148,7 +145,7 @@
                 id="mainDish"
                 value="Main dish"
               />
-              <label for="main dish" class="tags"
+              <label for="mainDish" class="tags"
                 >Main dish</label
               >
             </li>
@@ -181,7 +178,7 @@
                 id="sideDish"
                 value="side dish"
               />
-              <label for="Side dish" class="tags"
+              <label for="sideDish" class="tags"
                 >Side dish</label
               >
             </li>
@@ -193,7 +190,7 @@
                 value="morning meal"
               />
               <label
-                for="morning meal"
+                for="morningMeal"
                 class="tags"
                 >Morning meal</label
               >
@@ -264,17 +261,19 @@
                 >Spread</label
               >
             </li>
+            <input
+              id="filterSubmitBtn"
+              type="submit"
+              value="FILTER"
+              class="btn"
+            />
           </fieldset>
-          <input
-            type="submit"
-            value="FILTER"
-            class="btn"
-          />
         </form>
       </section>
     </main>
     <footer class="flex-row">
       <i
+        id="filter"
         class="icon icon-small fas fa-filter"
       ></i>
       <input
