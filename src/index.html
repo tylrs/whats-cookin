@@ -45,39 +45,34 @@
       class="flex-column"
       id="recipeContainer"
     >
-      <section>
-              <article class="recipe-card flex-row" id="recipeName" >
-                  <img src= alt="cookies"/>
-                  <div class="recipe-card-info flex-column">
-                   <div class="recipe-tag-container flex-column">
-                      <p class="recipe-name">${recipeNames}</p>
-                      <div class="tag-container flex-row">
-                        ${tags}
-                      </div>
-                  </div>
-                  <div class="recipe-card-buttons-container flex-column">
-                    <button class="favorite-recipe">
-                      <i class="heart-card fas fa-heart"></i>
-                    </button>
-                    <button class="this-week-recipe">
-                      <i class="calendar-card fas fa-calendar-alt"></i>
-                    </button>
-                  </div>
-                  </article>
-      </section>
+      <section class="main-recipes"></section>
 
-      <section class="filter-menu">
+      <section class="filter-menu hidden">
         <form action="#">
           <fieldset class="flex-row">
             <li class="flex-row">
-              <input type="checkbox" name="tags" id="antipasti" value="antipasti"/>
-              <label for="antipasti" class="tags">Antipasti</label>
+              <input
+                type="checkbox"
+                name="tags"
+                id="antipasti"
+                value="antipasti"
+              />
+              <label for="antipasti" class="tags"
+                >Antipasti</label
+              >
             </li>
             <li class="flex-row">
-              <input type="checkbox" name="tags" id="starter" value="starter" />
-              <label for="starter" class="tags">Starter</label>
+              <input
+                type="checkbox"
+                name="tags"
+                id="starter"
+                value="starter"
+              />
+              <label for="starter" class="tags"
+                >Starter</label
+              >
             </li>
-            
+
             <li class="flex-row">
               <input
                 type="checkbox"
@@ -117,9 +112,7 @@
                 id="horDoeuvre"
                 value="hor d'oeuvre’"
               />
-              <label
-                for="horDoeuvre"
-                class="tags"
+              <label for="horDoeuvre" class="tags"
                 >Hor d'oeuvre’</label
               >
             </li>
@@ -141,9 +134,7 @@
                 id="mainCourse"
                 value="main course’"
               />
-              <label
-                for="mainCourse"
-                class="tags"
+              <label for="mainCourse" class="tags"
                 >Main course</label
               >
             </li>
@@ -270,13 +261,12 @@
                 >Spread</label
               >
             </li>
-          <input
-            type="submit"
-            value="FILTER"
-            class="btn"
-          />
-        </fieldset>
-
+            <input
+              type="submit"
+              value="FILTER"
+              class="btn"
+            />
+          </fieldset>
         </form>
       </section>
     </main>
