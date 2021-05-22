@@ -32,6 +32,7 @@ const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
 const fullRecipeSection = document.querySelector('#fullRecipeInfo');
+const messageBar = document.querySelector('#messageBar');
 renderFullRecipeInfo(595736);
 
 
@@ -136,6 +137,7 @@ function renderFullRecipeInfo(id) {
   }).join(' ');
   console.log("This is the fullview recipe", recipeToRender);
   console.log(fixedName);
+  messageBar.innerHTML = `<h4>${fixedName}</h4>`
   fullRecipeSection.innerHTML +=
   `  <div class="tag-container flex-row">
       ${tags}
