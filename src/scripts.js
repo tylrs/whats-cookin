@@ -53,16 +53,19 @@ homeButton.addEventListener('click', showHomeView)
 
 function showFavoritesView() {
   messageBar.innerHTML = `<h2>${currentUser.name}'s Favorite Recipes</h2>`
-  renderRecipes(currentUser.favoriteRecipes.recipes);
+  currentRecipeRepo = currentUser.favoriteRecipes.recipes;
+  renderRecipes(currentRecipeRepo);
 }
 
 function showToCookView() {
   messageBar.innerHTML = `<h2>${currentUser.name}'s Recipes to Cook</h2>`
-  renderRecipes(currentUser.recipesToCook.recipes);
+  currentRecipeRepo = currentUser.recipesToCook.recipes;
+  renderRecipes(currentRecipeRepo);
 }
 
 function showHomeView() {
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  currentRecipeRepo = new RecipeRepository(recipes);
   renderRecipes(currentRecipeRepo.recipes);
 }
 
