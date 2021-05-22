@@ -49,12 +49,13 @@ toCookViewButton.addEventListener('click', showToCookView)
 // event handlers
 
 function showFavoritesView() {
-  messageBar.innerHTML = `<h2>${currentUser.name}s Favorite Recipes'</h2>`
+  messageBar.innerHTML = `<h2>${currentUser.name}'s Favorite Recipes</h2>`
   renderRecipes(currentUser.favoriteRecipes.recipes);
 }
 
 function showToCookView() {
-  renderRecipes(currentUser.favoriteRecipes.recipes);
+  messageBar.innerHTML = `<h2>${currentUser.name}'s Recipes to Cook</h2>`
+  renderRecipes(currentUser.recipesToCook.recipes);
 }
 
 function determineRecipeCardAction(event) {
