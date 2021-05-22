@@ -124,6 +124,15 @@ function renderRecipes(recipes) {
     `
   })
 }
+function convertRecipeToRender() {
+
+}
+
+function convertTotalCost(recipeToRender) {
+  let totalCost = recipeToRender.getTotalCost();
+  let dollars = totalCost / 100;
+  return `$${dollars}`;
+}
 
 function renderFullRecipeInfo(id) {
   let recipeToRender = currentRecipeRepo.recipes.find((recipe) => {
@@ -142,9 +151,9 @@ function renderFullRecipeInfo(id) {
   let fixedName = recipeToRender.name.map((name) => {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
-  let totalCost;
+  let fixedCost = convertTotalCost(recipeToRender);
   console.log("This is the fullview recipe", recipeToRender);
-  console.log(fixedIngredients);
+  console.log(fixedCost);
   messageBar.innerHTML = `<h4>${fixedName}</h4>`
   fullRecipeSection.innerHTML =
   `  <div class="tag-container flex-row">
@@ -168,7 +177,7 @@ function renderFullRecipeInfo(id) {
       </div>
       <div class="total-cost" id="totalCost">
         <h4>Estimated Total Cost of Ingredients</h4>
-        <p>$9.76</p>
+        <p>${fixedCost}</p>
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
