@@ -43,10 +43,18 @@ main.addEventListener('click', determineRecipeCardAction)
 
 // event handlers
 function determineRecipeCardAction(event) {
-  console.log(event.target.closest('.recipe-card'));
   let id = parseInt(event.target.closest('.recipe-card').id);
-  console.log(id);
-  showFullRecipeView(id);
+  let buttonType = event.target.parentElement.className;
+  if (buttonType === 'favorite-recipe') {
+    console.log('favoriteRecipes')
+  } else if (buttonType === 'this-week-recipe') {
+    console.log('addRecipeToCookThisWeek')
+  } else {
+    console.log(id)
+  }
+  // console.log(button);
+  // console.log(buttonType);
+  // showFullRecipeView(id);
 }
 
 function addToFavoriteRecipes() {
