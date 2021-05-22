@@ -45,33 +45,39 @@
       class="flex-column"
       id="recipeContainer"
     >
-      <section class="filter-menu hide">
+      <section>
+              <article class="recipe-card flex-row" id="recipeName" >
+                  <img src= alt="cookies"/>
+                  <div class="recipe-card-info flex-column">
+                   <div class="recipe-tag-container flex-column">
+                      <p class="recipe-name">${recipeNames}</p>
+                      <div class="tag-container flex-row">
+                        ${tags}
+                      </div>
+                  </div>
+                  <div class="recipe-card-buttons-container flex-column">
+                    <button class="favorite-recipe">
+                      <i class="heart-card fas fa-heart"></i>
+                    </button>
+                    <button class="this-week-recipe">
+                      <i class="calendar-card fas fa-calendar-alt"></i>
+                    </button>
+                  </div>
+                  </article>
+      </section>
+
+      <section class="filter-menu">
         <form action="#">
           <fieldset class="flex-row">
             <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="antipasti"
-                value="antipasti"
-              />
-              <label for="antipasti" class="tags"
-                >Antipasti</label
-              >
+              <input type="checkbox" name="tags" id="antipasti" value="antipasti"/>
+              <label for="antipasti" class="tags">Antipasti</label>
             </li>
             <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="starter’"
-                value="starter’"
-              />
-              <label
-                for="starter"
-                class="target tags"
-                >Starter</label
-              >
+              <input type="checkbox" name="tags" id="starter" value="starter" />
+              <label for="starter" class="tags">Starter</label>
             </li>
+            
             <li class="flex-row">
               <input
                 type="checkbox"
@@ -108,11 +114,11 @@
               <input
                 type="checkbox"
                 name="tags"
-                id="horDoeuvre’"
+                id="horDoeuvre"
                 value="hor d'oeuvre’"
               />
               <label
-                for="hor d'oeuvre’"
+                for="horDoeuvre"
                 class="tags"
                 >Hor d'oeuvre’</label
               >
@@ -132,11 +138,11 @@
               <input
                 type="checkbox"
                 name="tags"
-                id="mainCourse’"
+                id="mainCourse"
                 value="main course’"
               />
               <label
-                for="main course"
+                for="mainCourse"
                 class="tags"
                 >Main course</label
               >
@@ -148,7 +154,7 @@
                 id="mainDish"
                 value="Main dish"
               />
-              <label for="main dish" class="tags"
+              <label for="mainDish" class="tags"
                 >Main dish</label
               >
             </li>
@@ -181,7 +187,7 @@
                 id="sideDish"
                 value="side dish"
               />
-              <label for="Side dish" class="tags"
+              <label for="sideDish" class="tags"
                 >Side dish</label
               >
             </li>
@@ -193,7 +199,7 @@
                 value="morning meal"
               />
               <label
-                for="morning meal"
+                for="morningMeal"
                 class="tags"
                 >Morning meal</label
               >
@@ -264,12 +270,13 @@
                 >Spread</label
               >
             </li>
-          </fieldset>
           <input
             type="submit"
             value="FILTER"
             class="btn"
           />
+        </fieldset>
+
         </form>
       </section>
     </main>
