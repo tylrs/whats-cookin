@@ -31,19 +31,22 @@ const fullRecipeSection = document.querySelector('#fullRecipeView');
 const messageBar = document.querySelector('#messageBar');
 const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
+const homeButton = document.querySelector('#homeView')
 
 // renderFullRecipeInfo(741603);
 
 
 // event listeners
-window.onload = renderRecipes(currentRecipeRepo.recipes);
 window.onload = generateRandomUser();
+// window.onload = renderRecipes(currentRecipeRepo.recipes);
+window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
 main.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
+homeButton.addEventListener('click', showHomeView)
 
 
 // event handlers
@@ -56,6 +59,11 @@ function showFavoritesView() {
 function showToCookView() {
   messageBar.innerHTML = `<h2>${currentUser.name}'s Recipes to Cook</h2>`
   renderRecipes(currentUser.recipesToCook.recipes);
+}
+
+function showHomeView() {
+  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  renderRecipes(currentRecipeRepo.recipes);
 }
 
 function determineRecipeCardAction(event) {
