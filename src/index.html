@@ -43,7 +43,10 @@
     </div>
     <main class="flex-column">
       <section id="main-recipes hidden"></section>
-      <section class="full-recipe-view" id="fullRecipeView">
+      <section class="full-recipe-view flex-column" id="fullRecipeView">
+        <div class="tag-container flex-row">
+          ${tags}
+        </div>
         <article class="recipe-card flex-row" id="recipeName" >
           <img src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="cookies"/>
           <div class="recipe-card-buttons-container flex-column">
