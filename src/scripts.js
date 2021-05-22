@@ -14,7 +14,7 @@ recipes = sampleRecipes.map((recipe) => {
   let newRecipe = new Recipe(recipe, sampleIngredients)
   return newRecipe
 })
-// recipeRepository = new RecipeRepository(recipes)
+
 //global variable
 let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
@@ -27,6 +27,9 @@ const tagCheckBox = document.querySelectorAll('input[type="checkbox"]')
 const filterSubmitBtn = document.querySelector('#filterSubmitBtn')
 const searchBar = document.querySelector('#searchBar')
 const searchButton = document.querySelector('#searchButton')
+const fullRecipeSection = document.querySelector('#fullRecipeView');
+const messageBar = document.querySelector('#messageBar');
+renderFullRecipeInfo(741603);
 
 
 // event listeners
@@ -52,7 +55,6 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   console.log('These are filtered', uniqueFilteredRecipes);
-  console.log(currentUser);
 }
 
 function generateFilteredRecipes(convertedUserSearch) {
@@ -118,6 +120,71 @@ function renderRecipes(recipes) {
     `
   })
 }
+function convertRecipeToRender(recipeToRender) {
+  let tags = recipeToRender.tags.map((tag) => {
+    return `<h4 class="tags flex-column">${tag}</h4>`
+  })
+  let ingredients = recipeToRender.ingredients.map((ingredient) => {
+    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
+  }).join(' ');
+  let instructions = recipeToRender.getInstructions();
+  let fixedInstructions = instructions.map((instruction) => {
+    return `<p class="instructions flex-column">${instruction}</p>`
+  }).join(' ');
+  let name = recipeToRender.name.map((name) => {
+    return name[0].toUpperCase() + name.substring(1);
+  }).join(' ');
+  let totalCost = convertTotalCost(recipeToRender);
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
+  return recipeToRenderInfo;
+}
+
+function convertTotalCost(recipeToRender) {
+  let totalCost = recipeToRender.getTotalCost();
+  let dollars = totalCost / 100;
+  return `$${dollars}`;
+}
+
+function renderFullRecipeInfo(id) {
+  let recipeToRender = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
+
+  messageBar.innerHTML = `<h4>${recipeToRenderInfo.name}</h4>`
+  fullRecipeSection.innerHTML =
+  `
+    <div class="tag-container flex-row">
+      ${recipeToRenderInfo.tags}
+    </div>
+    <article class="recipe-card flex-row" id="recipeName" >
+      <img src=${recipeToRender.image} alt="cookies"/>
+      <div class="recipe-card-buttons-container flex-column">
+        <button class="favorite-recipe">
+          <i class="heart-card fas fa-heart"></i>
+        </button>
+        <button class="this-week-recipe">
+          <i class="calendar-card fas fa-calendar-alt"></i>
+        </button>
+      </div>
+      </article>
+    <section class="full-recipe-info flex-column" id="fullRecipeInfo">
+      <div class="ingredients-info" id=ingredientsInfo>
+        <h4>Ingredients</h4>
+        ${recipeToRenderInfo.ingredients}
+      </div>
+      <div class="total-cost" id="totalCost">
+        <h4>Estimated Total Cost of Ingredients</h4>
+        <p>${recipeToRenderInfo.totalCost}</p>
+      </div>
+      <div class="instructions-info flex-column" id="totalCost">
+        <h4>Instructions</h4>
+        ${recipeToRenderInfo.fixedInstructions}
+      </div>
+    </section>
+  `
+}
+
 
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
