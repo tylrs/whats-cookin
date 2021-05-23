@@ -20,7 +20,8 @@ let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
 
 // querySelectors
-const main = document.querySelector('#mainRecipes');
+const mainRecipes = document.querySelector('#mainRecipes');
+const mainSection = document.querySelector('#mainSection');
 const filter = document.querySelector('#filter')
 const filterMenu = document.querySelector('#filterMenu')
 const tagCheckBox = document.querySelectorAll('input[type="checkbox"]')
@@ -43,7 +44,8 @@ window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
-main.addEventListener('click', determineRecipeCardAction)
+// main.addEventListener('click', determineRecipeCardAction)
+mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
@@ -52,54 +54,79 @@ homeButton.addEventListener('click', showHomeView)
 // event handlers
 
 function showFavoritesView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
-  currentRecipeRepo = currentUser.favoriteRecipes.recipes;
-  renderRecipes(currentRecipeRepo);
+  currentRecipeRepo = currentUser.favoriteRecipes;
+  renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showToCookView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
-  currentRecipeRepo = currentUser.recipesToCook.recipes;
-  renderRecipes(currentRecipeRepo);
+  currentRecipeRepo = currentUser.recipesToCook;
+  renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showHomeView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
   currentRecipeRepo = new RecipeRepository(recipes);
+  console.log(currentRecipeRepo)
   renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes)
 }
 
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
-    addToFavoriteRecipes(id);
+    determineFavoriteOrUnfavorite(id);
   } else if (buttonType === 'this-week-recipe') {
-    addToRecipeToCook(id);
+    determineAddOrRemoveToCook(id);
   } else {
     showFullRecipeView(id);
   }
 }
 
-function addToFavoriteRecipes(id) {
-  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+function determineFavoriteOrUnfavorite(id) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
-  currentUser.addFavoriteRecipe(recipeToAdd);
-  console.log(currentUser.favoriteRecipes);
+  if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
+    console.log("Favorited");
+    currentUser.addFavoriteRecipe(clickedRecipe);
+  } else {
+    console.log('unfavorited');
+    currentUser.removeFavoriteRecipe(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
+  }
 }
 
-function addToRecipeToCook(id) {
-  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+function determineAddOrRemoveToCook(id) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
-  currentUser.addRecipeToCookThisWeek(recipeToAdd);
-  console.log(currentUser.recipesToCook);
+  if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
+    console.log("Add to cook");
+    currentUser.addRecipeToCookThisWeek(clickedRecipe);
+  } else {
+    console.log('Remove from to cook');
+    currentUser.removeRecipeToCookThisWeek(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
+  }
 }
+
+// function addToRecipeToCook(id) {
+//   let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+//     return recipe.id === id;
+//   })
+//   currentUser.addRecipeToCookThisWeek(recipeToAdd);
+//   console.log(currentUser.recipesToCook);
+// }
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
-  hide(main);
+  hide(mainRecipes);
   hide(searchBar);
   hide(searchButton);
   show(fullRecipeSection);
@@ -153,7 +180,7 @@ function determineSearchType(alteredUserSearch) {
 }
 
 function renderRecipes(recipes) {
-  main.innerHTML = ``;
+  mainRecipes.innerHTML = ``;
   recipes.forEach((recipe) => {
     let tags = recipe.tags.map((tag) => {
       return `<h4 class="tags flex-column">${tag}</h4>`
@@ -161,7 +188,7 @@ function renderRecipes(recipes) {
     let recipeNames = recipe.name.map((name) => {
       return name[0].toUpperCase() + name.substring(1);
     }).join(' ');
-    main.innerHTML +=
+    mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
         <img src=${recipe.image} alt="cookies"/>
@@ -187,7 +214,7 @@ function renderRecipes(recipes) {
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
     return `<h4 class="tags flex-column">${tag}</h4>`
-  })
+  }).join(' ');
   let ingredients = recipeToRender.ingredients.map((ingredient) => {
     return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
   }).join(' ');
@@ -220,13 +247,13 @@ function renderFullRecipeInfo(id) {
   ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
   </div>
-  
+
     <article  class="recipe-card-all flex-column" >
-   
-    <div class="recipe-card flex-row" id="recipeName">
-  
+
+    <div class="recipe-card flex-row" id="${recipeToRender.id}">
+
       <img src=${recipeToRender.image} alt="cookies"/>
-      
+
       <div class="recipe-card-buttons-container flex-column">
         <button class="favorite-recipe">
           <i class="heart-card fas fa-heart"></i>
@@ -247,7 +274,7 @@ function renderFullRecipeInfo(id) {
         <h4>Ingredients</h4>
         <p> ${recipeToRenderInfo.ingredients}</p>
       </div>
-   
+
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
@@ -257,7 +284,6 @@ function renderFullRecipeInfo(id) {
     </article>
   `
 }
-
 
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
