@@ -54,21 +54,26 @@ homeButton.addEventListener('click', showHomeView)
 // event handlers
 
 function showFavoritesView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showToCookView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showHomeView() {
+  hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
   currentRecipeRepo = new RecipeRepository(recipes);
+  console.log(currentRecipeRepo)
   renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes)
 }
 
 function determineRecipeCardAction(event) {
