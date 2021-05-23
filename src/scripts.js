@@ -5,6 +5,7 @@ import RecipeRepository from './classes/RecipeRepository.js'
 import User from './classes/User.js'
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
+console.log(apiCalls);
 
 //extra
 let recipes;
@@ -16,7 +17,9 @@ recipes = sampleRecipes.map((recipe) => {
 })
 
 //global variable
-let currentRecipeRepo = new RecipeRepository(recipes);
+let ingredients;
+// let recipes;
+let currentRecipeRepo;
 let currentUser;
 
 // querySelectors
@@ -38,6 +41,7 @@ const homeButton = document.querySelector('#homeView')
 
 
 // event listeners
+window.onload = onStartUp()
 window.onload = generateRandomUser();
 // window.onload = renderRecipes(currentRecipeRepo.recipes);
 window.onload = showHomeView();
@@ -50,6 +54,13 @@ favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
+function onStartUp() {
+  apiCalls.retrieveData()
+      .then((promise) => {
+        currentUser = new User(promise[0]['usersData'][0])
+        console.log(currentUser)
+      })
+}
 
 // event handlers
 
