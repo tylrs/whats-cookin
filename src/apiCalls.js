@@ -14,6 +14,4 @@ function retrieveData() {
   return Promise.all([usersData(), ingredientData(), recipeData()])
 }
 
-console.log('I will be a fetch request!')
-
 export default {usersData, ingredientData, recipeData, retrieveData};

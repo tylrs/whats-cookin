@@ -3,25 +3,6 @@ import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
 import RecipeRepository from './classes/RecipeRepository.js'
 import User from './classes/User.js'
-import sampleData from '../test/sampleData';
-const data = sampleData.sampleData;
-console.log(apiCalls);
-
-//extra
-let recipes;
-const sampleRecipes = data.sampleRecipe
-const sampleIngredients = data.sampleIngredients
-recipes = sampleRecipes.map((recipe) => {
-  let newRecipe = new Recipe(recipe, sampleIngredients)
-  return newRecipe
-})
-
-//global variable
-let ingredients;
-// let recipes;
-let currentRecipeRepo;
-let originalRecipeRepo;
-let currentUser;
 
 // querySelectors
 const mainRecipes = document.querySelector('#mainRecipes');
@@ -38,14 +19,13 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 
-// renderFullRecipeInfo(741603);
-
+//global variable
+let currentRecipeRepo;
+let originalRecipeRepo;
+let currentUser;
 
 // event listeners
 window.onload = generateStartingInformation()
-// window.onload = generateRandomUser();
-// window.onload = renderRecipes(currentRecipeRepo.recipes);
-// window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
@@ -58,21 +38,16 @@ homeButton.addEventListener('click', showHomeView)
 function generateStartingInformation() {
   apiCalls.retrieveData()
       .then((promise) => {
-        console.log(promise);
         let num = getRandomNumber(promise[0]['usersData'].length)
         currentUser = new User(promise[0]['usersData'][num])
         let ingredients = promise[1]['ingredientsData']
         let recipes = promise[2]['recipeData']
-        console.log(recipes)
         let formattedRecipes = recipes.map((recipe) => {
           let newRecipe = new Recipe(recipe, ingredients)
           return newRecipe
         })
         originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
         showHomeView();
-        console.log(recipes);
-        console.log(currentUser)
-        console.log(currentRecipeRepo)
       })
 }
 
@@ -96,7 +71,6 @@ function showHomeView() {
   hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
   currentRecipeRepo = originalRecipeRepo;
-  console.log(currentRecipeRepo)
   renderRecipes(currentRecipeRepo.recipes);
   show(mainRecipes)
 }
@@ -143,29 +117,12 @@ function determineAddOrRemoveToCook(id) {
   }
 }
 
-// function addToRecipeToCook(id) {
-//   let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
-//     return recipe.id === id;
-//   })
-//   currentUser.addRecipeToCookThisWeek(recipeToAdd);
-//   console.log(currentUser.recipesToCook);
-// }
-
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
   hide(mainRecipes);
   hide(searchBar);
   hide(searchButton);
   show(fullRecipeSection);
-}
-
-
-function generateRandomUser() {
-  let randomNumber = getRandomNumber(data.sampleUsers.length + 1);
-  let randomUserInfo = data.sampleUsers.find((user) => {
-    return user.id === randomNumber;
-  })
-  currentUser = new User(randomUserInfo);
 }
 
 function searchThroughRecipes() {
@@ -317,7 +274,7 @@ function getRandomNumber(max) {
   return number;
 }
 
-function  openFilterMenu() {
+function openFilterMenu() {
   show(filterMenu)
 }
 
@@ -339,6 +296,3 @@ function show(e) {
 function hide(e) {
   e.classList.add('hidden')
 }
-
-
-console.log('Hello world');
