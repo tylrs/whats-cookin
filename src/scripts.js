@@ -53,14 +53,14 @@ homeButton.addEventListener('click', showHomeView)
 
 function showFavoritesView() {
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
-  currentRecipeRepo = currentUser.favoriteRecipes.recipes;
-  renderRecipes(currentRecipeRepo);
+  currentRecipeRepo = currentUser.favoriteRecipes;
+  renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showToCookView() {
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
-  currentRecipeRepo = currentUser.recipesToCook.recipes;
-  renderRecipes(currentRecipeRepo);
+  currentRecipeRepo = currentUser.recipesToCook;
+  renderRecipes(currentRecipeRepo.recipes);
 }
 
 function showHomeView() {
@@ -220,13 +220,13 @@ function renderFullRecipeInfo(id) {
   ` <div class="tag-container flex-row">
     ${recipeToRenderInfo.tags}
   </div>
-  
+
     <article  class="recipe-card-all flex-column" >
-   
+
     <div class="recipe-card flex-row" id="recipeName">
-  
+
       <img src=${recipeToRender.image} alt="cookies"/>
-      
+
       <div class="recipe-card-buttons-container flex-column">
         <button class="favorite-recipe">
           <i class="heart-card fas fa-heart"></i>
@@ -247,7 +247,7 @@ function renderFullRecipeInfo(id) {
         <h4>Ingredients</h4>
         <p> ${recipeToRenderInfo.ingredients}</p>
       </div>
-   
+
       </div>
       <div class="instructions-info flex-column" id="totalCost">
         <h4>Instructions</h4>
@@ -257,7 +257,6 @@ function renderFullRecipeInfo(id) {
     </article>
   `
 }
-
 
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
