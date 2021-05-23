@@ -91,6 +91,7 @@ function determineFavoriteOrUnfavorite(id) {
   } else {
     console.log('unfavorited');
     currentUser.removeFavoriteRecipe(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
   }
   console.log(currentUser.favoriteRecipes);
 }
