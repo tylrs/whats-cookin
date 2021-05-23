@@ -57,7 +57,9 @@ homeButton.addEventListener('click', showHomeView)
 function onStartUp() {
   apiCalls.retrieveData()
       .then((promise) => {
-        currentUser = new User(promise[0]['usersData'][0])
+        console.log(promise);
+        let num = getRandomNumber(promise[0]['usersData'].length)
+        currentUser = new User(promise[0]['usersData'][num])
         console.log(currentUser)
       })
 }
