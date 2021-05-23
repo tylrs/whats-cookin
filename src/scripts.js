@@ -215,7 +215,7 @@ function renderFullRecipeInfo(id) {
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
 
-  messageBar.innerHTML = `<h3>${recipeToRenderInfo.name}</h3>`
+  messageBar.innerHTML = `<h2>${recipeToRenderInfo.name}</h2>`
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
