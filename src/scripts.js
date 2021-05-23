@@ -20,6 +20,7 @@ recipes = sampleRecipes.map((recipe) => {
 let ingredients;
 // let recipes;
 let currentRecipeRepo;
+let originalRecipeRepo;
 let currentUser;
 
 // querySelectors
@@ -67,7 +68,7 @@ function generateStartingInformation() {
           let newRecipe = new Recipe(recipe, ingredients)
           return newRecipe
         })
-        currentRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
+        originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
         showHomeView();
         console.log(recipes);
         console.log(currentUser)
@@ -94,7 +95,7 @@ function showToCookView() {
 function showHomeView() {
   hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
-  // currentRecipeRepo = new RecipeRepository(recipes);
+  currentRecipeRepo = originalRecipeRepo;
   console.log(currentRecipeRepo)
   renderRecipes(currentRecipeRepo.recipes);
   show(mainRecipes)
