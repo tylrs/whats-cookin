@@ -73,7 +73,7 @@ function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
-    addToFavoriteRecipes(id);
+    determineFavoriteOrUnfavorite(id);
   } else if (buttonType === 'this-week-recipe') {
     addToRecipeToCook(id);
   } else {
@@ -81,11 +81,17 @@ function determineRecipeCardAction(event) {
   }
 }
 
-function addToFavoriteRecipes(id) {
-  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+function determineFavoriteOrUnfavorite(id) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
-  currentUser.addFavoriteRecipe(recipeToAdd);
+  if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
+    console.log("Favorited");
+    currentUser.addFavoriteRecipe(clickedRecipe);
+  } else {
+    console.log('unfavorited');
+    currentUser.removeFavoriteRecipe(clickedRecipe)
+  }
   console.log(currentUser.favoriteRecipes);
 }
 

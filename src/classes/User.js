@@ -9,14 +9,12 @@ class User {
   }
 
   addFavoriteRecipe(recipe) {
-    if (!this.favoriteRecipes.recipes.includes(recipe)) {
-      this.favoriteRecipes.recipes.push(recipe);
-    }
+    this.favoriteRecipes.recipes.push(recipe);
   }
 
-  removeFavoriteRecipe(recipeID) {
+  removeFavoriteRecipe(clickedRecipe) {
     let index = this.favoriteRecipes.recipes.findIndex((recipe) => {
-      return recipe.id === recipeID;
+      return recipe.id === clickedRecipe.id;
     })
     if (index !== -1) {
       this.favoriteRecipes.recipes.splice(index, 1);
