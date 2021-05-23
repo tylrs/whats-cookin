@@ -217,7 +217,7 @@ function renderFullRecipeInfo(id) {
 
   messageBar.innerHTML = `<h3>${recipeToRenderInfo.name}</h3>`
   fullRecipeSection.innerHTML =
-  ` <div class="tag-container flex-row">
+  ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
   </div>
   
