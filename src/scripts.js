@@ -77,7 +77,7 @@ function determineRecipeCardAction(event) {
   if (buttonType === 'favorite-recipe') {
     determineFavoriteOrUnfavorite(id);
   } else if (buttonType === 'this-week-recipe') {
-    addToRecipeToCook(id);
+    determineAddOrRemoveToCook(id);
   } else {
     showFullRecipeView(id);
   }
@@ -95,7 +95,20 @@ function determineFavoriteOrUnfavorite(id) {
     currentUser.removeFavoriteRecipe(clickedRecipe)
     renderRecipes(currentRecipeRepo.recipes);
   }
-  console.log(currentUser.favoriteRecipes);
+}
+
+function determineAddOrRemoveToCook(id) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
+    console.log("Add to cook");
+    currentUser.addRecipeToCookThisWeek(clickedRecipe);
+  } else {
+    console.log('Remove from to cook');
+    currentUser.removeRecipeToCookThisWeek(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
+  }
 }
 
 function addToRecipeToCook(id) {
