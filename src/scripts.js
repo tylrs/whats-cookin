@@ -20,7 +20,8 @@ let currentRecipeRepo = new RecipeRepository(recipes);
 let currentUser;
 
 // querySelectors
-const main = document.querySelector('#mainRecipes');
+const mainRecipes = document.querySelector('#mainRecipes');
+const mainSection = document.querySelector('#mainSection');
 const filter = document.querySelector('#filter')
 const filterMenu = document.querySelector('#filterMenu')
 const tagCheckBox = document.querySelectorAll('input[type="checkbox"]')
@@ -43,7 +44,8 @@ window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
-main.addEventListener('click', determineRecipeCardAction)
+// main.addEventListener('click', determineRecipeCardAction)
+mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
@@ -106,7 +108,7 @@ function addToRecipeToCook(id) {
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
-  hide(main);
+  hide(mainRecipes);
   hide(searchBar);
   hide(searchButton);
   show(fullRecipeSection);
@@ -160,7 +162,7 @@ function determineSearchType(alteredUserSearch) {
 }
 
 function renderRecipes(recipes) {
-  main.innerHTML = ``;
+  mainRecipes.innerHTML = ``;
   recipes.forEach((recipe) => {
     let tags = recipe.tags.map((tag) => {
       return `<h4 class="tags flex-column">${tag}</h4>`
@@ -168,7 +170,7 @@ function renderRecipes(recipes) {
     let recipeNames = recipe.name.map((name) => {
       return name[0].toUpperCase() + name.substring(1);
     }).join(' ');
-    main.innerHTML +=
+    mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
         <img src=${recipe.image} alt="cookies"/>
@@ -230,7 +232,7 @@ function renderFullRecipeInfo(id) {
 
     <article  class="recipe-card-all flex-column" >
 
-    <div class="recipe-card flex-row" id="recipeName">
+    <div class="recipe-card flex-row" id="${recipeToRender.id}">
 
       <img src=${recipeToRender.image} alt="cookies"/>
 
