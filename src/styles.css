@@ -280,12 +280,12 @@ main {
   height: 100%;
 }
 
-.recipe-card img {
+.full-recipe-view .recipe-card img {
   border-radius: 15px 15px 0 0;
   align-content: flex-end;
 }
 
-.full-recipe-info h4 {
+.full-recipe-view .full-recipe-info h4 {
   text-decoration: underline;
   margin-bottom: 0.4rem 0;
 }
@@ -305,7 +305,7 @@ main {
   margin-right: 0.3rem;
 }
 
-.recipe-card-buttons-container {
+.full-recipe-view.recipe-card-buttons-container {
   justify-content: space-between;
   align-self: flex-start;
   margin-top: 0.5rem;
@@ -328,13 +328,15 @@ main {
   margin-bottom: 0.4rem;
 }
 
-.tag-container {
+.tag-container-full {
+  border: pink 1px solid;
   align-self: flex-start;
+  overflow: scroll;
   position: sticky;
   height: 5%;
   background-color: var(--transp-bg-light);
   top: 0%;
-  z-index: 2;
+  z-index: 3;
 }
 
 .tags {
