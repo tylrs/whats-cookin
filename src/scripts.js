@@ -34,7 +34,46 @@ favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
-//event handler
+//switch views functions
+function showFavoritesView() {
+  hide(fullRecipeSection);
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
+  currentRecipeRepo = currentUser.favoriteRecipes;
+  renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
+}
+
+function showToCookView() {
+  hide(fullRecipeSection);
+  messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
+  currentRecipeRepo = currentUser.recipesToCook;
+  renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
+}
+
+function showHomeView() {
+  hide(fullRecipeSection);
+  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  currentRecipeRepo = originalRecipeRepo;
+  renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
+}
+
+function showFullRecipeView(id) {
+  renderFullRecipeInfo(id);
+  hide(mainRecipes);
+  hide(searchBar);
+  hide(searchButton);
+  show(fullRecipeSection);
+}
+
+//event handlers
 function generateStartingInformation() {
   apiCalls.retrieveData()
       .then((promise) => {
@@ -51,27 +90,7 @@ function generateStartingInformation() {
       })
 }
 
-function showFavoritesView() {
-  hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
-  currentRecipeRepo = currentUser.favoriteRecipes;
-  renderRecipes(currentRecipeRepo.recipes);
-}
 
-function showToCookView() {
-  hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
-  currentRecipeRepo = currentUser.recipesToCook;
-  renderRecipes(currentRecipeRepo.recipes);
-}
-
-function showHomeView() {
-  hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
-  currentRecipeRepo = originalRecipeRepo;
-  renderRecipes(currentRecipeRepo.recipes);
-  show(mainRecipes)
-}
 
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
@@ -113,14 +132,6 @@ function determineAddOrRemoveToCook(id) {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     renderRecipes(currentRecipeRepo.recipes);
   }
-}
-
-function showFullRecipeView(id) {
-  renderFullRecipeInfo(id);
-  hide(mainRecipes);
-  hide(searchBar);
-  hide(searchButton);
-  show(fullRecipeSection);
 }
 
 function searchThroughRecipes() {
@@ -173,7 +184,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="cookies"/>
+        <img src=${recipe.image} alt="recipe image"/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
