@@ -80,7 +80,7 @@ function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
-    determineFavoriteOrUnfavorite(id);
+    determineFavoriteOrUnfavorite(id, event);
   } else if (buttonType === 'this-week-recipe') {
     determineAddOrRemoveToCook(id);
   } else {
@@ -88,12 +88,14 @@ function determineRecipeCardAction(event) {
   }
 }
 
-function determineFavoriteOrUnfavorite(id) {
+function determineFavoriteOrUnfavorite(id, event) {
   let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
   if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
     console.log("Favorited");
+    event.target.parentElement.classList.add('banana');
+    console.log(event);
     currentUser.addFavoriteRecipe(clickedRecipe);
   } else {
     console.log('unfavorited');
