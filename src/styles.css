@@ -64,6 +64,7 @@ button {
 .hidden {
   display: none;
 }
+/* Icons */
 
 .icon {
   font-size: 2.5rem;
@@ -75,6 +76,15 @@ button {
 
 .icon-small {
   font-size: 1.3rem;
+}
+
+.fa-heart:hover,
+.fa-calendar-alt:hover {
+  color: var(--accent-red);
+}
+
+.icon-on {
+  color: var(--accent-red);
 }
 
 /* header */
@@ -119,10 +129,6 @@ h1 i {
   font-size: 5rem;
   align-self: center;
   position: absolute;
-}
-
-.fa-heart:hover {
-  color: var(--accent-red);
 }
 
 /* Filter Menu */
@@ -268,7 +274,6 @@ main {
   font-size: 1.8rem;
   padding: 0 0.2rem;
 }
-
 
 /* Recipe View */
 
