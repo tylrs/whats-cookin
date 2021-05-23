@@ -29,12 +29,12 @@ window.onload = generateStartingInformation()
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
-// main.addEventListener('click', determineRecipeCardAction)
 mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
+//event handler
 function generateStartingInformation() {
   apiCalls.retrieveData()
       .then((promise) => {
@@ -50,8 +50,6 @@ function generateStartingInformation() {
         showHomeView();
       })
 }
-
-// event handlers
 
 function showFavoritesView() {
   hide(fullRecipeSection);

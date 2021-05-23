@@ -14,4 +14,4 @@ function retrieveData() {
   return Promise.all([usersData(), ingredientData(), recipeData()])
 }
 
-export default {usersData, ingredientData, recipeData, retrieveData};
+export default {retrieveData};
