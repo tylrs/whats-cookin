@@ -41,10 +41,10 @@ const homeButton = document.querySelector('#homeView')
 
 
 // event listeners
-window.onload = onStartUp()
-window.onload = generateRandomUser();
+window.onload = generateStartingInformation()
+// window.onload = generateRandomUser();
 // window.onload = renderRecipes(currentRecipeRepo.recipes);
-window.onload = showHomeView();
+// window.onload = showHomeView();
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
@@ -54,7 +54,7 @@ favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
-function onStartUp() {
+function generateStartingInformation() {
   apiCalls.retrieveData()
       .then((promise) => {
         console.log(promise);
@@ -62,8 +62,16 @@ function onStartUp() {
         currentUser = new User(promise[0]['usersData'][num])
         let ingredients = promise[1]['ingredientsData']
         let recipes = promise[2]['recipeData']
+        console.log(recipes)
+        let formattedRecipes = recipes.map((recipe) => {
+          let newRecipe = new Recipe(recipe, ingredients)
+          return newRecipe
+        })
+        currentRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
+        showHomeView();
         console.log(recipes);
         console.log(currentUser)
+        console.log(currentRecipeRepo)
       })
 }
 
@@ -86,7 +94,7 @@ function showToCookView() {
 function showHomeView() {
   hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
-  currentRecipeRepo = new RecipeRepository(recipes);
+  // currentRecipeRepo = new RecipeRepository(recipes);
   console.log(currentRecipeRepo)
   renderRecipes(currentRecipeRepo.recipes);
   show(mainRecipes)
