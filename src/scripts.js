@@ -60,6 +60,9 @@ function onStartUp() {
         console.log(promise);
         let num = getRandomNumber(promise[0]['usersData'].length)
         currentUser = new User(promise[0]['usersData'][num])
+        let ingredients = promise[1]['ingredientsData']
+        let recipes = promise[2]['recipeData']
+        console.log(recipes);
         console.log(currentUser)
       })
 }
