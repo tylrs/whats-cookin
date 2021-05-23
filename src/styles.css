@@ -172,19 +172,20 @@ input[type="submit"]:hover {
 
 /* Message Bar */
 .message-bar {
-  width: 100%;
   height: 5vh;
-  align-self: flex-start;
+  width: 100%;
+  /* align-self: flex-start; */
   justify-content: center;
   align-items: center;
   background-color: var(--accent-darkred);
   padding-bottom: 0.3rem;
+  line-height: 1.2rem;
+  padding: 0.5rem 0;
 }
 
-h2,
-h3 {
-  color: var(--white);
-  font-size: 1.8rem;
+.message-bar h2 {
+  text-align: center;
+  font-size: 1.3rem;
   font-weight: 200;
 }
 
@@ -217,7 +218,7 @@ main {
 .recipe-card-info {
   z-index: 1;
   width: 100%;
-  height: 50%;
+  max-height: 4rem;
   background: rgba(50, 50, 51, 0.9);
 }
 
@@ -236,12 +237,13 @@ main {
 }
 
 .tag-container {
-  top: 50%;
-  width: 100%;
+  top: 34%;
+  width: 80%;
   flex-wrap: wrap;
   position: absolute;
   justify-content: center;
   padding: 0.4rem 0;
+  margin-left: 0.2rem;
 }
 
 .tags {
@@ -254,10 +256,10 @@ main {
 }
 
 .recipe-card-buttons-container {
-  height: 50%;
+  height: 60%;
   width: 3rem;
   align-self: flex-end;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   position: absolute;
 }
@@ -269,12 +271,7 @@ main {
 
 /* Recipe View */
 
-.full-recipe-view {
-  height: 100%;
-}
-
 .recipe-card-all {
-  margin-top: 0.9rem;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -305,10 +302,8 @@ main {
   margin-right: 0.3rem;
 }
 
-.full-recipe-view.recipe-card-buttons-container {
-  justify-content: space-between;
+.full-recipe-view .recipe-card-buttons-container {
   align-self: flex-start;
-  margin-top: 0.5rem;
 }
 
 .full-recipe-info {
@@ -329,18 +324,17 @@ main {
 }
 
 .tag-container-full {
-  border: pink 1px solid;
-  align-self: flex-start;
-  overflow: scroll;
-  position: sticky;
-  height: 5%;
-  background-color: var(--transp-bg-light);
-  top: 0%;
-  z-index: 3;
+  justify-content: center;
+  align-content: center;
+  height: 10%;
+  background: var(--transp-bg-light);
+  z-index: 2;
 }
 
-.tags {
-  text-decoration: none;
+.tag-container-full .tags {
+  margin-top: 0.5rem;
+  padding: 0.125rem 0.8rem;
+  font-size: 0.5rem;
 }
 
 /* Footer */
