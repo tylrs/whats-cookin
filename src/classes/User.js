@@ -31,6 +31,15 @@ class User {
     }
   }
 
+  removeRecipeToCookThisWeek(clickedRecipe) {
+    let index = this.recipesToCook.recipes.findIndex((recipe) => {
+      return recipe.id === clickedRecipe.id;
+    })
+    if (index !== -1) {
+      this.recipesToCook.recipes.splice(index, 1);
+    }
+  }
+
 };
 
 

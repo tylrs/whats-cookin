@@ -111,13 +111,13 @@ function determineAddOrRemoveToCook(id) {
   }
 }
 
-function addToRecipeToCook(id) {
-  let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
-    return recipe.id === id;
-  })
-  currentUser.addRecipeToCookThisWeek(recipeToAdd);
-  console.log(currentUser.recipesToCook);
-}
+// function addToRecipeToCook(id) {
+//   let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
+//     return recipe.id === id;
+//   })
+//   currentUser.addRecipeToCookThisWeek(recipeToAdd);
+//   console.log(currentUser.recipesToCook);
+// }
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
@@ -209,7 +209,7 @@ function renderRecipes(recipes) {
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
     return `<h4 class="tags flex-column">${tag}</h4>`
-  })
+  }).join(' ');
   let ingredients = recipeToRender.ingredients.map((ingredient) => {
     return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
   }).join(' ');
