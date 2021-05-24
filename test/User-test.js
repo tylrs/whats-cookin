@@ -7,7 +7,7 @@ import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
 describe('User', () => {
-  let recipes, recipeRepository, user1
+  let recipes, user1
   beforeEach('Setup', () => {
     const sampleUsers = data.sampleUsers;
     const sampleRecipes = data.sampleRecipe
@@ -16,7 +16,6 @@ describe('User', () => {
       let newRecipe = new Recipe(recipe, sampleIngredients)
       return newRecipe;
     })
-    recipeRepository = new RecipeRepository([])
     user1 = new User(sampleUsers[0]);
     user1.addFavoriteRecipe(recipes[0])
     user1.addFavoriteRecipe(recipes[1])
@@ -64,19 +63,45 @@ describe('User', () => {
     expect(user1.recipesToCook.recipes).to.deep.equal([recipes[0]])
   })
 
-  it('Should have a method to unFavorite recipes', () => {
+  it('Should only add unique recipes to cook this week', () => {
+    user1.addRecipeToCookThisWeek(recipes[0])
 
-    user1.removeFavoriteRecipe(recipes[0].id);
+    expect(user1.recipesToCook.recipes.length).to.equal(1);
+    expect(user1.recipesToCook.recipes).to.deep.equal([recipes[0]])
+  })
+
+  it('Should have a method to unFavorite recipes', () => {
+    user1.removeFavoriteRecipe(recipes[0]);
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(4);
     expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);
   })
 
-  it('Should not remove item from favoriteRecipes if id does not match', () => {
-    user1.removeFavoriteRecipe(2126351423);
+  it('Should not remove any more items from favoriteRecipes if recipe is already removed', () => {
+    user1.removeFavoriteRecipe(recipes[0]);
+    user1.removeFavoriteRecipe(recipes[0]);
 
-    expect(user1.favoriteRecipes.recipes.length).to.equal(5);
-    expect(user1.favoriteRecipes.recipes).to.deep.equal(recipes);
+    expect(user1.favoriteRecipes.recipes.length).to.equal(4);
+    expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);
+  })
+
+  it('Should have a method to remove recipes to cook', () => {
+    user1.addRecipeToCookThisWeek(recipes[0])
+    user1.addRecipeToCookThisWeek(recipes[1])
+    user1.removeRecipeToCookThisWeek(recipes[0]);
+
+    expect(user1.recipesToCook.recipes.length).to.equal(1);
+    expect(user1.recipesToCook.recipes).to.deep.equal([recipes[1]]);
+  })
+
+  it('Should not remove any more items from recipesToCook if recipe is already removed', () => {
+    user1.addRecipeToCookThisWeek(recipes[0])
+    user1.addRecipeToCookThisWeek(recipes[1])
+    user1.removeRecipeToCookThisWeek(recipes[0]);
+    user1.removeRecipeToCookThisWeek(recipes[0]);
+
+    expect(user1.recipesToCook.recipes.length).to.equal(1);
+    expect(user1.recipesToCook.recipes).to.deep.equal([recipes[1]]);
   })
 
   it('Should have a method to filter favoriteRecipes based on one tag', () => {

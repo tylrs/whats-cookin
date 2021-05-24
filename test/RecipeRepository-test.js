@@ -60,14 +60,38 @@ describe('Recipe Repository', () => {
     expect(filteredRecipes).to.be.deep.equal([recipes[0]])
   })
 
-  it('Should return all recipes if no match is found for a recipe name with a single word', () => {
+  it('Should return no recipes if no match is found for a recipe name with a single word', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['quesadilla']})
 
     expect(filteredRecipes).to.be.deep.equal([])
   })
 
-  it('Should return all recipes if no match is found for a ingredient name with a single word', () => {
+  it('Should return no recipes if first word is a valid name but second word is not', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'name', query: ['chocolate', 'quesadilla']})
+
+    expect(filteredRecipes).to.be.deep.equal([])
+  })
+
+  it('Should return no recipes if no match is found for an ingredient name with a single word', () => {
     let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['saffron']})
+
+    expect(filteredRecipes).to.be.deep.equal([])
+  })
+
+  it('Should return no recipes if first word is a valid ingredient name but second word is not', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['saffron']})
+
+    expect(filteredRecipes).to.be.deep.equal([])
+  })
+
+  it('Should return no recipes if no words are passed in', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: []})
+
+    expect(filteredRecipes).to.be.deep.equal([])
+  })
+
+  it('Should return no recipes if numbers are passed in', () => {
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: [1, 2, 3]})
 
     expect(filteredRecipes).to.be.deep.equal([])
   })
@@ -83,4 +107,19 @@ describe('Recipe Repository', () => {
 
     expect(allIngredientNames.length).to.equal(111);
   })
+
+  it('Should return no recipe names if recipe repo is empty', () => {
+    recipeRepository.recipes = [];
+    let allRecipeNames = recipeRepository.generateAllRecipeNames();
+
+    expect(allRecipeNames.length).to.equal(0);
+  })
+
+  it('Should return no ingredient names if recipe repo is empty', () => {
+    recipeRepository.recipes = [];
+    let allRecipeNames = recipeRepository.generateAllIngredientNames();
+
+    expect(allRecipeNames.length).to.equal(0);
+  })
+
 })

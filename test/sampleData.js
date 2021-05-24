@@ -823,5 +823,5 @@ const sampleData = {
 }
 
 module.exports = {
-sampleData
+  sampleData
 }

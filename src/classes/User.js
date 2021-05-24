@@ -9,7 +9,9 @@ class User {
   }
 
   addFavoriteRecipe(recipe) {
-    this.favoriteRecipes.recipes.push(recipe);
+    if (!this.favoriteRecipes.recipes.includes(recipe)) {
+      this.favoriteRecipes.recipes.push(recipe);
+    }
   }
 
   removeFavoriteRecipe(clickedRecipe) {

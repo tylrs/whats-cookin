@@ -37,18 +37,18 @@ homeButton.addEventListener('click', showHomeView)
 
 function generateStartingInformation() {
   apiCalls.retrieveData()
-      .then((promise) => {
-        let num = getRandomNumber(promise[0]['usersData'].length)
-        currentUser = new User(promise[0]['usersData'][num])
-        let ingredients = promise[1]['ingredientsData']
-        let recipes = promise[2]['recipeData']
-        let formattedRecipes = recipes.map((recipe) => {
-          let newRecipe = new Recipe(recipe, ingredients)
-          return newRecipe
-        })
-        originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
-        showHomeView();
+    .then((promise) => {
+      let num = getRandomNumber(promise[0]['usersData'].length)
+      currentUser = new User(promise[0]['usersData'][num])
+      let ingredients = promise[1]['ingredientsData']
+      let recipes = promise[2]['recipeData']
+      let formattedRecipes = recipes.map((recipe) => {
+        let newRecipe = new Recipe(recipe, ingredients)
+        return newRecipe
       })
+      originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
+      showHomeView();
+    })
 }
 
 //switch views functions
