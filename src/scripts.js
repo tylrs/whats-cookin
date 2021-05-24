@@ -19,7 +19,7 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 
-//global variable
+//global variables
 let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
@@ -90,15 +90,13 @@ function generateStartingInformation() {
       })
 }
 
-
-
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
     determineFavoriteOrUnfavorite(id, event);
   } else if (buttonType === 'this-week-recipe') {
-    determineAddOrRemoveToCook(id);
+    determineAddOrRemoveToCook(id, event);
   } else {
     showFullRecipeView(id);
   }
@@ -110,8 +108,7 @@ function determineFavoriteOrUnfavorite(id, event) {
   })
   if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
     console.log("Favorited");
-    event.target.parentElement.classList.add('banana');
-    console.log(event);
+    event.target.parentElement.classList.add('icon-on');
     currentUser.addFavoriteRecipe(clickedRecipe);
   } else {
     console.log('unfavorited');
@@ -120,12 +117,13 @@ function determineFavoriteOrUnfavorite(id, event) {
   }
 }
 
-function determineAddOrRemoveToCook(id) {
+function determineAddOrRemoveToCook(id, event) {
   let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
   if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
     console.log("Add to cook");
+    event.target.parentElement.classList.add('icon-on');
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
   } else {
     console.log('Remove from to cook');
@@ -204,6 +202,7 @@ function renderRecipes(recipes) {
     `
   })
 }
+
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
     return `<h4 class="tags flex-column">${tag}</h4>`
