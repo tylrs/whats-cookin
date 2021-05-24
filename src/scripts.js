@@ -19,22 +19,22 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 
-//global variable
+//global variables
 let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
+let counter = 0;
 
 // event listeners
 window.onload = generateStartingInformation()
 searchButton.addEventListener('click', searchThroughRecipes)
-filter.addEventListener('click', openFilterMenu)
+filter.addEventListener('click', toggleFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
 mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
-//event handler
 function generateStartingInformation() {
   apiCalls.retrieveData()
       .then((promise) => {
@@ -51,11 +51,15 @@ function generateStartingInformation() {
       })
 }
 
+//switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
 }
 
 function showToCookView() {
@@ -63,6 +67,9 @@ function showToCookView() {
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
 }
 
 function showHomeView() {
@@ -70,49 +77,9 @@ function showHomeView() {
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
-  show(mainRecipes)
-}
-
-function determineRecipeCardAction(event) {
-  let id = parseInt(event.target.closest('.recipe-card').id);
-  let buttonType = event.target.parentElement.className;
-  if (buttonType === 'favorite-recipe') {
-    determineFavoriteOrUnfavorite(id, event);
-  } else if (buttonType === 'this-week-recipe') {
-    determineAddOrRemoveToCook(id);
-  } else {
-    showFullRecipeView(id);
-  }
-}
-
-function determineFavoriteOrUnfavorite(id, event) {
-  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
-    return recipe.id === id;
-  })
-  if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
-    console.log("Favorited");
-    event.target.parentElement.classList.add('banana');
-    console.log(event);
-    currentUser.addFavoriteRecipe(clickedRecipe);
-  } else {
-    console.log('unfavorited');
-    currentUser.removeFavoriteRecipe(clickedRecipe)
-    renderRecipes(currentRecipeRepo.recipes);
-  }
-}
-
-function determineAddOrRemoveToCook(id) {
-  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
-    return recipe.id === id;
-  })
-  if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
-    console.log("Add to cook");
-    currentUser.addRecipeToCookThisWeek(clickedRecipe);
-  } else {
-    console.log('Remove from to cook');
-    currentUser.removeRecipeToCookThisWeek(clickedRecipe)
-    renderRecipes(currentRecipeRepo.recipes);
-  }
+  show(mainRecipes);
+  show(searchBar);
+  show(searchButton);
 }
 
 function showFullRecipeView(id) {
@@ -123,19 +90,51 @@ function showFullRecipeView(id) {
   show(fullRecipeSection);
 }
 
+//card button event handlers
+function determineRecipeCardAction(event) {
+  let id = parseInt(event.target.closest('.recipe-card').id);
+  let buttonType = event.target.parentElement.className;
+  if (buttonType === 'favorite-recipe') {
+    determineFavoriteOrUnfavorite(id, event);
+  } else if (buttonType === 'this-week-recipe') {
+    determineAddOrRemoveToCook(id, event);
+  } else if (id) {
+    showFullRecipeView(id);
+  }
+}
+
+function determineFavoriteOrUnfavorite(id, event) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
+    event.target.parentElement.classList.add('icon-on');
+    currentUser.addFavoriteRecipe(clickedRecipe);
+  } else {
+    currentUser.removeFavoriteRecipe(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
+  }
+}
+
+function determineAddOrRemoveToCook(id, event) {
+  let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
+    return recipe.id === id;
+  })
+  if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
+    event.target.parentElement.classList.add('icon-on');
+    currentUser.addRecipeToCookThisWeek(clickedRecipe);
+  } else {
+    currentUser.removeRecipeToCookThisWeek(clickedRecipe)
+    renderRecipes(currentRecipeRepo.recipes);
+  }
+}
+//search functions
 function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
-  console.log('These are filtered', uniqueFilteredRecipes);
-}
-
-function generateFilteredRecipes(convertedUserSearch) {
-  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
-  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
-  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
-  return [...new Set(allFilteredRecipes)];
+  searchBar.value = '';
 }
 
 function convertUserInfo(userSearch) {
@@ -161,6 +160,26 @@ function determineSearchType(alteredUserSearch) {
   return searchInfo;
 }
 
+function generateFilteredRecipes(convertedUserSearch) {
+  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
+  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
+  return [...new Set(allFilteredRecipes)];
+}
+
+function searchByTag(e) {
+  e.preventDefault();
+  let tagSearchInfo = {type: 'tags', query: []}
+  tagCheckBox.forEach((tag) => {
+    tag.checked ? tagSearchInfo.query.push(tag.value) : null
+    tag.checked = false;
+  })
+  hide(filterMenu)
+  let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
+  renderRecipes(filteredRecipes);
+}
+
+//render functions
 function renderRecipes(recipes) {
   mainRecipes.innerHTML = ``;
   recipes.forEach((recipe) => {
@@ -173,7 +192,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="cookies"/>
+        <img src=${recipe.image} alt="recipe image"/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
@@ -192,30 +211,6 @@ function renderRecipes(recipes) {
         </article>
     `
   })
-}
-function convertRecipeToRender(recipeToRender) {
-  let tags = recipeToRender.tags.map((tag) => {
-    return `<h4 class="tags flex-column">${tag}</h4>`
-  }).join(' ');
-  let ingredients = recipeToRender.ingredients.map((ingredient) => {
-    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
-  }).join(' ');
-  let instructions = recipeToRender.getInstructions();
-  let fixedInstructions = instructions.map((instruction) => {
-    return `<p class="instructions flex-column">${instruction}</p>`
-  }).join('  ');
-  let name = recipeToRender.name.map((name) => {
-    return name[0].toUpperCase() + name.substring(1);
-  }).join(' ');
-  let totalCost = convertTotalCost(recipeToRender);
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
-  return recipeToRenderInfo;
-}
-
-function convertTotalCost(recipeToRender) {
-  let totalCost = recipeToRender.getTotalCost();
-  let dollars = totalCost / 100;
-  return `$${dollars}`;
 }
 
 function renderFullRecipeInfo(id) {
@@ -267,24 +262,45 @@ function renderFullRecipeInfo(id) {
   `
 }
 
+function convertRecipeToRender(recipeToRender) {
+  let tags = recipeToRender.tags.map((tag) => {
+    return `<h4 class="tags flex-column">${tag}</h4>`
+  }).join(' ');
+  let ingredients = recipeToRender.ingredients.map((ingredient) => {
+    return `<p class="ingredients flex-column">${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</p>`
+  }).join(' ');
+  let instructions = recipeToRender.getInstructions();
+  let fixedInstructions = instructions.map((instruction) => {
+    return `<p class="instructions flex-column">${instruction}</p>`
+  }).join('  ');
+  let name = recipeToRender.name.map((name) => {
+    return name[0].toUpperCase() + name.substring(1);
+  }).join(' ');
+  let totalCost = convertTotalCost(recipeToRender);
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
+  return recipeToRenderInfo;
+}
+
+function convertTotalCost(recipeToRender) {
+  let totalCost = recipeToRender.getTotalCost();
+  let dollars = Math.floor(totalCost / 100);
+  return `$${dollars}`;
+}
+
+//other functions
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
   return number;
 }
 
-function openFilterMenu() {
-  show(filterMenu)
-}
-
-function searchByTag(e) {
-  e.preventDefault();
-  let tagSearchInfo = {type: 'tags', query: []}
-  tagCheckBox.forEach((tag) => {
-    tag.checked ? tagSearchInfo.query.push(tag.value) : null
-  })
-  hide(filterMenu)
-  let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
-  renderRecipes(uniqueFilteredRecipes);
+function toggleFilterMenu() {
+  if (!(counter % 2)) {
+    show(filterMenu);
+    counter ++;
+  } else {
+    hide(filterMenu);
+    counter ++;
+  }
 }
 
 function show(e) {
