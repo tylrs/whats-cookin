@@ -93,10 +93,9 @@ function showFullRecipeView(id) {
 //card button event handlers
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
-  let buttonType = event.target.parentElement.className;
-  if (buttonType === 'favorite-recipe') {
+  if (event.target.parentElement.classList.contains('favorite-recipe')) {
     determineFavoriteOrUnfavorite(id, event);
-  } else if (buttonType === 'this-week-recipe') {
+  } else if (event.target.parentElement.classList.contains('this-week-recipe')) {
     determineAddOrRemoveToCook(id, event);
   } else if (id) {
     showFullRecipeView(id);
@@ -189,6 +188,14 @@ function renderRecipes(recipes) {
     let recipeNames = recipe.name.map((name) => {
       return name[0].toUpperCase() + name.substring(1);
     }).join(' ');
+    let favoriteButtonClass = `favorite-recipe`
+    let calendarButtonClass = `this-week-recipe`
+    if (recipe.isFavorited) {
+      favoriteButtonClass = `favorite-recipe icon-on`
+    }
+    if (recipe.isToBeCooked) {
+      calendarButtonClass = `this-week-recipe icon-on`
+    }
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
@@ -201,10 +208,10 @@ function renderRecipes(recipes) {
             </div>
         </div>
         <div class="recipe-card-buttons-container flex-column">
-          <button class="favorite-recipe">
+          <button class="${favoriteButtonClass}">
             <i class="heart-card fas fa-heart"></i>
           </button>
-          <button class="this-week-recipe">
+          <button class="${calendarButtonClass}">
             <i class="calendar-card fas fa-calendar-alt"></i>
           </button>
         </div>
@@ -232,10 +239,10 @@ function renderFullRecipeInfo(id) {
       <img src=${recipeToRender.image} alt="cookies"/>
 
       <div class="recipe-card-buttons-container flex-column">
-        <button class="favorite-recipe">
+        <button class="${recipeToRenderInfo.favoriteButtonClass}">
           <i class="heart-card fas fa-heart"></i>
         </button>
-        <button class="this-week-recipe">
+        <button class="${recipeToRenderInfo.calendarButtonClass}">
           <i class="calendar-card fas fa-calendar-alt"></i>
         </button>
       </div>
@@ -277,7 +284,15 @@ function convertRecipeToRender(recipeToRender) {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost = convertTotalCost(recipeToRender);
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
+  let favoriteButtonClass = `favorite-recipe`
+  let calendarButtonClass = `this-week-recipe`
+  if (recipeToRender.isFavorited) {
+    favoriteButtonClass = `favorite-recipe icon-on`
+  }
+  if (recipeToRender.isToBeCooked) {
+    calendarButtonClass = `this-week-recipe icon-on`
+  }
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, favoriteButtonClass, calendarButtonClass};
   return recipeToRenderInfo;
 }
 
