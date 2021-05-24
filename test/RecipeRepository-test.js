@@ -107,4 +107,19 @@ describe('Recipe Repository', () => {
 
     expect(allIngredientNames.length).to.equal(111);
   })
+
+  it('Should return no recipe names if recipe repo is empty', () => {
+    recipeRepository.recipes = [];
+    let allRecipeNames = recipeRepository.generateAllRecipeNames();
+
+    expect(allRecipeNames.length).to.equal(0);
+  })
+
+  it('Should return no ingredient names if recipe repo is empty', () => {
+    recipeRepository.recipes = [];
+    let allRecipeNames = recipeRepository.generateAllIngredientNames();
+
+    expect(allRecipeNames.length).to.equal(0);
+  })
+
 })
