@@ -79,7 +79,7 @@ describe('Recipe Repository', () => {
   })
 
   it('Should return no recipes if first word is a valid ingredient name but second word is not', () => {
-    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['saffron']})
+    let filteredRecipes = recipeRepository.filterRecipes({type: 'ingredientNames', query: ['butter', 'saffron']})
 
     expect(filteredRecipes).to.be.deep.equal([])
   })

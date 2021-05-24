@@ -10,7 +10,6 @@ describe('Recipe', () => {
     sampleRecipe = data.sampleRecipe[0];
     sampleIngredients = data.sampleIngredients;
     recipe1 = new Recipe(sampleRecipe, sampleIngredients);
-
     updatedRecipeIngredients = [
       {
         id: 20081,
