@@ -35,6 +35,22 @@ favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
+function generateStartingInformation() {
+  apiCalls.retrieveData()
+      .then((promise) => {
+        let num = getRandomNumber(promise[0]['usersData'].length)
+        currentUser = new User(promise[0]['usersData'][num])
+        let ingredients = promise[1]['ingredientsData']
+        let recipes = promise[2]['recipeData']
+        let formattedRecipes = recipes.map((recipe) => {
+          let newRecipe = new Recipe(recipe, ingredients)
+          return newRecipe
+        })
+        originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
+        showHomeView();
+      })
+}
+
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
@@ -74,23 +90,7 @@ function showFullRecipeView(id) {
   show(fullRecipeSection);
 }
 
-//event handlers
-function generateStartingInformation() {
-  apiCalls.retrieveData()
-      .then((promise) => {
-        let num = getRandomNumber(promise[0]['usersData'].length)
-        currentUser = new User(promise[0]['usersData'][num])
-        let ingredients = promise[1]['ingredientsData']
-        let recipes = promise[2]['recipeData']
-        let formattedRecipes = recipes.map((recipe) => {
-          let newRecipe = new Recipe(recipe, ingredients)
-          return newRecipe
-        })
-        originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
-        showHomeView();
-      })
-}
-
+//card button event handlers
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
@@ -132,7 +132,7 @@ function determineAddOrRemoveToCook(id, event) {
     renderRecipes(currentRecipeRepo.recipes);
   }
 }
-
+//search functions
 function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
@@ -140,13 +140,6 @@ function searchThroughRecipes() {
   renderRecipes(uniqueFilteredRecipes);
   searchBar.value = '';
   console.log('These are filtered', uniqueFilteredRecipes);
-}
-
-function generateFilteredRecipes(convertedUserSearch) {
-  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
-  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
-  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
-  return [...new Set(allFilteredRecipes)];
 }
 
 function convertUserInfo(userSearch) {
@@ -172,6 +165,25 @@ function determineSearchType(alteredUserSearch) {
   return searchInfo;
 }
 
+function generateFilteredRecipes(convertedUserSearch) {
+  let filteredRecipesByName = currentRecipeRepo.filterRecipes(convertedUserSearch.name);
+  let filteredRecipesByIngredient = currentRecipeRepo.filterRecipes(convertedUserSearch.ingredientNames);
+  let allFilteredRecipes = filteredRecipesByName.concat(filteredRecipesByIngredient);
+  return [...new Set(allFilteredRecipes)];
+}
+
+function searchByTag(e) {
+  e.preventDefault();
+  let tagSearchInfo = {type: 'tags', query: []}
+  tagCheckBox.forEach((tag) => {
+    tag.checked ? tagSearchInfo.query.push(tag.value) : null
+  })
+  hide(filterMenu)
+  let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
+  renderRecipes(uniqueFilteredRecipes);
+}
+
+//render functions
 function renderRecipes(recipes) {
   mainRecipes.innerHTML = ``;
   recipes.forEach((recipe) => {
@@ -279,6 +291,7 @@ function convertTotalCost(recipeToRender) {
   return `$${dollars}`;
 }
 
+//other functions
 function getRandomNumber(max) {
   var number = Math.floor(Math.random() * (max - 1) + 1);
   return number;
@@ -292,17 +305,6 @@ function toggleFilterMenu() {
     hide(filterMenu);
     counter ++;
   }
-}
-
-function searchByTag(e) {
-  e.preventDefault();
-  let tagSearchInfo = {type: 'tags', query: []}
-  tagCheckBox.forEach((tag) => {
-    tag.checked ? tagSearchInfo.query.push(tag.value) : null
-  })
-  hide(filterMenu)
-  let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
-  renderRecipes(uniqueFilteredRecipes);
 }
 
 function show(e) {
