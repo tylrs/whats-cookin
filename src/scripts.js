@@ -3,21 +3,6 @@ import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
 import RecipeRepository from './classes/RecipeRepository.js'
 import User from './classes/User.js'
-import sampleData from '../test/sampleData';
-const data = sampleData.sampleData;
-
-//extra
-let recipes;
-const sampleRecipes = data.sampleRecipe
-const sampleIngredients = data.sampleIngredients
-recipes = sampleRecipes.map((recipe) => {
-  let newRecipe = new Recipe(recipe, sampleIngredients)
-  return newRecipe
-})
-
-//global variable
-let currentRecipeRepo = new RecipeRepository(recipes);
-let currentUser;
 
 // querySelectors
 const mainRecipes = document.querySelector('#mainRecipes');
@@ -34,24 +19,37 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 
-// renderFullRecipeInfo(741603);
-
+//global variable
+let currentRecipeRepo;
+let originalRecipeRepo;
+let currentUser;
 
 // event listeners
-window.onload = generateRandomUser();
-// window.onload = renderRecipes(currentRecipeRepo.recipes);
-window.onload = showHomeView();
+window.onload = generateStartingInformation()
 searchButton.addEventListener('click', searchThroughRecipes)
 filter.addEventListener('click', openFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
-// main.addEventListener('click', determineRecipeCardAction)
 mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
 toCookViewButton.addEventListener('click', showToCookView)
 homeButton.addEventListener('click', showHomeView)
 
-
-// event handlers
+//event handler
+function generateStartingInformation() {
+  apiCalls.retrieveData()
+      .then((promise) => {
+        let num = getRandomNumber(promise[0]['usersData'].length)
+        currentUser = new User(promise[0]['usersData'][num])
+        let ingredients = promise[1]['ingredientsData']
+        let recipes = promise[2]['recipeData']
+        let formattedRecipes = recipes.map((recipe) => {
+          let newRecipe = new Recipe(recipe, ingredients)
+          return newRecipe
+        })
+        originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
+        showHomeView();
+      })
+}
 
 function showFavoritesView() {
   hide(fullRecipeSection);
@@ -70,8 +68,7 @@ function showToCookView() {
 function showHomeView() {
   hide(fullRecipeSection);
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
-  currentRecipeRepo = new RecipeRepository(recipes);
-  console.log(currentRecipeRepo)
+  currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
   show(mainRecipes)
 }
@@ -80,7 +77,7 @@ function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
   let buttonType = event.target.parentElement.className;
   if (buttonType === 'favorite-recipe') {
-    determineFavoriteOrUnfavorite(id);
+    determineFavoriteOrUnfavorite(id, event);
   } else if (buttonType === 'this-week-recipe') {
     determineAddOrRemoveToCook(id);
   } else {
@@ -88,12 +85,14 @@ function determineRecipeCardAction(event) {
   }
 }
 
-function determineFavoriteOrUnfavorite(id) {
+function determineFavoriteOrUnfavorite(id, event) {
   let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
   if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
     console.log("Favorited");
+    event.target.parentElement.classList.add('banana');
+    console.log(event);
     currentUser.addFavoriteRecipe(clickedRecipe);
   } else {
     console.log('unfavorited');
@@ -116,29 +115,12 @@ function determineAddOrRemoveToCook(id) {
   }
 }
 
-// function addToRecipeToCook(id) {
-//   let recipeToAdd = currentRecipeRepo.recipes.find((recipe) => {
-//     return recipe.id === id;
-//   })
-//   currentUser.addRecipeToCookThisWeek(recipeToAdd);
-//   console.log(currentUser.recipesToCook);
-// }
-
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
   hide(mainRecipes);
   hide(searchBar);
   hide(searchButton);
   show(fullRecipeSection);
-}
-
-
-function generateRandomUser() {
-  let randomNumber = getRandomNumber(data.sampleUsers.length + 1);
-  let randomUserInfo = data.sampleUsers.find((user) => {
-    return user.id === randomNumber;
-  })
-  currentUser = new User(randomUserInfo);
 }
 
 function searchThroughRecipes() {
@@ -290,7 +272,7 @@ function getRandomNumber(max) {
   return number;
 }
 
-function  openFilterMenu() {
+function openFilterMenu() {
   show(filterMenu)
 }
 
@@ -312,6 +294,3 @@ function show(e) {
 function hide(e) {
   e.classList.add('hidden')
 }
-
-
-console.log('Hello world');
