@@ -11,6 +11,7 @@ class User {
   addFavoriteRecipe(recipe) {
     if (!this.favoriteRecipes.recipes.includes(recipe)) {
       this.favoriteRecipes.recipes.push(recipe);
+      recipe.favorite();
     }
   }
 
@@ -20,6 +21,7 @@ class User {
     })
     if (index !== -1) {
       this.favoriteRecipes.recipes.splice(index, 1);
+      recipe.unFavorite();
     }
   }
 
@@ -30,6 +32,7 @@ class User {
   addRecipeToCookThisWeek(recipe) {
     if (!this.recipesToCook.recipes.includes(recipe)) {
       this.recipesToCook.recipes.push(recipe);
+      recipe.toCook();
     }
   }
 
@@ -39,6 +42,7 @@ class User {
     })
     if (index !== -1) {
       this.recipesToCook.recipes.splice(index, 1);
+      recipe.removeToCook();
     }
   }
 
