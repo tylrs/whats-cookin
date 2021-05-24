@@ -55,7 +55,6 @@ describe('Recipe', () => {
   })
 
   it('should have a name which is an array of separate lowerCase words', () => {
-
     expect(recipe1.name).to.deep.equal([ 'loaded', 'chocolate', 'chip', 'pudding', 'cookie', 'cups' ]);
   })
 
@@ -84,7 +83,7 @@ describe('Recipe', () => {
     expect(recipe1.getTotalCost()).to.equal(976);
   })
 
-  it('should have a method to return recipe instructions', () => {
+  it('should have a method to return updated recipe instructions', () => {
     expect(recipe1.getInstructions()).to.deep.equal(updatedInstructions)
   })
 })
