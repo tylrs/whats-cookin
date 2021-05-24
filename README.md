@@ -14,16 +14,19 @@ Users can view a list of recipes, favorite recipes, and choose recipes to cook. 
 
 ## Demonstration of Application
 Users can scroll through a list of recipes
-![alt text](./gifs/game-demonstration.gif)
+![alt text](./gifs/recipe-scroll.gif)
 
 Users can click on a recipe to learn more information about it
-![alt text](./gifs/timer-percentage.gif)
+![alt text](./gifs/full-recipe-view.gif)
 
 Users can favorite recipes and view them later
-![alt text](./gifs/timer-percentage.gif)
+![alt text](./gifs/favorite-recipes.gif)
+
+Users can unfavorite recipes
+![alt text](./gifs/unfavorite-recipes.gif)
 
 Users can choose recipes to cook later and view those as well
-![alt text](./gifs/timer-percentage.gif)
+![alt text](./gifs/recipes-to-cook.gif)
 
 Users can search through all recipes or their favorite recipes by ingredient name or recipe name
 ![alt text](./gifs/timer-percentage.gif)
