@@ -49,4 +49,4 @@ Users can also filter recipes by tag
 
 ## Contributors
 - [Taylor Galloway](https://github.com/tylrs)
-- [Andrew Vallejo]()
+- [Andrew Vallejo](https://github.com/andrewvallejo)
