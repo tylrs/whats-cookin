@@ -66,7 +66,7 @@ describe('User', () => {
 
   it('Should have a method to unFavorite recipes', () => {
 
-    user1.removeFavoriteRecipe(recipes[0].id);
+    user1.removeFavoriteRecipe(recipes[0]);
 
     expect(user1.favoriteRecipes.recipes.length).to.equal(4);
     expect(user1.favoriteRecipes.recipes).to.deep.equal([recipes[1], recipes[2], recipes[3], recipes[4]]);
