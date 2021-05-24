@@ -171,11 +171,13 @@ function searchByTag(e) {
   e.preventDefault();
   let tagSearchInfo = {type: 'tags', query: []}
   tagCheckBox.forEach((tag) => {
+    console.log(tag);
     tag.checked ? tagSearchInfo.query.push(tag.value) : null
+    tag.checked = false;
   })
   hide(filterMenu)
-  let uniqueFilteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
-  renderRecipes(uniqueFilteredRecipes);
+  let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
+  renderRecipes(filteredRecipes);
 }
 
 //render functions
