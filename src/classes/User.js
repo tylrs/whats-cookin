@@ -21,7 +21,7 @@ class User {
     })
     if (index !== -1) {
       this.favoriteRecipes.recipes.splice(index, 1);
-      recipe.unFavorite();
+      clickedRecipe.unFavorite();
     }
   }
 
@@ -42,7 +42,7 @@ class User {
     })
     if (index !== -1) {
       this.recipesToCook.recipes.splice(index, 1);
-      recipe.removeToCook();
+      clickedRecipe.removeToCook();
     }
   }
 
