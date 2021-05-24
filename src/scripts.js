@@ -23,11 +23,12 @@ const homeButton = document.querySelector('#homeView')
 let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
+let counter = 0;
 
 // event listeners
 window.onload = generateStartingInformation()
 searchButton.addEventListener('click', searchThroughRecipes)
-filter.addEventListener('click', openFilterMenu)
+filter.addEventListener('click', toggleFilterMenu)
 filterSubmitBtn.addEventListener('click', searchByTag)
 mainSection.addEventListener('click', determineRecipeCardAction)
 favoritesViewButton.addEventListener('click', showFavoritesView)
@@ -282,8 +283,15 @@ function getRandomNumber(max) {
   return number;
 }
 
-function openFilterMenu() {
-  show(filterMenu)
+function toggleFilterMenu() {
+  console.log(counter);
+  if (!(counter % 2)) {
+    show(filterMenu);
+    counter ++;
+  } else {
+    hide(filterMenu);
+    counter ++;
+  }
 }
 
 function searchByTag(e) {
