@@ -98,7 +98,7 @@ function determineRecipeCardAction(event) {
     determineFavoriteOrUnfavorite(id, event);
   } else if (buttonType === 'this-week-recipe') {
     determineAddOrRemoveToCook(id, event);
-  } else {
+  } else if (id) {
     showFullRecipeView(id);
   }
 }
