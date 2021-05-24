@@ -171,7 +171,6 @@ function searchByTag(e) {
   e.preventDefault();
   let tagSearchInfo = {type: 'tags', query: []}
   tagCheckBox.forEach((tag) => {
-    console.log(tag);
     tag.checked ? tagSearchInfo.query.push(tag.value) : null
     tag.checked = false;
   })
