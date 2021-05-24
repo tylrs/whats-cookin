@@ -225,7 +225,7 @@ function convertRecipeToRender(recipeToRender) {
 
 function convertTotalCost(recipeToRender) {
   let totalCost = recipeToRender.getTotalCost();
-  let dollars = totalCost / 100;
+  let dollars = Math.floor(totalCost / 100);
   return `$${dollars}`;
 }
 
@@ -284,7 +284,6 @@ function getRandomNumber(max) {
 }
 
 function toggleFilterMenu() {
-  console.log(counter);
   if (!(counter % 2)) {
     show(filterMenu);
     counter ++;
