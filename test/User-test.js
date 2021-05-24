@@ -7,7 +7,7 @@ import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 
 describe('User', () => {
-  let recipes, recipeRepository, user1
+  let recipes, user1
   beforeEach('Setup', () => {
     const sampleUsers = data.sampleUsers;
     const sampleRecipes = data.sampleRecipe
@@ -16,7 +16,6 @@ describe('User', () => {
       let newRecipe = new Recipe(recipe, sampleIngredients)
       return newRecipe;
     })
-    recipeRepository = new RecipeRepository([])
     user1 = new User(sampleUsers[0]);
     user1.addFavoriteRecipe(recipes[0])
     user1.addFavoriteRecipe(recipes[1])
