@@ -68,7 +68,14 @@ describe('Recipe', () => {
 
   it('should have a method which returns a new list of ingredients with updated information', () => {
     const updatedIngredients = recipe1.fetchIngredients(sampleRecipe.ingredients, sampleIngredients)
+
     expect(updatedIngredients).to.deep.equal(updatedRecipeIngredients);
+  })
+
+  it('should return an empty arry if no ingredients are passed in', () => {
+    const updatedIngredients = recipe1.fetchIngredients([], [])
+
+    expect(updatedIngredients).to.deep.equal([]);
   })
 
   it('should have a property which has the returned value from fetchIngredients', () => {
