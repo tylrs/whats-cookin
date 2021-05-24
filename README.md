@@ -28,11 +28,11 @@ Users can unfavorite recipes
 Users can choose recipes to cook later and view those as well
 ![alt text](./gifs/recipes-to-cook.gif)
 
-Users can search through all recipes or their favorite recipes by ingredient name or recipe name
-![alt text](./gifs/timer-percentage.gif)
+Users can search through all recipes or their favorite recipes by recipe name or ingredient name
+![alt text](./gifs/search-recipes.gif)
 
 Users can also filter recipes by tag
-![alt text](./gifs/timer-percentage.gif)
+![alt text](./gifs/filter-menu.gif)
 
 ### Technologies
 - JavaScript
