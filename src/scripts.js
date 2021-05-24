@@ -108,11 +108,9 @@ function determineFavoriteOrUnfavorite(id, event) {
     return recipe.id === id;
   })
   if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
-    console.log("Favorited");
     event.target.parentElement.classList.add('icon-on');
     currentUser.addFavoriteRecipe(clickedRecipe);
   } else {
-    console.log('unfavorited');
     currentUser.removeFavoriteRecipe(clickedRecipe)
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -123,11 +121,9 @@ function determineAddOrRemoveToCook(id, event) {
     return recipe.id === id;
   })
   if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
-    console.log("Add to cook");
     event.target.parentElement.classList.add('icon-on');
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
   } else {
-    console.log('Remove from to cook');
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -139,7 +135,6 @@ function searchThroughRecipes() {
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
   searchBar.value = '';
-  console.log('These are filtered', uniqueFilteredRecipes);
 }
 
 function convertUserInfo(userSearch) {
