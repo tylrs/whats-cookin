@@ -138,6 +138,7 @@ function searchThroughRecipes() {
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
   renderRecipes(uniqueFilteredRecipes);
+  searchBar.value = '';
   console.log('These are filtered', uniqueFilteredRecipes);
 }
 
@@ -204,31 +205,6 @@ function renderRecipes(recipes) {
   })
 }
 
-function convertRecipeToRender(recipeToRender) {
-  let tags = recipeToRender.tags.map((tag) => {
-    return `<h4 class="tags flex-column">${tag}</h4>`
-  }).join(' ');
-  let ingredients = recipeToRender.ingredients.map((ingredient) => {
-    return `<p class="ingredients flex-column">${ingredient.quantity.amount}${ingredient.quantity.unit} ${ingredient.name}</p>`
-  }).join(' ');
-  let instructions = recipeToRender.getInstructions();
-  let fixedInstructions = instructions.map((instruction) => {
-    return `<p class="instructions flex-column">${instruction}</p>`
-  }).join('  ');
-  let name = recipeToRender.name.map((name) => {
-    return name[0].toUpperCase() + name.substring(1);
-  }).join(' ');
-  let totalCost = convertTotalCost(recipeToRender);
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
-  return recipeToRenderInfo;
-}
-
-function convertTotalCost(recipeToRender) {
-  let totalCost = recipeToRender.getTotalCost();
-  let dollars = Math.floor(totalCost / 100);
-  return `$${dollars}`;
-}
-
 function renderFullRecipeInfo(id) {
   let recipeToRender = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
@@ -276,6 +252,31 @@ function renderFullRecipeInfo(id) {
     </section>
     </article>
   `
+}
+
+function convertRecipeToRender(recipeToRender) {
+  let tags = recipeToRender.tags.map((tag) => {
+    return `<h4 class="tags flex-column">${tag}</h4>`
+  }).join(' ');
+  let ingredients = recipeToRender.ingredients.map((ingredient) => {
+    return `<p class="ingredients flex-column">${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</p>`
+  }).join(' ');
+  let instructions = recipeToRender.getInstructions();
+  let fixedInstructions = instructions.map((instruction) => {
+    return `<p class="instructions flex-column">${instruction}</p>`
+  }).join('  ');
+  let name = recipeToRender.name.map((name) => {
+    return name[0].toUpperCase() + name.substring(1);
+  }).join(' ');
+  let totalCost = convertTotalCost(recipeToRender);
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost};
+  return recipeToRenderInfo;
+}
+
+function convertTotalCost(recipeToRender) {
+  let totalCost = recipeToRender.getTotalCost();
+  let dollars = Math.floor(totalCost / 100);
+  return `$${dollars}`;
 }
 
 function getRandomNumber(max) {
