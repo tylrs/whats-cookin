@@ -1,22 +1,52 @@
-# What's Cookin'? Starter Kit 
+<h1 align="center">Grains of Paradise</h1>
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
+## Table of Contents
+* [Introduction](#introduction)
+* [Features](#Features)
+* [Technologies](#Technologies)
+* [Setup](#Setup/execution-Instructions)
+* [Contributors](#Contributors)
 
-## Set Up 
+## Introduction
+This is a recipe tracking application designed to be viewed on a mobile device although it can also be viewed on larger screens.
+Users can view a list of recipes, favorite recipes, and choose recipes to cook. Users can filter recipes by tag, and can search for recipes based on ingredients or recipe name.
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
+## Demonstration of Application
+Users can scroll through a list of recipes
+![alt text](./gifs/recipe-scroll.gif)
 
-## Testing 
+Users can click on a recipe to learn more information about it
+![alt text](./gifs/full-recipe-view.gif)
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
+Users can favorite recipes and view them later
+![alt text](./gifs/favorite-recipes.gif)
 
-## Linting Your Code 
+Users can unfavorite recipes
+![alt text](./gifs/unfavorite-recipes.gif)
 
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+Users can choose recipes to cook later and view those as well
+![alt text](./gifs/recipes-to-cook.gif)
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+Users can search through all recipes/favorite recipes by recipe name or ingredient name
+![alt text](./gifs/search-recipes.gif)
 
+Users can also filter recipes by tag
+![alt text](./gifs/filter-menu.gif)
+
+### Technologies
+- JavaScript
+- HTML
+- CSS
+- Mocha
+- Chai
+- Webpack
+- Fetch API
+
+## Setup/execution-instructions
+1) Clone copy of repo to your machine
+2) Using node from your command line run node index.js
+
+## Contributors
+- [Taylor Galloway](https://github.com/tylrs)
+- [Andrew Vallejo]()
