@@ -65,6 +65,35 @@ describe('Recipe', () => {
     expect(recipe1.tags).to.deep.equal(sampleRecipe.tags);
   })
 
+  it('should have properties with a default of false to determine if a recipe is favorited or added to cook', () => {
+    expect(recipe1.isFavorited).to.equal(false);
+    expect(recipe1.isToBeCooked).to.equal(false);
+  })
+
+  it('should have a method to update is favorited to true', () => {
+    recipe1.favorite();
+
+    expect(recipe1.isFavorited).to.equal(true);
+  })
+
+  it('should have a method to update is favorited to false', () => {
+    recipe1.unFavorite();
+
+    expect(recipe1.isFavorited).to.equal(false);
+  })
+
+  it('should have a method to update is to be cooked to be true', () => {
+    recipe1.toCook();
+
+    expect(recipe1.isToBeCooked).to.equal(true);
+  })
+
+  it('should have a method to update is to be cooked to be false', () => {
+    recipe1.removeToCook();
+
+    expect(recipe1.isToBeCooked).to.equal(false);
+  })
+
   it('should have a method which returns a new list of ingredients with updated information', () => {
     const updatedIngredients = recipe1.fetchIngredients(sampleRecipe.ingredients, sampleIngredients)
 

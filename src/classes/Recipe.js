@@ -8,6 +8,8 @@ class Recipe {
     this.tags = recipeDetails.tags;
     this.ingredients = this.fetchIngredients(recipeDetails.ingredients, ingredientList);
     this.ingredientNames = this.getIngredientNames();
+    this.isFavorited = false;
+    this.isToBeCooked = false;
   }
 
   fetchIngredients(recipeIngredients, ingredientList) {
@@ -42,6 +44,22 @@ class Recipe {
     return this.instructions.map((instruction) => {
       return `${instruction.number}. ${instruction.instruction}`;
     })
+  }
+
+  favorite() {
+    this.isFavorited = true;
+  }
+
+  unFavorite() {
+    this.isFavorited = false;
+  }
+
+  toCook() {
+    this.isToBeCooked = true;
+  }
+
+  removeToCook() {
+    this.isToBeCooked = false;
   }
 }
 
