@@ -26,6 +26,7 @@ let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
 let counter = 0;
+let isLoaded = false
 
 // event listeners
 window.onload = generateStartingInformation()
@@ -50,13 +51,14 @@ function generateStartingInformation() {
       })
       originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
       showHomeView();
+      isLoaded = true 
     })
 }
 
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>` 
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
   show(footer)
@@ -78,7 +80,7 @@ function showToCookView() {
 
 function showHomeView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = `<h2>Grains of Paradise</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
   show(footer)
@@ -86,6 +88,7 @@ function showHomeView() {
   show(searchBar);
   show(searchButton);
 }
+
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
@@ -272,6 +275,7 @@ function renderFullRecipeInfo(id) {
     </article>
   `
 }
+
 
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
