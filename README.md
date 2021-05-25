@@ -1,4 +1,4 @@
-<h1 align="center">Grains of Paradise</h1>
+# Grains of Paradise
 
 Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
 
