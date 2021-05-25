@@ -153,7 +153,6 @@ function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
-  console.log(uniqueFilteredRecipes);
   if (uniqueFilteredRecipes.length) {
     renderRecipes(uniqueFilteredRecipes);
   } else {
@@ -203,6 +202,7 @@ function searchByTag(e) {
     tag.checked = false;
   })
   let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
+  hide(filterMenu);
   renderRecipes(filteredRecipes);
 }
 
