@@ -1,18 +1,22 @@
 <h1 align="center">Grains of Paradise</h1>
 
 Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
+
 ## Table of Contents
-* [Introduction](#introduction)
-* [Features](#Features)
-* [Technologies](#Technologies)
-* [Setup](#Setup/execution-Instructions)
-* [Contributors](#Contributors)
+
+- [Introduction](#introduction)
+- [Features](#Features)
+- [Technologies](#Technologies)
+- [Setup](#Setup/execution-Instructions)
+- [Contributors](#Contributors)
 
 ## Introduction
+
 This is a recipe tracking application designed to be viewed on a mobile device although it can also be viewed on larger screens.
 Users can view a list of recipes, favorite recipes, and choose recipes to cook. Users can filter recipes by tag, and can search for recipes based on ingredients or recipe name.
 
 ## Demonstration of Application
+
 Users can scroll through a list of recipes
 ![alt text](./gifs/recipe-scroll.gif)
 
@@ -35,6 +39,7 @@ Users can also filter recipes by tag
 ![alt text](./gifs/filter-menu.gif)
 
 ### Technologies
+
 - JavaScript
 - HTML
 - CSS
@@ -44,9 +49,11 @@ Users can also filter recipes by tag
 - Fetch API
 
 ## Setup/execution-instructions
-1) Clone copy of repo to your machine
-2) Using node from your command line run node index.js
+
+1. Clone copy of repo to your machine
+2. Using node from your command line run node index.js
 
 ## Contributors
+
 - [Taylor Galloway](https://github.com/tylrs)
 - [Andrew Vallejo](https://github.com/andrewvallejo)
