@@ -19,6 +19,7 @@ const messageBar = document.querySelector('#messageBar');
 const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
+const footer = document.querySelector('footer')
 
 //global variables
 let currentRecipeRepo;
@@ -58,6 +59,7 @@ function showFavoritesView() {
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
+  show(footer)
   show(mainRecipes);
   show(searchBar);
   show(searchButton);
@@ -68,6 +70,7 @@ function showToCookView() {
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
+  show(footer)
   show(mainRecipes);
   show(searchBar);
   show(searchButton);
@@ -78,6 +81,7 @@ function showHomeView() {
   messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
+  show(footer)
   show(mainRecipes);
   show(searchBar);
   show(searchButton);
@@ -85,6 +89,7 @@ function showHomeView() {
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
+  hide(footer)
   hide(mainRecipes);
   hide(searchBar);
   hide(searchButton);
@@ -174,7 +179,6 @@ function searchByTag(e) {
     tag.checked ? tagSearchInfo.query.push(tag.value) : null
     tag.checked = false;
   })
-  hide(filterMenu)
   let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
   renderRecipes(filteredRecipes);
 }
@@ -226,7 +230,6 @@ function renderFullRecipeInfo(id) {
     return recipe.id === id;
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
-
   messageBar.innerHTML = `<h2>${recipeToRenderInfo.name}</h2>`
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
