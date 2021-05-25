@@ -27,7 +27,8 @@ let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
 let counter = 0;
-let isLoaded = false
+let isLoaded = false;
+let currentMessage;
 
 // event listeners
 window.onload = generateStartingInformation()
@@ -52,14 +53,15 @@ function generateStartingInformation() {
       })
       originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
       showHomeView();
-      isLoaded = true
+      isLoaded = true;
     })
 }
 
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
+  currentMessage = `<h2>Your Favorite Recipes</h2>`;
+  messageBar.innerHTML = currentMessage;
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
@@ -67,16 +69,17 @@ function showFavoritesView() {
 
 function showToCookView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
+  currentMessage = `<h2>Your Recipes to Cook</h2>`;
+  messageBar.innerHTML = currentMessage;
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
-
 }
 
 function showHomeView() {
   hide(fullRecipeSection);
-  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = `<h2>Grains of Paradise</h2>`
+  currentMessage = `<h2>All Recipes</h2>`;
+  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = currentMessage;
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
@@ -92,7 +95,7 @@ function showFullRecipeView(id) {
 //card button event handlers
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
-  console.log(event.target.parentElement.className);
+  console.log(event);
   if (event.target.parentElement.classList.contains('favorite-recipe')) {
     determineFavoriteOrUnfavorite(id, event);
   } else if (event.target.parentElement.classList.contains('this-week-recipe')) {
@@ -105,6 +108,7 @@ function determineRecipeCardAction(event) {
 }
 
 function determineFavoriteOrUnfavorite(id, event) {
+  // console.log(event.target.parentElement.classList);
   let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
@@ -113,14 +117,15 @@ function determineFavoriteOrUnfavorite(id, event) {
     currentUser.addFavoriteRecipe(clickedRecipe);
     messageBar.innerHTML = `<h2>Favorited!</h2>`
     let timeout = setTimeout(function() {
-     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = currentMessage;
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   } else {
+    event.target.parentElement.classList.remove('icon-on');
     currentUser.removeFavoriteRecipe(clickedRecipe)
     messageBar.innerHTML = `<h2>Unfavorited!</h2>`
     let timeout = setTimeout(function() {
-     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = currentMessage;
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -135,14 +140,14 @@ function determineAddOrRemoveToCook(id, event) {
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
     messageBar.innerHTML = `<h2>Added to Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -152,7 +157,16 @@ function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
-  renderRecipes(uniqueFilteredRecipes);
+  console.log(uniqueFilteredRecipes);
+  if (uniqueFilteredRecipes.length) {
+    renderRecipes(uniqueFilteredRecipes);
+  } else {
+    console.log('no recipes');
+    main.innerHTML =
+    `
+      <p>Oops could not find any recipes that matched 😦</p>
+    `
+  }
   searchBar.value = '';
 }
 
@@ -244,7 +258,8 @@ function renderFullRecipeInfo(id) {
     return recipe.id === id;
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
-  messageBar.innerHTML = `<h2>${recipeToRenderInfo.name}</h2>`
+  currentMessage = `<h2>${recipeToRenderInfo.name}</h2>`
+  messageBar.innerHTML = currentMessage;
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
@@ -289,7 +304,6 @@ function renderFullRecipeInfo(id) {
     </article>
   `
 }
-
 
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
