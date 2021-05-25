@@ -118,7 +118,6 @@ function determineFavoriteOrUnfavorite(id, event) {
     messageBar.innerHTML = currentMessage;
     }, 1000);
   } else {
-    event.target.parentElement.classList.remove('icon-on');
     currentUser.removeFavoriteRecipe(clickedRecipe)
     messageBar.innerHTML = `<h2>Unfavorited!</h2>`
     let timeout = setTimeout(function() {
@@ -203,7 +202,14 @@ function searchByTag(e) {
   })
   let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
   hide(filterMenu);
-  renderRecipes(filteredRecipes);
+  if (filteredRecipes.length) {
+    renderRecipes(filteredRecipes);
+  } else {
+    mainRecipes.innerHTML =
+    `
+      <p class="error-message">Oops could not find any recipes that matched 😦</p>
+    `
+  }
 }
 
 //render functions
