@@ -133,9 +133,17 @@ function determineAddOrRemoveToCook(id, event) {
   if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
     event.target.parentElement.classList.add('icon-on');
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
+    messageBar.innerHTML = `<h2>Added to Recipes to Cook!</h2>`
+    let timeout = setTimeout(function() {
+     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
+    messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
+    let timeout = setTimeout(function() {
+     messageBar.innerHTML = `<h2>All Recipes</h2>`
+    }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
 }
