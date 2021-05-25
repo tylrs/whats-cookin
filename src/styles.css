@@ -78,8 +78,9 @@ button {
   font-size: 1.3rem;
 }
 
-.fa-heart:hover,
-.fa-calendar-alt:hover {
+.exit-card:hover,
+.heart-card:hover,
+.calendar-card:hover {
   color: var(--accent-red);
 }
 
@@ -310,6 +311,7 @@ main {
 
 .full-recipe-view .recipe-card-buttons-container {
   align-self: flex-start;
+  height: 80%;
 }
 
 .full-recipe-info {
