@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './styles.css';
 import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
@@ -199,7 +200,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="recipe image"/>
+        <img src=${recipe.image} alt="A picture of a dish called  ${recipeNames} "/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
@@ -236,7 +237,7 @@ function renderFullRecipeInfo(id) {
 
     <div class="recipe-card flex-row" id="${recipeToRender.id}">
 
-      <img src=${recipeToRender.image} alt="cookies"/>
+      <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
 
       <div class="recipe-card-buttons-container flex-column">
         <button class="${recipeToRenderInfo.favoriteButtonClass}">
