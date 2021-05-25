@@ -193,7 +193,6 @@ input[type="submit"]:hover {
 /* Main */
 main {
   height: 100vh;
-  width: 100vw;
   background: var(--bg-dark);
   align-items: center;
   overflow-y: scroll;
