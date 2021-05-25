@@ -1,18 +1,22 @@
-<h1 align="center">Grains of Paradise</h1>
+# Grains of Paradise
 
 Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
+
 ## Table of Contents
-* [Introduction](#introduction)
-* [Features](#Features)
-* [Technologies](#Technologies)
-* [Setup](#Setup/execution-Instructions)
-* [Contributors](#Contributors)
+
+- [Introduction](#introduction)
+- [Features](#Features)
+- [Technologies](#Technologies)
+- [Setup](#Setup/execution-Instructions)
+- [Contributors](#Contributors)
 
 ## Introduction
+
 This is a recipe tracking application designed to be viewed on a mobile device although it can also be viewed on larger screens.
 Users can view a list of recipes, favorite recipes, and choose recipes to cook. Users can filter recipes by tag, and can search for recipes based on ingredients or recipe name.
 
 ## Demonstration of Application
+
 Users can scroll through a list of recipes
 ![alt text](./gifs/recipe-scroll.gif)
 
@@ -35,6 +39,7 @@ Users can also filter recipes by tag
 ![alt text](./gifs/filter-menu.gif)
 
 ### Technologies
+
 - JavaScript
 - HTML
 - CSS
@@ -44,9 +49,17 @@ Users can also filter recipes by tag
 - Fetch API
 
 ## Setup/execution-instructions
-1) Clone copy of repo to your machine
-2) Using node from your command line run node index.js
+
+1. Clone copy of repo to your machine: `git@github.com:tylrs/whats-cookin.git`
+2. CD into the directory
+3. In the terminal, run `npm install`
+4. After that, in a different directory outside of the whats-cooking directory, clone this repo: `git@github.com:turingschool/What-s-cookin--starter-kit-API.git`
+5. CD into the directory then run `npm install` and then `npm start`
+6. In a different terminal, CD back into your whats-cooking directory
+7. Now run `npm start` and a link for the webpack will appear: `http://localhost:8080/`
+8. In your browser, set the view to `iPhone X` to see it in its mobile view.
 
 ## Contributors
+
 - [Taylor Galloway](https://github.com/tylrs)
 - [Andrew Vallejo](https://github.com/andrewvallejo)

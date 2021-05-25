@@ -78,8 +78,9 @@ button {
   font-size: 1.3rem;
 }
 
-.fa-heart:hover,
-.fa-calendar-alt:hover {
+.exit-card:hover,
+.heart-card:hover,
+.calendar-card:hover {
   color: var(--accent-red);
 }
 
@@ -197,7 +198,7 @@ input[type="submit"]:hover {
 
 /* Main */
 main {
-  height: 80vh;
+  height: 100vh;
   background: var(--bg-dark);
   align-items: center;
   overflow-y: scroll;
@@ -310,6 +311,7 @@ main {
 
 .full-recipe-view .recipe-card-buttons-container {
   align-self: flex-start;
+  height: 80%;
 }
 
 .full-recipe-info {

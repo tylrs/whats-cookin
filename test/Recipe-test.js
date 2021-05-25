@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const expect = require('chai').expect;
-const Recipe = require('../src/classes/Recipe');
+import { expect } from 'chai';
+import Recipe from '../src/classes/Recipe';
 import sampleData from '../test/sampleData';
 const data = sampleData.sampleData;
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import './styles.css';
 import apiCalls from './apiCalls';
 import Recipe from './classes/Recipe.js'
@@ -18,12 +19,14 @@ const messageBar = document.querySelector('#messageBar');
 const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
+const footer = document.querySelector('footer')
 
 //global variables
 let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
 let counter = 0;
+let isLoaded = false
 
 // event listeners
 window.onload = generateStartingInformation()
@@ -48,18 +51,17 @@ function generateStartingInformation() {
       })
       originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
       showHomeView();
+      isLoaded = true 
     })
 }
 
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>` 
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
 }
 
 function showToCookView() {
@@ -67,26 +69,22 @@ function showToCookView() {
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
+
 }
 
 function showHomeView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Hello ${currentUser.name}</h2>`
+  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = `<h2>Grains of Paradise</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
 }
+
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
-  hide(mainRecipes);
-  hide(searchBar);
-  hide(searchButton);
+  hide([footer, mainRecipes, searchBar, searchButton])
   show(fullRecipeSection);
 }
 
@@ -173,7 +171,6 @@ function searchByTag(e) {
     tag.checked ? tagSearchInfo.query.push(tag.value) : null
     tag.checked = false;
   })
-  hide(filterMenu)
   let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
   renderRecipes(filteredRecipes);
 }
@@ -199,7 +196,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="recipe image"/>
+        <img src=${recipe.image} alt="A picture of a dish called  ${recipeNames} "/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
@@ -225,7 +222,6 @@ function renderFullRecipeInfo(id) {
     return recipe.id === id;
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
-
   messageBar.innerHTML = `<h2>${recipeToRenderInfo.name}</h2>`
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
@@ -236,9 +232,12 @@ function renderFullRecipeInfo(id) {
 
     <div class="recipe-card flex-row" id="${recipeToRender.id}">
 
-      <img src=${recipeToRender.image} alt="cookies"/>
+      <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
 
       <div class="recipe-card-buttons-container flex-column">
+        <button class="${recipeToRenderInfo.exitButtonClass}">
+          <i class="exit-card fas fa-times"></i>
+        </button>
         <button class="${recipeToRenderInfo.favoriteButtonClass}">
           <i class="heart-card fas fa-heart"></i>
         </button>
@@ -269,6 +268,7 @@ function renderFullRecipeInfo(id) {
   `
 }
 
+
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
     return `<h4 class="tags flex-column">${tag}</h4>`
@@ -284,6 +284,7 @@ function convertRecipeToRender(recipeToRender) {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost = convertTotalCost(recipeToRender);
+  let exitButtonClass = showHomeView();
   let favoriteButtonClass = `favorite-recipe`
   let calendarButtonClass = `this-week-recipe`
   if (recipeToRender.isFavorited) {
@@ -292,7 +293,7 @@ function convertRecipeToRender(recipeToRender) {
   if (recipeToRender.isToBeCooked) {
     calendarButtonClass = `this-week-recipe icon-on`
   }
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, favoriteButtonClass, calendarButtonClass};
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, exitButtonClass,  favoriteButtonClass, calendarButtonClass};
   return recipeToRenderInfo;
 }
 
@@ -319,9 +320,21 @@ function toggleFilterMenu() {
 }
 
 function show(e) {
-  e.classList.remove('hidden')
+  if (e.length > 0) {
+    e.forEach((element) => {
+      element.classList.remove('hidden')
+    })
+  } else {
+    e.classList.remove('hidden')
+  }
 }
 
 function hide(e) {
-  e.classList.add('hidden')
+  if (e.length > 0) {
+    e.forEach((element) => {
+      element.classList.add('hidden')
+    })
+  } else {
+    e.classList.add('hidden')
+  }
 }
