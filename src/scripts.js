@@ -20,6 +20,7 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 const footer = document.querySelector('footer')
+// const exitButton = document.querySelector('#exitButton')
 
 //global variables
 let currentRecipeRepo;
@@ -51,14 +52,14 @@ function generateStartingInformation() {
       })
       originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
       showHomeView();
-      isLoaded = true 
+      isLoaded = true
     })
 }
 
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
-  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>` 
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>`
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
@@ -91,10 +92,13 @@ function showFullRecipeView(id) {
 //card button event handlers
 function determineRecipeCardAction(event) {
   let id = parseInt(event.target.closest('.recipe-card').id);
+  console.log(event.target.parentElement.className);
   if (event.target.parentElement.classList.contains('favorite-recipe')) {
     determineFavoriteOrUnfavorite(id, event);
   } else if (event.target.parentElement.classList.contains('this-week-recipe')) {
     determineAddOrRemoveToCook(id, event);
+  } else if (event.target.parentElement.className === 'exit-button') {
+    showHomeView();
   } else if (id) {
     showFullRecipeView(id);
   }
@@ -235,7 +239,7 @@ function renderFullRecipeInfo(id) {
       <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
 
       <div class="recipe-card-buttons-container flex-column">
-        <button class="${recipeToRenderInfo.exitButtonClass}">
+        <button class="exit-button" id="exitButton">
           <i class="exit-card fas fa-times"></i>
         </button>
         <button class="${recipeToRenderInfo.favoriteButtonClass}">
