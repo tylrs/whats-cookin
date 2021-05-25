@@ -93,8 +93,10 @@ function showFullRecipeView(id) {
 
 //card button event handlers
 function determineRecipeCardAction(event) {
-  let id = parseInt(event.target.closest('.recipe-card').id);
-  console.log(event);
+  let id = 0;
+  if (event.target.closest('.recipe-card')) {
+    id = parseInt(event.target.closest('.recipe-card').id);
+  }
   if (event.target.parentElement.classList.contains('favorite-recipe')) {
     determineFavoriteOrUnfavorite(id, event);
   } else if (event.target.parentElement.classList.contains('this-week-recipe')) {
