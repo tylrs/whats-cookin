@@ -78,12 +78,6 @@ button {
   font-size: 1.3rem;
 }
 
-.exit-card:hover,
-.heart-card:hover,
-.calendar-card:hover {
-  color: var(--accent-red);
-}
-
 .icon-on {
   color: var(--accent-red);
 }
@@ -373,4 +367,24 @@ footer {
 input:checked + .tags {
   background: var(--accent-blue);
   color: var(--accent-red);
+}
+
+@media (min-width: 376px) {
+  .main-recipes {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  header,
+  footer {
+    height: 15vh;
+  }
+  .exit-card:hover,
+  .heart-card:hover,
+  .calendar-card:hover {
+    color: var(--accent-red);
+  }
+  .message-bar {
+    height: 7vh;
+  }
 }
