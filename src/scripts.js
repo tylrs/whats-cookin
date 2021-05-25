@@ -61,10 +61,7 @@ function showFavoritesView() {
   messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>` 
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
-  show(footer)
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
 }
 
 function showToCookView() {
@@ -72,10 +69,8 @@ function showToCookView() {
   messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
-  show(footer)
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
+
 }
 
 function showHomeView() {
@@ -83,19 +78,13 @@ function showHomeView() {
   !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = `<h2>Grains of Paradise</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
-  show(footer)
-  show(mainRecipes);
-  show(searchBar);
-  show(searchButton);
+  show([footer, mainRecipes, searchBar, searchButton])
 }
 
 
 function showFullRecipeView(id) {
   renderFullRecipeInfo(id);
-  hide(footer)
-  hide(mainRecipes);
-  hide(searchBar);
-  hide(searchButton);
+  hide([footer, mainRecipes, searchBar, searchButton])
   show(fullRecipeSection);
 }
 
@@ -246,6 +235,9 @@ function renderFullRecipeInfo(id) {
       <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
 
       <div class="recipe-card-buttons-container flex-column">
+        <button class="${recipeToRenderInfo.exitButtonClass}">
+          <i class="exit-card fas fa-times"></i>
+        </button>
         <button class="${recipeToRenderInfo.favoriteButtonClass}">
           <i class="heart-card fas fa-heart"></i>
         </button>
@@ -292,6 +284,7 @@ function convertRecipeToRender(recipeToRender) {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost = convertTotalCost(recipeToRender);
+  let exitButtonClass = showHomeView();
   let favoriteButtonClass = `favorite-recipe`
   let calendarButtonClass = `this-week-recipe`
   if (recipeToRender.isFavorited) {
@@ -300,7 +293,7 @@ function convertRecipeToRender(recipeToRender) {
   if (recipeToRender.isToBeCooked) {
     calendarButtonClass = `this-week-recipe icon-on`
   }
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, favoriteButtonClass, calendarButtonClass};
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, exitButtonClass,  favoriteButtonClass, calendarButtonClass};
   return recipeToRenderInfo;
 }
 
@@ -327,9 +320,21 @@ function toggleFilterMenu() {
 }
 
 function show(e) {
-  e.classList.remove('hidden')
+  if (e.length > 0) {
+    e.forEach((element) => {
+      element.classList.remove('hidden')
+    })
+  } else {
+    e.classList.remove('hidden')
+  }
 }
 
 function hide(e) {
-  e.classList.add('hidden')
+  if (e.length > 0) {
+    e.forEach((element) => {
+      element.classList.add('hidden')
+    })
+  } else {
+    e.classList.add('hidden')
+  }
 }
