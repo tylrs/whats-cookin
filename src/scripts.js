@@ -20,7 +20,6 @@ const favoritesViewButton = document.querySelector('#favoritesViewButton');
 const toCookViewButton = document.querySelector('#toCookViewButton');
 const homeButton = document.querySelector('#homeView')
 const footer = document.querySelector('footer')
-// const exitButton = document.querySelector('#exitButton')
 
 //global variables
 let currentRecipeRepo;
@@ -108,7 +107,6 @@ function determineRecipeCardAction(event) {
 }
 
 function determineFavoriteOrUnfavorite(id, event) {
-  // console.log(event.target.parentElement.classList);
   let clickedRecipe = currentRecipeRepo.recipes.find((recipe) => {
     return recipe.id === id;
   })
@@ -119,7 +117,6 @@ function determineFavoriteOrUnfavorite(id, event) {
     let timeout = setTimeout(function() {
     messageBar.innerHTML = currentMessage;
     }, 1000);
-    renderRecipes(currentRecipeRepo.recipes);
   } else {
     event.target.parentElement.classList.remove('icon-on');
     currentUser.removeFavoriteRecipe(clickedRecipe)
@@ -142,7 +139,6 @@ function determineAddOrRemoveToCook(id, event) {
     let timeout = setTimeout(function() {
     messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
-    renderRecipes(currentRecipeRepo.recipes);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
@@ -161,10 +157,9 @@ function searchThroughRecipes() {
   if (uniqueFilteredRecipes.length) {
     renderRecipes(uniqueFilteredRecipes);
   } else {
-    console.log('no recipes');
-    main.innerHTML =
+    mainRecipes.innerHTML =
     `
-      <p>Oops could not find any recipes that matched 😦</p>
+      <p class="error-message">Oops could not find any recipes that matched 😦</p>
     `
   }
   searchBar.value = '';
@@ -232,7 +227,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="A picture of a dish called  ${recipeNames} "/>
+        <img src=${recipe.image} alt="A picture of a dish called ${recipeNames}"/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
@@ -320,7 +315,6 @@ function convertRecipeToRender(recipeToRender) {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost = convertTotalCost(recipeToRender);
-  let exitButtonClass = showHomeView();
   let favoriteButtonClass = `favorite-recipe`
   let calendarButtonClass = `this-week-recipe`
   if (recipeToRender.isFavorited) {
@@ -329,7 +323,7 @@ function convertRecipeToRender(recipeToRender) {
   if (recipeToRender.isToBeCooked) {
     calendarButtonClass = `this-week-recipe icon-on`
   }
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, exitButtonClass,  favoriteButtonClass, calendarButtonClass};
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, favoriteButtonClass, calendarButtonClass};
   return recipeToRenderInfo;
 }
 
