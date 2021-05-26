@@ -133,7 +133,7 @@ h1 i {
   align-self: flex-start;
   border-right: 2px solid var(--accent-grey);
   width: 60%;
-  height: 38.6rem;
+  height: 40.5rem;
   padding: 0.5rem 0 0 0.5rem;
   background: var(--transp-bg-light);
   font-size: 1rem;
@@ -304,7 +304,11 @@ main {
 
 .full-recipe-view .recipe-card-buttons-container {
   align-self: flex-start;
-  height: 80%;
+  justify-content: space-evenly;
+  border-radius: 15px 0 0 0;
+  height: 100%;
+  padding-bottom: 1rem;
+  background: var(--transp-bg-light);
 }
 
 .full-recipe-info {
@@ -327,9 +331,9 @@ main {
 .tag-container-full {
   align-content: center;
   justify-content: center;
+  border-bottom: var(--bg-light) 3px solid;
   z-index: 2;
   height: 10%;
-  background: var(--transp-bg-light);
 }
 
 .tag-container-full .tags {
@@ -378,19 +382,84 @@ input:checked + .tags {
   footer {
     height: 15vh;
   }
-  .recipe-card {
-    margin-right: 1rem;
-  }
-  .exit-card:hover,
-  .heart-card:hover,
-  .calendar-card:hover {
-    color: var(--accent-red);
+  .hidden {
+    display: none;
   }
   .message-bar {
     height: 7vh;
   }
+  .message-bar h2 {
+    font-size: 1.8rem;
+  }
 
-  .hidden {
-    display: none;
+  .filter-menu {
+    align-items: center;
+    height: 72.9vh;
+    min-width: 25%;
+  }
+
+  fieldset {
+    height: auto;
+    width: auto;
+  }
+
+  li {
+    margin-top: 3rem;
+  }
+  .recipe-card {
+    margin-right: 1rem;
+  }
+
+  .recipe-name {
+    font-size: 1vw;
+  }
+  .total-cost {
+    justify-content: flex-end;
+    background: var(--bg-dark);
+  }
+
+  .total-cost p,
+  .total-cost h5,
+  .full-recipe-info {
+    font-size: 1.5rem;
+  }
+
+  .full-recipe-view .recipe-card {
+    align-self: center;
+    margin-right: 0;
+    height: 15rem;
+    width: 85%;
+  }
+
+  .full-recipe-view .recipe-card img {
+    background: center center/cover no-repeat;
+  }
+
+  .tag-container-full {
+    height: 15%;
+  }
+
+  .tag-container-full .tags {
+    font-size: 1rem;
+  }
+
+  footer .icon-small,
+  footer .icon {
+    font-size: 2rem;
+  }
+
+  .search-bar {
+    height: 3rem;
+    width: 80%;
+    font-size: 1.5rem;
+  }
+
+  h1:hover,
+  .exit-card:hover,
+  .heart-card:hover,
+  .calendar-card:hover,
+  .filter-btn:hover,
+  .search-btn:hover {
+    color: var(--accent-red);
   }
 }
