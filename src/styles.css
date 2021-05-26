@@ -87,7 +87,7 @@ header {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px var(--accent-grey) solid;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
 }
 
 .filter-logo-container {
@@ -378,10 +378,7 @@ input:checked + .tags {
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  header,
-  footer {
-    height: 15vh;
-  }
+
   .hidden {
     display: none;
   }
@@ -394,12 +391,11 @@ input:checked + .tags {
 
   .filter-menu {
     align-items: center;
-    height: 72.9vh;
-    min-width: 25%;
+    height: 78.3vh;
+    max-width: 50%;
   }
 
   fieldset {
-    height: auto;
     width: auto;
   }
 
@@ -410,9 +406,6 @@ input:checked + .tags {
     margin-right: 1rem;
   }
 
-  .recipe-name {
-    font-size: 1vw;
-  }
   .total-cost {
     justify-content: flex-end;
     background: var(--bg-dark);
