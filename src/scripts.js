@@ -117,13 +117,13 @@ function determineFavoriteOrUnfavorite(id, event) {
     currentUser.addFavoriteRecipe(clickedRecipe);
     messageBar.innerHTML = `<h2>Favorited!</h2>`
     let timeout = setTimeout(function() {
-    messageBar.innerHTML = currentMessage;
+      messageBar.innerHTML = currentMessage;
     }, 1000);
   } else {
     currentUser.removeFavoriteRecipe(clickedRecipe)
     messageBar.innerHTML = `<h2>Unfavorited!</h2>`
     let timeout = setTimeout(function() {
-    messageBar.innerHTML = currentMessage;
+      messageBar.innerHTML = currentMessage;
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -138,13 +138,13 @@ function determineAddOrRemoveToCook(id, event) {
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
     messageBar.innerHTML = `<h2>Added to Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-    messageBar.innerHTML = `<h2>All Recipes</h2>`
+      messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-    messageBar.innerHTML = `<h2>All Recipes</h2>`
+      messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -159,7 +159,7 @@ function searchThroughRecipes() {
   } else {
     mainRecipes.innerHTML =
     `
-      <p class="error-message">Oops could not find any recipes that matched 😦</p>
+      <p class="error-message">Oops could not find any recipes that matched!</p>
     `
   }
   searchBar.value = '';
