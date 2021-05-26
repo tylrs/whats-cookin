@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import './styles.css';
-import apiCalls from './apiCalls';
+import apiCalls from './src/apiCalls';
 import Recipe from './classes/Recipe.js'
 import RecipeRepository from './classes/RecipeRepository.js'
 import User from './classes/User.js'
@@ -26,8 +26,7 @@ let currentRecipeRepo;
 let originalRecipeRepo;
 let currentUser;
 let counter = 0;
-let isLoaded = false;
-let currentMessage;
+let isLoaded = false
 
 // event listeners
 window.onload = generateStartingInformation()
@@ -52,15 +51,14 @@ function generateStartingInformation() {
       })
       originalRecipeRepo = new RecipeRepository(formattedRecipes, ingredients);
       showHomeView();
-      isLoaded = true;
+      isLoaded = true 
     })
 }
 
 //switch views functions
 function showFavoritesView() {
   hide(fullRecipeSection);
-  currentMessage = `<h2>Your Favorite Recipes</h2>`;
-  messageBar.innerHTML = currentMessage;
+  messageBar.innerHTML = `<h2>Your Favorite Recipes</h2>` 
   currentRecipeRepo = currentUser.favoriteRecipes;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
@@ -68,17 +66,16 @@ function showFavoritesView() {
 
 function showToCookView() {
   hide(fullRecipeSection);
-  currentMessage = `<h2>Your Recipes to Cook</h2>`;
-  messageBar.innerHTML = currentMessage;
+  messageBar.innerHTML = `<h2>Your Recipes to Cook</h2>`
   currentRecipeRepo = currentUser.recipesToCook;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
+
 }
 
 function showHomeView() {
   hide(fullRecipeSection);
-  currentMessage = `<h2>All Recipes</h2>`;
-  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = currentMessage;
+  !isLoaded ? messageBar.innerHTML = `<h2>Hello, ${currentUser.name}</h2>` : messageBar.innerHTML = `<h2>Grains of Paradise</h2>`
   currentRecipeRepo = originalRecipeRepo;
   renderRecipes(currentRecipeRepo.recipes);
   show([footer, mainRecipes, searchBar, searchButton])
@@ -93,16 +90,11 @@ function showFullRecipeView(id) {
 
 //card button event handlers
 function determineRecipeCardAction(event) {
-  let id = 0;
-  if (event.target.closest('.recipe-card')) {
-    id = parseInt(event.target.closest('.recipe-card').id);
-  }
+  let id = parseInt(event.target.closest('.recipe-card').id);
   if (event.target.parentElement.classList.contains('favorite-recipe')) {
     determineFavoriteOrUnfavorite(id, event);
   } else if (event.target.parentElement.classList.contains('this-week-recipe')) {
     determineAddOrRemoveToCook(id, event);
-  } else if (event.target.parentElement.className === 'exit-button') {
-    showHomeView();
   } else if (id) {
     showFullRecipeView(id);
   }
@@ -115,16 +107,8 @@ function determineFavoriteOrUnfavorite(id, event) {
   if (!currentUser.favoriteRecipes.recipes.includes(clickedRecipe)) {
     event.target.parentElement.classList.add('icon-on');
     currentUser.addFavoriteRecipe(clickedRecipe);
-    messageBar.innerHTML = `<h2>Favorited!</h2>`
-    let timeout = setTimeout(function() {
-    messageBar.innerHTML = currentMessage;
-    }, 1000);
   } else {
     currentUser.removeFavoriteRecipe(clickedRecipe)
-    messageBar.innerHTML = `<h2>Unfavorited!</h2>`
-    let timeout = setTimeout(function() {
-    messageBar.innerHTML = currentMessage;
-    }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
 }
@@ -136,16 +120,8 @@ function determineAddOrRemoveToCook(id, event) {
   if (!currentUser.recipesToCook.recipes.includes(clickedRecipe)) {
     event.target.parentElement.classList.add('icon-on');
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
-    messageBar.innerHTML = `<h2>Added to Recipes to Cook!</h2>`
-    let timeout = setTimeout(function() {
-    messageBar.innerHTML = `<h2>All Recipes</h2>`
-    }, 1000);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
-    messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
-    let timeout = setTimeout(function() {
-    messageBar.innerHTML = `<h2>All Recipes</h2>`
-    }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
 }
@@ -154,14 +130,7 @@ function searchThroughRecipes() {
   let userSearch = searchBar.value;
   let convertedUserSearch = convertUserInfo(userSearch)
   let uniqueFilteredRecipes = generateFilteredRecipes(convertedUserSearch);
-  if (uniqueFilteredRecipes.length) {
-    renderRecipes(uniqueFilteredRecipes);
-  } else {
-    mainRecipes.innerHTML =
-    `
-      <p class="error-message">Oops could not find any recipes that matched 😦</p>
-    `
-  }
+  renderRecipes(uniqueFilteredRecipes);
   searchBar.value = '';
 }
 
@@ -203,15 +172,7 @@ function searchByTag(e) {
     tag.checked = false;
   })
   let filteredRecipes = currentRecipeRepo.filterRecipes(tagSearchInfo);
-  hide(filterMenu);
-  if (filteredRecipes.length) {
-    renderRecipes(filteredRecipes);
-  } else {
-    mainRecipes.innerHTML =
-    `
-      <p class="error-message">Oops could not find any recipes that matched 😦</p>
-    `
-  }
+  renderRecipes(filteredRecipes);
 }
 
 //render functions
@@ -235,7 +196,7 @@ function renderRecipes(recipes) {
     mainRecipes.innerHTML +=
     `
       <article class="recipe-card flex-row" id="${recipe.id}" >
-        <img src=${recipe.image} alt="A picture of a dish called ${recipeNames}"/>
+        <img src=${recipe.image} alt="A picture of a dish called  ${recipeNames} "/>
         <div class="recipe-card-info flex-column">
          <div class="recipe-tag-container flex-column">
             <p class="recipe-name">${recipeNames}</p>
@@ -261,46 +222,52 @@ function renderFullRecipeInfo(id) {
     return recipe.id === id;
   })
   let recipeToRenderInfo = convertRecipeToRender(recipeToRender);
-  currentMessage = `<h2>${recipeToRenderInfo.name}</h2>`
-  messageBar.innerHTML = currentMessage;
+  messageBar.innerHTML = `<h2>${recipeToRenderInfo.name}</h2>`
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
-    </div>
-    <article class="recipe-card-all flex-column" >
-      <div class="recipe-card flex-row" id="${recipeToRender.id}">
-        <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
-        <div class="recipe-card-buttons-container flex-column">
-          <button class="exit-button" id="exitButton">
-            <i class="exit-card fas fa-times"></i>
-          </button>
-          <button class="${recipeToRenderInfo.favoriteButtonClass}">
-            <i class="heart-card fas fa-heart"></i>
-          </button>
-          <button class="${recipeToRenderInfo.calendarButtonClass}">
-            <i class="calendar-card fas fa-calendar-alt"></i>
-          </button>
-        </div>
-        <div class="total-cost flex-row" id="totalCost">
-          <h5>Estimated Cost </h5>
-          <p>${recipeToRenderInfo.totalCost}</p>
-        </div>
+  </div>
+
+    <article  class="recipe-card-all flex-column" >
+
+    <div class="recipe-card flex-row" id="${recipeToRender.id}">
+
+      <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
+
+      <div class="recipe-card-buttons-container flex-column">
+        <button class="${recipeToRenderInfo.exitButtonClass}">
+          <i class="exit-card fas fa-times"></i>
+        </button>
+        <button class="${recipeToRenderInfo.favoriteButtonClass}">
+          <i class="heart-card fas fa-heart"></i>
+        </button>
+        <button class="${recipeToRenderInfo.calendarButtonClass}">
+          <i class="calendar-card fas fa-calendar-alt"></i>
+        </button>
       </div>
-      <section class="full-recipe-info flex-column" id="fullRecipeInfo">
-        <div class="recipePriceContainer flex-row">
-          <div class="ingredients-info" id=ingredientsInfo>
-            <h4>Ingredients</h4>
-            <p> ${recipeToRenderInfo.ingredients}</p>
-          </div>
-        </div>
-        <div class="instructions-info flex-column" id="totalCost">
-          <h4>Instructions</h4>
-          <p>${recipeToRenderInfo.fixedInstructions}</p>
-        </div>
-      </section>
+      <div class="total-cost flex-row" id="totalCost">
+      <h5>Estimated Cost </h5>
+      <p>${recipeToRenderInfo.totalCost}</p>
+    </div>
+      </div>
+
+    <section class="full-recipe-info flex-column" id="fullRecipeInfo">
+    <div class="recipePriceContainer flex-row">
+      <div class="ingredients-info" id=ingredientsInfo>
+        <h4>Ingredients</h4>
+        <p> ${recipeToRenderInfo.ingredients}</p>
+      </div>
+
+      </div>
+      <div class="instructions-info flex-column" id="totalCost">
+        <h4>Instructions</h4>
+        <p>${recipeToRenderInfo.fixedInstructions}</p>
+      </div>
+    </section>
     </article>
   `
 }
+
 
 function convertRecipeToRender(recipeToRender) {
   let tags = recipeToRender.tags.map((tag) => {
@@ -317,6 +284,7 @@ function convertRecipeToRender(recipeToRender) {
     return name[0].toUpperCase() + name.substring(1);
   }).join(' ');
   let totalCost = convertTotalCost(recipeToRender);
+  let exitButtonClass = showHomeView();
   let favoriteButtonClass = `favorite-recipe`
   let calendarButtonClass = `this-week-recipe`
   if (recipeToRender.isFavorited) {
@@ -325,7 +293,7 @@ function convertRecipeToRender(recipeToRender) {
   if (recipeToRender.isToBeCooked) {
     calendarButtonClass = `this-week-recipe icon-on`
   }
-  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, favoriteButtonClass, calendarButtonClass};
+  let recipeToRenderInfo = {tags, ingredients, fixedInstructions, name, totalCost, exitButtonClass,  favoriteButtonClass, calendarButtonClass};
   return recipeToRenderInfo;
 }
 
