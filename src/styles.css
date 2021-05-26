@@ -133,7 +133,7 @@ h1 i {
   align-self: flex-start;
   border-right: 2px solid var(--accent-grey);
   width: 60%;
-  height: 40.5rem;
+  height: 39.9rem;
   padding: 0.5rem 0 0 0.5rem;
   background: var(--transp-bg-light);
   font-size: 1rem;
@@ -196,6 +196,17 @@ main {
   overflow-y: scroll;
   height: 100vh;
   background: var(--bg-dark);
+}
+
+.error-view {
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 4rem;
 }
 
 /* Recipe Card */
@@ -389,18 +400,26 @@ input:checked + .tags {
     font-size: 1.8rem;
   }
 
+  .error-view {
+    padding: 0 1rem;
+  }
+
   .filter-menu {
     align-items: center;
-    height: 78.3vh;
-    max-width: 50%;
+    height: 77.8%;
+    max-width: 40%;
+    padding: 0;
+    padding-bottom: 1rem;
   }
 
   fieldset {
     width: auto;
+    max-height: 80%;
+    margin-top: 0;
   }
 
   li {
-    margin-top: 3rem;
+    padding: 0;
   }
   .recipe-card {
     margin-right: 1rem;
