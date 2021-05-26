@@ -201,10 +201,10 @@ main {
 .error-view {
   justify-content: center;
   align-content: center;
-  height: 100%;
 }
 
 .error-message {
+  margin: 3rem;
   text-align: center;
   font-size: 4rem;
 }
@@ -464,6 +464,10 @@ input:checked + .tags {
     height: 3rem;
     width: 80%;
     font-size: 1.5rem;
+  }
+
+  .error-message {
+    margin: 10rem;
   }
 
   h1:hover,
