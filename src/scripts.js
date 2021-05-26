@@ -117,13 +117,13 @@ function determineFavoriteOrUnfavorite(id, event) {
     currentUser.addFavoriteRecipe(clickedRecipe);
     messageBar.innerHTML = `<h2>Favorited!</h2>`
     let timeout = setTimeout(function() {
-      messageBar.innerHTML = currentMessage;
+    messageBar.innerHTML = currentMessage;
     }, 1000);
   } else {
     currentUser.removeFavoriteRecipe(clickedRecipe)
     messageBar.innerHTML = `<h2>Unfavorited!</h2>`
     let timeout = setTimeout(function() {
-      messageBar.innerHTML = currentMessage;
+    messageBar.innerHTML = currentMessage;
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -138,13 +138,13 @@ function determineAddOrRemoveToCook(id, event) {
     currentUser.addRecipeToCookThisWeek(clickedRecipe);
     messageBar.innerHTML = `<h2>Added to Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-      messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
   } else {
     currentUser.removeRecipeToCookThisWeek(clickedRecipe)
     messageBar.innerHTML = `<h2>Removed from Recipes to Cook!</h2>`
     let timeout = setTimeout(function() {
-      messageBar.innerHTML = `<h2>All Recipes</h2>`
+    messageBar.innerHTML = `<h2>All Recipes</h2>`
     }, 1000);
     renderRecipes(currentRecipeRepo.recipes);
   }
@@ -159,7 +159,7 @@ function searchThroughRecipes() {
   } else {
     mainRecipes.innerHTML =
     `
-      <p class="error-message">Oops could not find any recipes that matched!</p>
+      <p class="error-message">Oops could not find any recipes that matched 😦</p>
     `
   }
   searchBar.value = '';
@@ -266,44 +266,38 @@ function renderFullRecipeInfo(id) {
   fullRecipeSection.innerHTML =
   ` <div class="tag-container-full flex-row">
     ${recipeToRenderInfo.tags}
-  </div>
-
-    <article  class="recipe-card-all flex-column" >
-
-    <div class="recipe-card flex-row" id="${recipeToRender.id}">
-
-      <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
-
-      <div class="recipe-card-buttons-container flex-column">
-        <button class="exit-button" id="exitButton">
-          <i class="exit-card fas fa-times"></i>
-        </button>
-        <button class="${recipeToRenderInfo.favoriteButtonClass}">
-          <i class="heart-card fas fa-heart"></i>
-        </button>
-        <button class="${recipeToRenderInfo.calendarButtonClass}">
-          <i class="calendar-card fas fa-calendar-alt"></i>
-        </button>
-      </div>
-      <div class="total-cost flex-row" id="totalCost">
-      <h5>Estimated Cost </h5>
-      <p>${recipeToRenderInfo.totalCost}</p>
     </div>
+    <article class="recipe-card-all flex-column" >
+      <div class="recipe-card flex-row" id="${recipeToRender.id}">
+        <img src=${recipeToRender.image} alt="A picture of a dish called ${recipeToRenderInfo.name}"/>
+        <div class="recipe-card-buttons-container flex-column">
+          <button class="exit-button" id="exitButton">
+            <i class="exit-card fas fa-times"></i>
+          </button>
+          <button class="${recipeToRenderInfo.favoriteButtonClass}">
+            <i class="heart-card fas fa-heart"></i>
+          </button>
+          <button class="${recipeToRenderInfo.calendarButtonClass}">
+            <i class="calendar-card fas fa-calendar-alt"></i>
+          </button>
+        </div>
+        <div class="total-cost flex-row" id="totalCost">
+          <h5>Estimated Cost </h5>
+          <p>${recipeToRenderInfo.totalCost}</p>
+        </div>
       </div>
-
-    <section class="full-recipe-info flex-column" id="fullRecipeInfo">
-    <div class="recipePriceContainer flex-row">
-      <div class="ingredients-info" id=ingredientsInfo>
-        <h4>Ingredients</h4>
-        <p> ${recipeToRenderInfo.ingredients}</p>
-      </div>
-
-      </div>
-      <div class="instructions-info flex-column" id="totalCost">
-        <h4>Instructions</h4>
-        <p>${recipeToRenderInfo.fixedInstructions}</p>
-      </div>
-    </section>
+      <section class="full-recipe-info flex-column" id="fullRecipeInfo">
+        <div class="recipePriceContainer flex-row">
+          <div class="ingredients-info" id=ingredientsInfo>
+            <h4>Ingredients</h4>
+            <p> ${recipeToRenderInfo.ingredients}</p>
+          </div>
+        </div>
+        <div class="instructions-info flex-column" id="totalCost">
+          <h4>Instructions</h4>
+          <p>${recipeToRenderInfo.fixedInstructions}</p>
+        </div>
+      </section>
     </article>
   `
 }

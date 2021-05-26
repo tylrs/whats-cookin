@@ -1,309 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="X-UA-Compatible"
-      content="IE=edge"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Seaweed+Script&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>Grains of paradise</title>
-  </head>
-  <body class="flex-column">
-    <header class="flex-row">
-      <div class="logo-container flex-row">
-        <h1 class="flex-column" id="homeView">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=KoHo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Seaweed+Script&display=swap" rel="stylesheet" />
+	<title>Grains of paradise</title>
+</head>
+<body class="flex-column">
+	<header class="flex-row">
+		<div class="logo-container flex-row">
+			<h1 class="flex-column" id="homeView">
           <p>GRAINS</p>
           <p>of</p>
           <p>Paradise</p>
           <i class="bread fas fa-bread-slice"></i>
-        </h1>
-      </div>
-      <button id="toCookViewButton">
-        <i
-          class="calendar-card icon fas fa-calendar-alt"
-        ></i>
-      </button>
-      <button id="favoritesViewButton">
-        <i
-          class="heart-card icon fas fa-heart"
-        ></i>
-      </button>
-    </header>
-    <div
-      class="message-bar flex-row"
-      id="messageBar"
-    ></div>
-    <main class="flex-column" id="mainSection">
-      <section
-        id="mainRecipes"
-        class="flex-column error-view display-desktop"
-      ></section>
-      <section
-        class="full-recipe-view hidden flex-column"
-        id="fullRecipeView"
-      ></section>
-      <section
-        id="filterMenu"
-        class="filter-menu hidden"
-      >
-        <form action="#">
-          <fieldset
-            id="filterForm"
-            class="flex-row"
-          >
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="antipasti"
-                value="antipasti"
-              />
-              <label for="antipasti" class="tags"
-                >Antipasti</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="starter"
-                value="starter"
-              />
-              <label for="starter" class="tags"
-                >Starter</label
-              >
-            </li>
-
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="snack"
-                value="snack"
-              /><label for="snack" class="tags"
-                >Snack</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="appetizer"
-                value="appetizer"
-              />
-              <label for="appetizer" class="tags"
-                >Appetizer</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="antipasto"
-                value="antipasto"
-              />
-              <label for="antipasto" class="tags"
-                >Antipasto</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="horDoeuvre"
-                value="hor d'oeuvre"
-              />
-              <label for="horDoeuvre" class="tags"
-                >Hor d'oeuvre’</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="lunch"
-                value="lunch"
-              />
-              <label for="lunch" class="tags"
-                >Lunch</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="mainCourse"
-                value="main course"
-              />
-              <label for="mainCourse" class="tags"
-                >Main course</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="mainDish"
-                value="main dish"
-              />
-              <label for="mainDish" class="tags"
-                >Main dish</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="dinner"
-                value="dinner"
-              />
-              <label for="dinner" class="tags"
-                >Dinner</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="sauce"
-                value="sauce"
-              />
-              <label for="sauce" class="tags"
-                >Sauce</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="sideDish"
-                value="side dish"
-              />
-              <label for="sideDish" class="tags"
-                >Side dish</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="morningMeal"
-                value="morning meal"
-              />
-              <label
-                for="morningMeal"
-                class="tags"
-                >Morning meal</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="brunch"
-                value="brunch"
-              />
-              <label for="brunch" class="tags"
-                >Brunch</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="breakfast"
-                value="breakfast"
-              />
-              <label for="breakfast" class="tags"
-                >Breakfast</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="salad"
-                value="salad"
-              />
-              <label for="salad" class="tags"
-                >Salad</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="condiment"
-                value="condiment"
-              />
-              <label for="condiment" class="tags"
-                >Condiment</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="dip"
-                value="dip"
-              />
-              <label for="dip" class="tags"
-                >Dip</label
-              >
-            </li>
-            <li class="flex-row">
-              <input
-                type="checkbox"
-                name="tags"
-                id="spread"
-                value="spread"
-              />
-              <label for="spread" class="tags"
-                >Spread</label
-              >
-            </li>
-            <input
-              id="filterSubmitBtn"
-              type="submit"
-              value="FILTER"
-              class="btn"
-            />
-          </fieldset>
-        </form>
-      </section>
-    </main>
-    <footer class="flex-row">
-      <i
-        id="filter"
-        class="filter-btn icon icon-small fas fa-filter"
-      ></i>
-      <input
-        type="text"
-        placeholder="Search by recipe name or ingredients"
-        class="search-bar"
-        id="searchBar"
-      />
-      <i
-        class="search-btn icon fas fa-search"
-        id="searchButton"
-      ></i>
-    </footer>
-  </body>
+        </h1> </div>
+		<button id="toCookViewButton"> <i class="calendar-card icon fas fa-calendar-alt"></i> </button>
+		<button id="favoritesViewButton"> <i class="heart-card icon fas fa-heart"></i> </button>
+	</header>
+	<div class="message-bar flex-row" id="messageBar"></div>
+	<main class="flex-column" id="mainSection">
+		<section id="mainRecipes" class="flex-column error-view display-desktop"></section>
+		<section class="full-recipe-view hidden flex-column" id="fullRecipeView"></section>
+		<section id="filterMenu" class="filter-menu hidden">
+			<form action="#">
+				<fieldset id="filterForm" class="flex-row">
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="antipasti" value="antipasti" />
+						<label for="antipasti" class="tags">Antipasti</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="starter" value="starter" />
+						<label for="starter" class="tags">Starter</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="snack" value="snack" />
+						<label for="snack" class="tags">Snack</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="appetizer" value="appetizer" />
+						<label for="appetizer" class="tags">Appetizer</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="antipasto" value="antipasto" />
+						<label for="antipasto" class="tags">Antipasto</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="horDoeuvre" value="hor d'oeuvre" />
+						<label for="horDoeuvre" class="tags">Hor d'oeuvre'</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="lunch" value="lunch" />
+						<label for="lunch" class="tags">Lunch</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="mainCourse" value="main course" />
+						<label for="mainCourse" class="tags">Main course</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="mainDish" value="main dish" />
+						<label for="mainDish" class="tags">Main dish</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="dinner" value="dinner" />
+						<label for="dinner" class="tags">Dinner</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="sauce" value="sauce" />
+						<label for="sauce" class="tags">Sauce</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="sideDish" value="side dish" />
+						<label for="sideDish" class="tags">Side dish</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="morningMeal" value="morning meal" />
+						<label for="morningMeal" class="tags">Morning meal</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="brunch" value="brunch" />
+						<label for="brunch" class="tags">Brunch</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="breakfast" value="breakfast" />
+						<label for="breakfast" class="tags">Breakfast</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="salad" value="salad" />
+						<label for="salad" class="tags">Salad</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="condiment" value="condiment" />
+						<label for="condiment" class="tags">Condiment</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="dip" value="dip" />
+						<label for="dip" class="tags">Dip</label>
+					</li>
+					<li class="flex-row">
+						<input type="checkbox" name="tags" id="spread" value="spread" />
+						<label for="spread" class="tags">Spread</label>
+					</li>
+					<input id="filterSubmitBtn" type="submit" value="FILTER" class="btn" /> </fieldset>
+			</form>
+		</section>
+	</main>
+	<footer class="flex-row"> <i id="filter" class="filter-btn icon icon-small fas fa-filter"></i>
+		<input type="text" placeholder="Search by recipe name or ingredients" class="search-bar" id="searchBar" /> <i class="search-btn icon fas fa-search" id="searchButton"></i> </footer>
+</body>
 </html>
