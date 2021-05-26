@@ -5,9 +5,11 @@ Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Features](#Features)
+- [Features](#Demonstration)
 - [Technologies](#Technologies)
 - [Setup](#Setup/execution-Instructions)
+- [Future Iterations](#Future)
+- [Original Assignment](#Original)
 - [Contributors](#Contributors)
 
 ## Introduction
@@ -58,6 +60,16 @@ Users can also filter recipes by tag
 6. In a different terminal, CD back into your whats-cooking directory
 7. Now run `npm start` and a link for the webpack will appear: `http://localhost:8080/`
 8. In your browser, set the view to `iPhone X` to see it in its mobile view.
+
+## Future Iterations
+
+- Adding a rating system for users to use on recipes they interact with
+- Choose to add recipes to cook on specific days of the week and see a calendar displayed with those recipes
+- Compare a user's pantry, which contains a list of ingredients, to each recipe, and see if they the right ingredients to make a recipe.
+
+## Original Assignment
+
+- [Link To Whats Cookin Project from Turing School of Software and Design](https://frontend.turing.edu/projects/whats-cookin.html)
 
 ## Contributors
 
