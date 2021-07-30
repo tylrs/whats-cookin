@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "Starter kit for Turing FE2 paired project",
   "main": "index.js",
+  "homepage": "https://github.com/tylrs/whats-cookin",
   "devDependencies": {
     "chai": "^4.2.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.17.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^4.5.1",
     "mocha": "^8.2.1",
     "mochapack": "^2.0.6",
@@ -21,6 +23,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "mochapack 'test/**/*.js'",
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   },
