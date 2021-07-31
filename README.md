@@ -1,6 +1,6 @@
 # Grains of Paradise
 
-Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise)
+Turing 2103 FE Mod 2 Partner Project What's Cookin (Grains of Paradise). **Deployment Link:** [Grains of Paradise](https://tylrs.github.io/whats-cookin)
 
 ## Table of Contents
 
